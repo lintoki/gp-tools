@@ -4,7 +4,7 @@
 
 **Goal:** Create a daily Codex thread automation that posts a 10:00 Asia/Shanghai finance influencer radar report and writes a local result-first HTML version.
 
-**Architecture:** Use the Codex app automation facility as the scheduler and thread delivery mechanism. Ask the automation to also write a single-file HTML report under `reports/` so the user can open a polished local version. The report layout prioritizes concrete excellent-industry analysis, stock recommendation observation pool, and future excellent-industry forecast before evidence details.
+**Architecture:** Use the Codex app automation facility as the scheduler and thread delivery mechanism. Ask the automation to also write a single-file HTML report under `reports/` so the user can open a polished local version. The report layout prioritizes concrete excellent-industry analysis, stock single-name diagnostic cards with direct buy-or-do-not-buy conclusions, and future excellent-industry forecast before evidence details.
 
 **Tech Stack:** Codex app `automation_update`, Markdown documentation, public web sources at automation runtime.
 
@@ -54,30 +54,27 @@ status: ACTIVE
 ```
 
 The automation should also create `reports/finance-radar-YYYY-MM-DD.html` and include the local path in its thread response.
-The HTML report should be result-first: section 1 concrete excellent-industry ranking with policy and data, section 2 stock recommendation observation pool, section 3 future excellent-industry forecast with policy/data reasoning, followed by influencer tracking, cross-verification, and risk discipline.
+The HTML report should be result-first: section 1 concrete excellent-industry ranking with policy and data, section 2 stock single-name diagnostic cards covering company profile, real business, recent move, price position, valuation/hype, direct buy-or-do-not-buy conclusion, triggers and risks, section 3 future excellent-industry forecast with policy/data reasoning, followed by expanded influencer/reliable-source tracking, cross-verification, and risk discipline. Optical modules/CPO and storage/HBM/DRAM/NAND must be actively evaluated as standalone subsectors instead of being hidden under broad AI or semiconductor categories.
 
 - [x] **Step 2: Use this automation prompt**
 
 ```text
-每天生成一份中文财经投研雷达报告，定位为公开信息研究辅助，不是个性化投资建议或保证收益承诺。
+生成中文财经投研雷达报告，结果优先，不是个性化投顾或收益承诺。
 
-请在运行时检索和核验当前公开、可引用、尽量稳定的来源，优先覆盖李一恩、孙宇晨、龙头大班长、天才阿蛮、宇菠萝，并可补充其他满足可信度筛选的知名财经博主或评论者。只使用公开可访问的信息；需要登录、不可稳定访问、只有截图或无法找到原始出处的内容，只能作为低可信线索，不能作为强证据。
+报告顺序：
+1. 具体优秀行业榜单：优先级、置信度、结论、政策依据、关键数据、行业逻辑、催化剂、验证点、失效条件和风险。
+2. 股票单票体检卡：每只股票集中写清企业基本信息、主营业务、产业链位置、实际业务/收入/订单/客户/公告支撑、最近涨幅、当前价格位置、是否接近52周/年内/历史高点、估值是否虚高、是否概念炒作、买不买结论、买入触发条件、暂不购买条件和风险。
+3. 未来优秀行业预测：结合当前和未来政策、产业数据、资金偏好，给出未来更可能走强的行业排序。
+4. 博主和可靠信源追踪：覆盖李一恩、孙宇晨、龙头大班长、天才阿蛮、宇菠萝，但不能只看这五人；必须扩展检索其他靠谱财经博主、产业研究者、公开实盘作者、券商/机构研究观点、财经媒体作者和行业专家。
+5. 观点交叉验证、风险与仓位纪律。
 
-报告必须包含：
-1. 今日核心结论：列出1-3个最值得关注的行业或主题，并标记高/中/低置信度。
-2. 博主言论追踪：每条包括博主/来源、发布时间、来源链接、观点摘要、行业标签、可信度。
-3. 观点交叉验证：区分多人共识、单一观点、与政策/产业新闻/盘面/公告共振的证据；无法核验的内容必须明确说明。
-4. 行业前景分析：从政策、订单或业绩可见度、景气周期、资金关注、风险五个角度判断。
-5. A股观察池：围绕高质量行业主题列出候选A股股票，包含代码、名称、逻辑、催化剂、风险点、观察纪律。不要输出无条件买入或卖出指令。
-6. 风险与仓位纪律：提示不追高、分批、止损、事件兑现、流动性和信息源风险。
-
-筛选和降权规则：
-- 优先一手公开内容和可核验二手来源。
-- 声称实仓的人，只有在公开、日期清晰、可复盘证据存在时才可标记为较高可信；否则写成未核验。
-- 只喊代码不讲逻辑、频繁删帖、强引流付费群、夸大收益、没有原始来源的内容要降权或剔除。
-- 不要编造博主观点、持仓、链接、日期或行情数据。
-
-输出风格：中文，结构清晰，结论先行，引用来源使用Markdown链接。股票部分必须清楚标为观察池和研究线索。
+硬规则：
+- 高置信行业至少给2-3个公开可验证数据点或事实。
+- 高优先级股票至少给2-3个可验证事实或数据点。
+- 找不到数据必须写“未找到可靠公开数据”或“未找到可靠行情数据”，并降低置信度。
+- 买不买结论必须用白话：可以买、现在不能买、等回调再买、等业绩/订单确认后再买、资料不足不判断。禁止只写右侧确认、趋势确认、回撤关注、高波动观察、弹性观察、核心观察这类黑话。
+- 不要编造博主观点、持仓、链接、日期、政策、行业数据、股票行情或估值数据。
+- 同时生成 `reports/finance-radar-YYYY-MM-DD.html`，HTML 首屏展示行业榜单、股票单票体检卡、未来行业预测。
 ```
 
 - [x] **Step 3: Verify the automation**

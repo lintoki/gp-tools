@@ -381,6 +381,108 @@
       color: var(--red);
     }
 
+    .stock-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stock-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: #fbfcfd;
+      display: grid;
+      gap: 13px;
+    }
+
+    .stock-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .stock-title {
+      min-width: 0;
+    }
+
+    .stock-title h3 {
+      margin: 2px 0 0;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .stock-meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .verdict {
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      background: rgba(18, 117, 111, 0.08);
+      color: var(--teal);
+      border: 1px solid rgba(18, 117, 111, 0.2);
+    }
+
+    .verdict.buy {
+      background: rgba(29, 133, 72, 0.08);
+      color: var(--green);
+      border-color: rgba(29, 133, 72, 0.24);
+    }
+
+    .verdict.wait {
+      background: rgba(165, 100, 0, 0.08);
+      color: var(--gold);
+      border-color: rgba(165, 100, 0, 0.24);
+    }
+
+    .verdict.no {
+      background: rgba(191, 63, 75, 0.08);
+      color: var(--red);
+      border-color: rgba(191, 63, 75, 0.24);
+    }
+
+    .stock-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .fact {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+      padding: 10px;
+      min-height: 78px;
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .stock-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .stock-note strong {
+      color: var(--ink);
+    }
+
     .forecast-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -540,7 +642,8 @@
       }
 
       .industry-grid,
-      .forecast-grid {
+      .forecast-grid,
+      .stock-grid {
         grid-template-columns: 1fr;
       }
 
@@ -573,9 +676,15 @@
       }
 
       .watch-row,
-      .matrix-row {
+      .matrix-row,
+      .stock-top,
+      .stock-facts {
         grid-template-columns: 1fr;
         gap: 5px;
+      }
+
+      .stock-top {
+        display: grid;
       }
 
       table,
@@ -700,53 +809,53 @@
         <div class="industry-grid">
           <article class="industry-card">
             <div class="rank">RANK 01</div>
-            <h3>AI算力与AI应用</h3>
-            <p><strong>结论：</strong>中长期主线，优先看能把算力需求转化为订单和利润的环节。</p>
-            <div class="scorebar" aria-label="示例评分 68"><span style="width: 68%"></span></div>
+            <h3>光模块 / 硅光 / CPO</h3>
+            <p><strong>结论：</strong>当前最该前置的细分主线。AI 数据中心扩建越大，GPU 间互联越依赖光模块和硅光。</p>
+            <div class="scorebar" aria-label="示例评分 88"><span style="width: 88%"></span></div>
             <div class="signal-list">
-              <div class="signal"><strong>政策</strong><span>AI+、数字经济、新质生产力、国产算力。</span></div>
-              <div class="signal"><strong>数据</strong><span>正式日报填：订单增速、资本开支、毛利率、估值分位。</span></div>
-              <div class="signal"><strong>原因</strong><span>需求强、产业链长、业绩弹性高。</span></div>
-              <div class="signal"><strong>失效</strong><span>云厂资本开支下修或订单低于预期。</span></div>
+              <div class="signal"><strong>政策</strong><span>AI+、算力基础设施、数字经济、新质生产力。</span></div>
+              <div class="signal"><strong>数据</strong><span>Nvidia 路线提到 800G、1.6T、CPO；CPO 可把每端口功耗从约 30W 降至 9W。</span></div>
+              <div class="signal"><strong>原因</strong><span>海外 AI CAPEX 直接拉动，800G/1.6T 升级带来单价和份额弹性。</span></div>
+              <div class="signal"><strong>失效</strong><span>云厂资本开支下修、订单低于预期、估值过度透支。</span></div>
             </div>
           </article>
 
           <article class="industry-card">
             <div class="rank">RANK 02</div>
-            <h3>人形机器人与智能制造</h3>
-            <p><strong>结论：</strong>未来产业方向明确，但要从概念炒作筛到真实量产链。</p>
-            <div class="scorebar" aria-label="示例评分 61"><span style="width: 61%"></span></div>
+            <h3>存储 / HBM / DRAM / NAND</h3>
+            <p><strong>结论：</strong>景气弹性强，AI 服务器和 HBM 挤占传统产能，存储价格周期仍值得跟踪。</p>
+            <div class="scorebar" aria-label="示例评分 82"><span style="width: 82%"></span></div>
             <div class="signal-list">
-              <div class="signal"><strong>政策</strong><span>新型工业化、未来产业、设备更新。</span></div>
-              <div class="signal"><strong>数据</strong><span>正式日报填：量产节点、订单金额、零部件毛利、客户进展。</span></div>
-              <div class="signal"><strong>原因</strong><span>制造升级和劳动力替代逻辑清晰。</span></div>
-              <div class="signal"><strong>失效</strong><span>量产延期或订单只停留在样机阶段。</span></div>
+              <div class="signal"><strong>政策</strong><span>AI 算力、数据要素、国产半导体供应链安全。</span></div>
+              <div class="signal"><strong>数据</strong><span>2月 DDR5 16G 现货月涨 7.4%，1Tb TLC NAND 晶圆月涨 25%。</span></div>
+              <div class="signal"><strong>原因</strong><span>HBM/企业 SSD 抢产能，传统 DRAM/NAND 供给更紧。</span></div>
+              <div class="signal"><strong>失效</strong><span>价格涨太快压制需求，或原厂扩产导致周期反转。</span></div>
             </div>
           </article>
 
           <article class="industry-card">
             <div class="rank">RANK 03</div>
-            <h3>半导体设备与材料</h3>
-            <p><strong>结论：</strong>国产替代仍是硬逻辑，弹性取决于周期修复和订单兑现。</p>
-            <div class="scorebar" aria-label="示例评分 54"><span style="width: 54%"></span></div>
+            <h3>国产算力与AI服务器链</h3>
+            <p><strong>结论：</strong>作为光模块和存储的上游需求来源，适合跟踪政策与订单共振。</p>
+            <div class="scorebar" aria-label="示例评分 68"><span style="width: 68%"></span></div>
             <div class="signal-list">
-              <div class="signal"><strong>政策</strong><span>科技自立自强、供应链安全、先进制造。</span></div>
-              <div class="signal"><strong>数据</strong><span>正式日报填：招标、订单、库存周期、国产化率。</span></div>
-              <div class="signal"><strong>原因</strong><span>政策确定性高，设备材料环节业绩可追踪。</span></div>
-              <div class="signal"><strong>失效</strong><span>下游扩产放缓或估值提前透支。</span></div>
+              <div class="signal"><strong>政策</strong><span>国产算力、数据中心、东数西算、行业大模型。</span></div>
+              <div class="signal"><strong>数据</strong><span>正式日报填：服务器招标、GPU/ASIC 供给、运营商集采。</span></div>
+              <div class="signal"><strong>原因</strong><span>政策支持强，但业绩兑现比海外光模块链更慢。</span></div>
+              <div class="signal"><strong>失效</strong><span>订单停留在试点，或毛利率无法覆盖研发投入。</span></div>
             </div>
           </article>
 
           <article class="industry-card">
             <div class="rank">RANK 04</div>
-            <h3>低空经济与商业航天</h3>
-            <p><strong>结论：</strong>政策弹性强，适合作为未来风口候选，但要等商业化数据验证。</p>
-            <div class="scorebar" aria-label="示例评分 51"><span style="width: 51%"></span></div>
+            <h3>半导体设备与材料</h3>
+            <p><strong>结论：</strong>国产替代仍是硬逻辑，但相对光模块和存储，需要更多订单与周期数据确认。</p>
+            <div class="scorebar" aria-label="示例评分 58"><span style="width: 58%"></span></div>
             <div class="signal-list">
-              <div class="signal"><strong>政策</strong><span>低空经济、通用航空、商业航天、空域改革。</span></div>
-              <div class="signal"><strong>数据</strong><span>正式日报填：试点城市、订单、飞行架次、基础设施投资。</span></div>
-              <div class="signal"><strong>原因</strong><span>政策新、空间大，容易形成主题扩散。</span></div>
-              <div class="signal"><strong>失效</strong><span>应用场景落地慢，只有概念没有订单。</span></div>
+              <div class="signal"><strong>政策</strong><span>科技自立自强、供应链安全、先进制造。</span></div>
+              <div class="signal"><strong>数据</strong><span>正式日报填：招标、订单、库存周期、国产化率。</span></div>
+              <div class="signal"><strong>原因</strong><span>政策确定性高，设备材料环节业绩可追踪。</span></div>
+              <div class="signal"><strong>失效</strong><span>下游扩产放缓或估值提前透支。</span></div>
             </div>
           </article>
         </div>
@@ -756,53 +865,85 @@
         <div class="section-head">
           <div>
             <div class="section-kicker">02 · 股票推荐</div>
-            <h2 id="stocks-title">A股观察池：给方向，也给触发条件</h2>
-            <div class="section-subtitle">“推荐”指研究观察池，不是无条件买入指令；正式日报会按当天证据更新。</div>
+            <h2 id="stocks-title">单票体检：直接告诉你能不能买</h2>
+            <div class="section-subtitle">正式日报会把企业信息、真实业务、近期涨幅、是否高位、估值是否虚高和“买/不买”结论放到一起讲清楚。</div>
           </div>
           <span class="tag high">结果区</span>
         </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>股票</th>
-              <th>关联行业</th>
-              <th>建议动作</th>
-              <th>触发条件</th>
-              <th>主要风险</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="股票"><span class="code">300308</span><span class="name">中际旭创</span></td>
-              <td data-label="关联行业">AI算力</td>
-              <td data-label="建议动作" class="action">重点观察</td>
-              <td data-label="触发条件">算力链订单、业绩和资金强度同步确认。</td>
-              <td data-label="主要风险" class="risk">高位拥挤、海外需求波动。</td>
-            </tr>
-            <tr>
-              <td data-label="股票"><span class="code">002050</span><span class="name">三花智控</span></td>
-              <td data-label="关联行业">机器人 / 制造</td>
-              <td data-label="建议动作" class="action">回撤关注</td>
-              <td data-label="触发条件">机器人量产催化或供应链定点进一步明确。</td>
-              <td data-label="主要风险" class="risk">事件兑现后波动加大。</td>
-            </tr>
-            <tr>
-              <td data-label="股票"><span class="code">002371</span><span class="name">北方华创</span></td>
-              <td data-label="关联行业">半导体设备</td>
-              <td data-label="建议动作" class="action">趋势确认</td>
-              <td data-label="触发条件">设备订单、招标和国产替代消息共振。</td>
-              <td data-label="主要风险" class="risk">估值敏感、周期反复。</td>
-            </tr>
-            <tr>
-              <td data-label="股票"><span class="code">300124</span><span class="name">汇川技术</span></td>
-              <td data-label="关联行业">高端制造</td>
-              <td data-label="建议动作" class="action">中线观察</td>
-              <td data-label="触发条件">制造业景气和自动化需求边际改善。</td>
-              <td data-label="主要风险" class="risk">宏观需求弱于预期。</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="stock-grid">
+          <article class="stock-card">
+            <div class="stock-top">
+              <div class="stock-title">
+                <span class="code">300308</span>
+                <h3>中际旭创</h3>
+                <div class="stock-meta">光模块 / 800G / 1.6T / AI数据中心</div>
+              </div>
+              <span class="verdict no">现在不能买</span>
+            </div>
+            <div class="stock-facts">
+              <div class="fact"><strong>企业信息</strong><span>高速光通信模块供应商，核心看海外 AI 数据中心需求。</span></div>
+              <div class="fact"><strong>实际业务</strong><span>有真实出货和业绩弹性；正式日报核验收入结构、毛利率、客户集中度。</span></div>
+              <div class="fact"><strong>涨幅/位置</strong><span>正式日报填：5/20/60日涨幅、距52周高点/历史高点、量能。</span></div>
+              <div class="fact"><strong>虚高判断</strong><span>看PE/PEG、业绩增速、订单能否覆盖估值；高位放量滞涨降权。</span></div>
+            </div>
+            <p class="stock-note"><strong>买不买结论：</strong>现在不买。只有回撤后不破关键趋势，且订单、业绩、毛利率继续验证，才改成“可以买”。</p>
+          </article>
+
+          <article class="stock-card">
+            <div class="stock-top">
+              <div class="stock-title">
+                <span class="code">300502</span>
+                <h3>新易盛</h3>
+                <div class="stock-meta">高速数通光模块 / 海外AI链 / 弹性标的</div>
+              </div>
+              <span class="verdict no">现在不能买</span>
+            </div>
+            <div class="stock-facts">
+              <div class="fact"><strong>企业信息</strong><span>高速光模块厂商，弹性强，受AI资本开支和高速产品放量影响大。</span></div>
+              <div class="fact"><strong>实际业务</strong><span>有实际产品和客户链条；正式日报核验公告、产能、产品代际。</span></div>
+              <div class="fact"><strong>涨幅/位置</strong><span>正式日报填：近期涨幅、是否接近阶段/历史高点、换手率。</span></div>
+              <div class="fact"><strong>虚高判断</strong><span>若涨幅远快于业绩上修，标为估值透支；若业绩同步上修，维持跟踪。</span></div>
+            </div>
+            <p class="stock-note"><strong>买不买结论：</strong>现在不买。等明显分歧或回撤，同时业绩/订单继续上修，才改成“可以买”。</p>
+          </article>
+
+          <article class="stock-card">
+            <div class="stock-top">
+              <div class="stock-title">
+                <span class="code">300394</span>
+                <h3>天孚通信</h3>
+                <div class="stock-meta">光器件 / 硅光配套 / CPO候选链</div>
+              </div>
+              <span class="verdict wait">等回调再买</span>
+            </div>
+            <div class="stock-facts">
+              <div class="fact"><strong>企业信息</strong><span>光器件平台型公司，受高速光模块、硅光和CPO趋势带动。</span></div>
+              <div class="fact"><strong>实际业务</strong><span>有光器件业务基础；正式日报核验产品结构、产能扩张和客户进展。</span></div>
+              <div class="fact"><strong>涨幅/位置</strong><span>正式日报填：20日/60日涨幅、距高点回撤、是否放量突破。</span></div>
+              <div class="fact"><strong>虚高判断</strong><span>若CPO只停留在概念、订单未验证，则降低评级。</span></div>
+            </div>
+            <p class="stock-note"><strong>买不买结论：</strong>不在高点追买。回调后仍有订单和业绩兑现，才可以买；若接近最高点，只观察。</p>
+          </article>
+
+          <article class="stock-card">
+            <div class="stock-top">
+              <div class="stock-title">
+                <span class="code">603986</span>
+                <h3>兆易创新</h3>
+                <div class="stock-meta">存储 / MCU / 国产半导体</div>
+              </div>
+              <span class="verdict buy">满足条件可以买</span>
+            </div>
+            <div class="stock-facts">
+              <div class="fact"><strong>企业信息</strong><span>存储芯片和MCU公司，受存储价格周期与国产替代影响。</span></div>
+              <div class="fact"><strong>实际业务</strong><span>有实际收入和产品线；正式日报核验库存、价格、毛利率和业绩指引。</span></div>
+              <div class="fact"><strong>涨幅/位置</strong><span>正式日报填：阶段涨幅、是否突破箱体、距年内高点。</span></div>
+              <div class="fact"><strong>虚高判断</strong><span>周期股要看价格上行能否传导利润；只涨估值不涨利润则降权。</span></div>
+            </div>
+            <p class="stock-note"><strong>买不买结论：</strong>存储价格和业绩已经确认改善时可以买；如果已经快速拉升到高位，就不买，等回踩。</p>
+          </article>
+        </div>
       </section>
 
       <section class="result-section" id="forecast" aria-labelledby="forecast-title">
@@ -817,16 +958,16 @@
 
         <div class="forecast-grid">
           <article class="forecast-card">
-            <h3>最优先：AI算力 + AI应用</h3>
-            <p>政策和产业需求共振，数据重点看云厂资本开支、国产算力订单、AI应用付费和端侧渗透。若数据继续上修，仍是主线候选。</p>
+            <h3>最优先：光模块 / 硅光 / CPO</h3>
+            <p>AI 集群规模扩大后，铜连接瓶颈会持续强化光互联价值。未来跟踪 800G/1.6T 出货、CPO 节点、海外云厂 CAPEX。</p>
           </article>
           <article class="forecast-card">
-            <h3>第二梯队：机器人 + 智能制造</h3>
-            <p>政策支持明确，未来看量产时间表和核心零部件订单。只有发布会没有订单时，降为题材交易，不列高置信。</p>
+            <h3>第二梯队：存储 / HBM / 企业 SSD</h3>
+            <p>AI 服务器抢占 HBM 和企业级 SSD 产能，传统 DRAM/NAND 价格上行会带来周期弹性。重点看价格是否继续传导到业绩。</p>
           </article>
           <article class="forecast-card">
-            <h3>弹性候选：低空经济 / 商业航天</h3>
-            <p>未来政策催化可能密集，但商业化仍需数据确认。重点看空域、试点、订单、基础设施投资，而不是只看概念热度。</p>
+            <h3>第三梯队：国产算力 + 半导体设备</h3>
+            <p>政策确定性强，但业绩兑现节奏慢于光模块和存储。重点看运营商/云厂招标、国产替代订单和毛利稳定性。</p>
           </article>
         </div>
       </section>
@@ -837,8 +978,8 @@
         <section class="detail-card" aria-labelledby="watch-title">
           <div class="section-head">
             <div>
-              <h2 id="watch-title">博主言论追踪</h2>
-              <div class="section-subtitle">放在结果后面，用来解释结论从哪里来。</div>
+              <h2 id="watch-title">博主与可靠信源追踪</h2>
+              <div class="section-subtitle">五人名单只是起点；正式日报会扩展检索其他公开、可复盘、有实盘或产业研究能力的可靠财经作者。</div>
             </div>
             <span class="tag">公开来源优先</span>
           </div>
@@ -867,6 +1008,11 @@
               <div class="person">宇菠萝</div>
               <p>优先使用一手公开帖；不可稳定抓取平台只做弱线索。</p>
               <span class="tag low">待核验</span>
+            </div>
+            <div class="watch-row">
+              <div class="person">扩展池</div>
+              <p>每日补充雪球、微博、公众号、券商/产业研究、财经媒体中可引用且历史观点可复盘的作者。</p>
+              <span class="tag high">动态筛选</span>
             </div>
           </div>
         </section>

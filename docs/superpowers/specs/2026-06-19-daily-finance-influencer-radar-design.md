@@ -26,7 +26,10 @@ Each daily report should use the same sections so the user can compare reports o
 
 2. A-share observation and recommendation pool
    - List candidate A-share stocks connected to the strongest industry themes.
-   - For each stock, include ticker, company name, linked industry, suggested observation action, trigger condition, and key risk.
+   - For each stock, include ticker, company name, company profile, main business, industry-chain position, actual business evidence, revenue/order/customer/announcement support, recent price move, current price position, distance from 52-week/year-to-date/historical highs when available, valuation judgment, hype/inflation check, plain-language buy-or-do-not-buy conclusion, trigger condition, no-buy condition, and key risk.
+   - Keep all information for one stock together in one stock card or subsection so the user can understand the business, price position, valuation, and buyability in one place.
+   - Avoid jargon such as right-side confirmation, trend confirmation, high-volatility watch, core watch, or elastic watch unless it is immediately translated into a buy-or-do-not-buy conclusion.
+   - Allowed conclusion labels: can buy, cannot buy now, wait for pullback before buying, wait for earnings/order confirmation before buying, or insufficient data to judge.
    - Do not give unconditional buy/sell instructions.
 
 3. Future forecast
@@ -34,10 +37,10 @@ Each daily report should use the same sections so the user can compare reports o
    - Combine current and expected policy direction, industry data, capital-market preference, and company-level validation.
    - For each predicted industry, explain why it is attractive, policy catalyst, data to track, likely realization window, invalidation signals, and what not to chase.
 
-4. Influencer commentary tracker
-   - Cover the initial watch list first.
-   - Add other public finance commentators when they provide traceable, relevant, and non-duplicative signals.
-   - For each item, include source link, publication time when available, a concise paraphrase, industry tags, and confidence level.
+4. Influencer and reliable-source tracker
+   - Cover the initial watch list first, but do not limit the report to those five people.
+   - Add other public finance commentators, industry researchers, public real-position authors, institutional or sector researchers, financial media writers, and industry experts when they provide traceable, relevant, and non-duplicative signals.
+   - For each item, include source link, publication time when available, a concise paraphrase, industry tags, confidence level, and why the source is included or downweighted.
 
 5. Cross-verification
    - Separate multi-source agreement from single-source claims.
@@ -99,11 +102,40 @@ Confidence labels:
 
 If reliable public data cannot be found for an industry, the report must state that clearly and lower the confidence level instead of inventing numbers.
 
+## Stock Diagnostic Requirements
+
+Each high-priority stock should be presented as a single diagnostic card or subsection with these fields:
+
+- Company profile: main business, core product, industry-chain position, and downstream/customer direction.
+- Actual business verification: company announcement, financial report, earnings preview, exchange Q&A, order/tender, customer, capacity, or product progress where available.
+- Price position: 5-day, 20-day, 60-day, and year-to-date move where available; distance from 52-week high, year-to-date high, or historical high where available; state whether it is near a high.
+- Valuation and hype check: PE/PB/PS/PEG, historical valuation percentile, peer comparison, market cap vs earnings fit, performance growth, and concept heat where available.
+- Buy-or-do-not-buy conclusion: use plain labels only and attach reason, trigger, position discipline, stop-loss or invalidation condition.
+
+If reliable stock price, valuation, or business data cannot be found, the report must say so and avoid presenting a buyability conclusion as strong.
+
+## Subsector Consensus Rule
+
+The report must not hide important subsectors inside broad categories. When several tracked commentators mention the same subsector, it must be evaluated as a standalone candidate industry.
+
+Required active watch tags:
+
+- Optical modules, silicon photonics, CPO, 800G, and 1.6T.
+- Storage, HBM, DRAM, NAND, and enterprise SSD.
+
+Examples:
+
+- Do not write only "AI compute" when the concrete signal is optical modules or CPO.
+- Do not write only "semiconductors" when the concrete signal is DRAM, NAND, HBM, or storage modules.
+- If a popular subsector is not selected as a high-ranking industry, the report must explain why it was downgraded: weak data, crowded trade, valuation, lack of source verification, or missing earnings validation.
+
+The output should use a professional portfolio-manager style: conclusion first, data second, risk third. Blogger consensus is useful only when it is supported by policy, industry data, order evidence, earnings, or market behavior.
+
 ## Automation Behavior
 
 The automation should run every calendar day at 10:00 Asia/Shanghai and post the report in the current thread. It should also create `reports/finance-radar-YYYY-MM-DD.html` as a polished single-file HTML report and include the local path in the thread response. It should browse or otherwise verify current public sources at runtime. When current information cannot be found, it should say so plainly and avoid filling gaps with invented claims.
 
-The report should use concise Chinese, include links for cited sources, and keep stock observations clearly separated from risk reminders. The local HTML layout should open with the three highest-priority result blocks: concrete excellent industry ranking, stock recommendation observation pool, and future excellent-industry forecast; evidence, influencer tracking, and risk details should follow.
+The report should use concise Chinese, include links for cited sources, and keep stock observations clearly separated from risk reminders. The local HTML layout should open with the three highest-priority result blocks: concrete excellent industry ranking, stock single-name diagnostic cards, and future excellent-industry forecast; evidence, expanded influencer/reliable-source tracking, and risk details should follow.
 
 ## Non-Goals
 
