@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A 股买点监控</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --panel-soft: #f8fafb;
+      --line: #d9e0e8;
+      --text: #182230;
+      --muted: #667085;
+      --accent: #0f6b63;
+      --accent-soft: #e7f4f2;
+      --danger: #b42318;
+      --danger-soft: #fff1f0;
+      --warn: #a15c07;
+      --warn-soft: #fff7e8;
+      --ok: #087443;
+      --ok-soft: #edf8f2;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .topbar {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .pill {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #fff;
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .pill.ok { color: var(--ok); border-color: #a7d9bd; background: var(--ok-soft); }
+    .pill.warn { color: var(--warn); border-color: #f0c98a; background: var(--warn-soft); }
+    .pill.danger { color: var(--danger); border-color: #f2b8b2; background: var(--danger-soft); }
+
+    main {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 16px 20px 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 392px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .content, .side {
+      display: grid;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 12px;
+      min-height: 92px;
+      display: grid;
+      align-content: space-between;
+      gap: 8px;
+    }
+
+    .metric .value {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .metric .sub {
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    section {
+      padding: 14px;
+      min-width: 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1060px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 10px;
+      text-align: left;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: var(--panel-soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .tight-table { min-width: 520px; }
+    .config-table { min-width: 700px; }
+    .snapshot-table { min-width: 840px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .BUY_CONFIRMED, .LOW, .SECTOR_RISK_LOW { color: var(--ok); border-color: #a7d9bd; background: var(--ok-soft); }
+    .WATCH_ONLY, .MEDIUM, .UNKNOWN, .SECTOR_RISK_MEDIUM, .SECTOR_RISK_UNKNOWN, .PRICE_IN_ZONE_BUT_NO_CONFIRM { color: var(--warn); border-color: #f0c98a; background: var(--warn-soft); }
+    .RISK_BLOCKED, .BELOW_ZONE_RISK, .HIGH, .SECTOR_RISK_HIGH, .BLOCKED_BY_POSITION { color: var(--danger); border-color: #f2b8b2; background: var(--danger-soft); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      min-width: 0;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: var(--text);
+      background: #fff;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 190px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 12px;
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      font: inherit;
+    }
+
+    button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    button.danger {
+      border-color: #f3b6b0;
+      color: var(--danger);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      min-height: 20px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error { color: var(--danger); }
+
+    .snapshots {
+      display: grid;
+      gap: 12px;
+      max-height: 680px;
+      overflow: auto;
+    }
+
+    .snapshot-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .snapshot-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      background: var(--panel-soft);
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .logs {
+      display: grid;
+      gap: 8px;
+      max-height: 280px;
+      overflow: auto;
+    }
+
+    .log-line {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .log-line:last-child { border-bottom: 0; }
+
+    .muted { color: var(--muted); }
+
+    @media (max-width: 1200px) {
+      main { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .toolbar { justify-content: flex-start; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 700px) {
+      main { padding: 12px; }
+      .metrics, .form-grid { grid-template-columns: 1fr; }
+      .brand { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <h1>A 股买点监控</h1>
+      </div>
+      <div class="toolbar">
+        <span class="pill" id="runStatus">运行 -</span>
+        <span class="pill" id="tradeStatus">交易 -</span>
+        <span class="pill" id="webhookStatus">Webhook -</span>
+        <span class="pill" id="fetchStatus">拉取 -</span>
+        <button class="primary" id="refreshButton" type="button">刷新</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="content">
+      <div class="metrics">
+        <div class="metric">
+          <h3>市场资金</h3>
+          <div class="value" id="marketRiskValue">-</div>
+          <div class="sub" id="marketRiskSub">-</div>
+        </div>
+        <div class="metric">
+          <h3>AI 核心票</h3>
+          <div class="value" id="sectorRiskValue">-</div>
+          <div class="sub" id="sectorRiskSub">-</div>
+        </div>
+        <div class="metric">
+          <h3>最终信号</h3>
+          <div class="value" id="signalValue">-</div>
+          <div class="sub" id="signalSub">-</div>
+        </div>
+        <div class="metric">
+          <h3>最近快照</h3>
+          <div class="value" id="summaryValue">-</div>
+          <div class="sub" id="summarySub">-</div>
+        </div>
+      </div>
+
+      <section>
+        <div class="section-head">
+          <h2>行情决策</h2>
+          <span class="muted" id="quoteMessage"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>时间</th>
+                <th>代码</th>
+                <th>名称</th>
+                <th>最新价</th>
+                <th>涨跌幅</th>
+                <th>成交额</th>
+                <th>买入区间</th>
+                <th>价格状态</th>
+                <th>市场</th>
+                <th>板块</th>
+                <th>承接</th>
+                <th>最终提醒</th>
+              </tr>
+            </thead>
+            <tbody id="quoteRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>时间段快照</h2>
+          <span class="muted">5 分钟粒度</span>
+        </div>
+        <div class="snapshots" id="snapshots"></div>
+      </section>
+    </div>
+
+    <aside class="side">
+      <section>
+        <div class="section-head">
+          <h2>单只股票</h2>
+        </div>
+        <form id="singleForm">
+          <div class="form-grid">
+            <label>代码<input name="code" placeholder="002463 或 002463.SZ" required></label>
+            <label>名称<input name="name" placeholder="沪电股份"></label>
+            <label>单价<input name="price" placeholder="只填单一价格时使用"></label>
+            <label>股数<input name="shares" value="100"></label>
+            <label>区间下沿<input name="buy_low" placeholder="142.00"></label>
+            <label>区间上沿<input name="buy_high" placeholder="144.00"></label>
+            <label>类型<input name="type" placeholder="AI_PCB核心"></label>
+            <label>依赖未买<input name="depends_on_not_bought" placeholder="002463.SZ"></label>
+          </div>
+          <label style="margin-top: 10px;">备注<input name="note"></label>
+          <div class="actions">
+            <button class="primary" type="submit">保存股票</button>
+          </div>
+          <div class="message" id="singleMessage"></div>
+        </form>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>批量导入</h2>
+        </div>
+        <label>格式
+          <select id="importFormat">
+            <option value="json">JSON</option>
+            <option value="csv">CSV</option>
+            <option value="yaml">YAML</option>
+          </select>
+        </label>
+        <label style="margin-top: 10px;">内容
+          <textarea id="importContent" spellcheck="false">{
+  "watchlist": [
+    {
+      "name": "沪电股份",
+      "code": "002463.SZ",
+      "buy_low": 142,
+      "buy_high": 144,
+      "shares": 100,
+      "type": "AI_PCB核心",
+      "note": "优先买入"
+    }
+  ]
+}</textarea>
+        </label>
+        <label style="margin-top: 10px; display: flex; align-items: center; grid-template-columns: 20px 1fr;">
+          <input id="replaceImport" type="checkbox" style="width: 16px; min-height: 16px;">
+          替换当前监控列表
+        </label>
+        <div class="actions">
+          <button class="primary" id="importButton" type="button">导入</button>
+        </div>
+        <div class="message" id="importMessage"></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>监控列表</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="config-table">
+            <thead>
+              <tr>
+                <th>代码</th>
+                <th>名称</th>
+                <th>区间</th>
+                <th>股数</th>
+                <th>启用</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="watchlistRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Webhook</h2>
+        </div>
+        <label>企业微信机器人地址
+          <input id="webhookInput" type="password" placeholder="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=...">
+        </label>
+        <div class="actions">
+          <button class="primary" id="saveWebhookButton" type="button">保存 Webhook</button>
+        </div>
+        <div class="message" id="webhookMessage"></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>持仓状态</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="tight-table">
+            <thead>
+              <tr>
+                <th>代码</th>
+                <th>名称</th>
+                <th>已买</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="positionRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>事件日志</h2>
+        </div>
+        <div class="logs" id="eventLogs"></div>
+      </section>
+    </aside>
+  </main>
+
+  <script>
+    const state = { data: null };
+
+    function text(value) {
+      return value === undefined || value === null || value === "" ? "-" : String(value);
+    }
+
+    function escapeHtml(value) {
+      return text(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function numberText(value, digits = 2) {
+      const n = Number(value);
+      return Number.isFinite(n) ? n.toFixed(digits) : "-";
+    }
+
+    const labelMap = {
+      LOW: "低风险",
+      MEDIUM: "中风险",
+      HIGH: "高风险",
+      UNKNOWN: "未知",
+      SECTOR_RISK_LOW: "板块低风险",
+      SECTOR_RISK_MEDIUM: "板块中风险",
+      SECTOR_RISK_HIGH: "板块高风险",
+      SECTOR_RISK_UNKNOWN: "板块未知",
+      ACCEPTANCE_CONFIRMED: "承接确认",
+      PRICE_IN_ZONE_BUT_NO_CONFIRM: "承接不足",
+      ACCEPTANCE_UNKNOWN: "承接未知",
+      NONE: "无提醒",
+      BUY_CONFIRMED: "买点确认",
+      WATCH_ONLY: "观察提醒",
+      RISK_BLOCKED: "风险拦截",
+      BELOW_ZONE_RISK: "跌破风险",
+      BUY_ZONE: "进入区间",
+      WAIT_PULLBACK: "等待回落",
+      BELOW_ZONE: "跌破区间",
+      NO_PRICE: "无价格",
+      MISSING_QUOTE: "无行情",
+      BLOCKED_BY_POSITION: "持仓阻断",
+    };
+
+    function label(value) {
+      const raw = text(value);
+      return labelMap[raw] || raw;
+    }
+
+    function badge(value, displayValue) {
+      const raw = text(value);
+      return `<span class="badge ${escapeHtml(raw)}">${escapeHtml(displayValue || label(raw))}</span>`;
+    }
+
+    async function requestJson(url, options = {}) {
+      const response = await fetch(url, {
+        headers: { "Content-Type": "application/json" },
+        ...options,
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.detail || `HTTP ${response.status}`);
+      return payload;
+    }
+
+    function setMessage(id, message, isError = false) {
+      const el = document.getElementById(id);
+      el.textContent = message || "";
+      el.classList.toggle("error", Boolean(isError));
+    }
+
+    function renderTop(data) {
+      const run = document.getElementById("runStatus");
+      run.textContent = data.running ? "运行中" : "未运行";
+      run.className = data.running ? "pill ok" : "pill warn";
+
+      const trade = document.getElementById("tradeStatus");
+      trade.textContent = data.trading_time ? "交易时段" : "非交易时段";
+      trade.className = data.trading_time ? "pill ok" : "pill warn";
+
+      const webhook = document.getElementById("webhookStatus");
+      webhook.textContent = data.settings.webhook_configured ? `Webhook ${data.settings.webhook_preview}` : "Webhook 未配置";
+      webhook.className = data.settings.webhook_configured ? "pill ok" : "pill warn";
+
+      document.getElementById("fetchStatus").textContent = `拉取 ${text(data.last_fetch_at)}`;
+    }
+
+    function renderMetrics(data) {
+      const market = data.market_risk || {};
+      const sector = data.sector_risk || {};
+      const rows = data.latest_rows || [];
+      const counts = rows.reduce((acc, row) => {
+        acc[row.final_alert] = (acc[row.final_alert] || 0) + 1;
+        return acc;
+      }, {});
+
+      document.getElementById("marketRiskValue").innerHTML = badge(market.level);
+      document.getElementById("marketRiskSub").textContent = `主力净流入 ${numberText(market.main_net_inflow_yi)} 亿 | ${text(market.reason)}`;
+      document.getElementById("sectorRiskValue").innerHTML = badge(sector.level);
+      document.getElementById("sectorRiskSub").textContent = `上涨 ${text(sector.up_count)} / 下跌 ${text(sector.down_count)} | 均幅 ${numberText(sector.avg_change_pct)}%`;
+      document.getElementById("signalValue").textContent = `买点确认 ${counts.BUY_CONFIRMED || 0} / 观察 ${counts.WATCH_ONLY || 0} / 风险拦截 ${counts.RISK_BLOCKED || 0}`;
+      document.getElementById("signalSub").textContent = data.last_error ? `错误：${data.last_error}` : "只提醒，不自动下单";
+      document.getElementById("summaryValue").textContent = text(data.last_summary_at);
+      document.getElementById("summarySub").textContent = `${(data.summary_history || []).length} 条快照`;
+    }
+
+    function renderQuotes(rows) {
+      const body = document.getElementById("quoteRows");
+      body.innerHTML = rows.map((row) => `
+        <tr>
+          <td>${escapeHtml(row.time)}</td>
+          <td>${escapeHtml(row.code)}</td>
+          <td>${escapeHtml(row.name)}</td>
+          <td>${escapeHtml(row.latest_price_text)}</td>
+          <td>${escapeHtml(row.change_pct_text)}</td>
+          <td>${escapeHtml(row.amount_text)}</td>
+          <td>${escapeHtml(row.buy_range_text)}</td>
+          <td>${badge(row.price_status, row.price_status_text)}</td>
+          <td>${badge(row.market_risk_level, row.market_risk_level_text)}</td>
+          <td>${badge(row.sector_risk_level, row.sector_risk_level_text)}</td>
+          <td>${badge(row.stock_acceptance, row.stock_acceptance_text)}</td>
+          <td>${badge(row.final_alert, row.final_alert_text)}</td>
+        </tr>
+      `).join("");
+      document.getElementById("quoteMessage").textContent = rows.length ? `${rows.length} 只股票` : "暂无行情数据";
+    }
+
+    function renderWatchlist(items) {
+      const body = document.getElementById("watchlistRows");
+      body.innerHTML = items.map((item) => `
+        <tr>
+          <td>${escapeHtml(item.code)}</td>
+          <td>${escapeHtml(item.name)}</td>
+          <td>${numberText(item.buy_low)}-${numberText(item.buy_high)}</td>
+          <td>${escapeHtml(item.shares)}</td>
+          <td>${item.enabled ? "是" : "否"}</td>
+          <td><button class="danger" type="button" data-delete="${escapeHtml(item.code)}">删除</button></td>
+        </tr>
+      `).join("");
+      body.querySelectorAll("[data-delete]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          if (!window.confirm(`确认删除 ${button.dataset.delete} 的监控配置？`)) return;
+          await requestJson(`/api/watchlist/${encodeURIComponent(button.dataset.delete)}`, { method: "DELETE" });
+          await loadState();
+        });
+      });
+    }
+
+    function renderPositions(positions) {
+      const body = document.getElementById("positionRows");
+      const rows = Object.entries(positions || {}).sort(([a], [b]) => a.localeCompare(b));
+      body.innerHTML = rows.map(([code, position]) => `
+        <tr>
+          <td>${escapeHtml(code)}</td>
+          <td>${escapeHtml(position.name)}</td>
+          <td>${position.bought ? "是" : "否"}</td>
+          <td><button type="button" data-position="${escapeHtml(code)}" data-bought="${position.bought ? "false" : "true"}">${position.bought ? "标记未买" : "标记已买"}</button></td>
+        </tr>
+      `).join("");
+      body.querySelectorAll("[data-position]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          await requestJson(`/api/positions/${encodeURIComponent(button.dataset.position)}`, {
+            method: "PUT",
+            body: JSON.stringify({ bought: button.dataset.bought === "true" }),
+          });
+          await loadState();
+        });
+      });
+    }
+
+    function renderSnapshots(snapshots) {
+      const root = document.getElementById("snapshots");
+      const visible = (snapshots || []).slice(0, 8);
+      if (!visible.length) {
+        root.innerHTML = '<div class="muted">暂无时间段快照</div>';
+        return;
+      }
+      root.innerHTML = visible.map((snapshot) => {
+        const market = snapshot.market_risk || {};
+        const sector = snapshot.sector_risk || {};
+        return `
+          <div class="snapshot-card">
+            <div class="snapshot-meta">
+              <strong>${escapeHtml(snapshot.time)}</strong>
+              <span>${badge(market.level)} ${badge(sector.level)}</span>
+              <span>上涨 ${text(sector.up_count)} / 下跌 ${text(sector.down_count)} / 均幅 ${numberText(sector.avg_change_pct)}%</span>
+            </div>
+            <div class="table-wrap" style="border: 0; border-radius: 0;">
+              <table class="snapshot-table">
+                <thead>
+                  <tr>
+                    <th>代码</th>
+                    <th>名称</th>
+                    <th>最新价</th>
+                    <th>区间</th>
+                    <th>价格状态</th>
+                    <th>资金过滤</th>
+                    <th>最终提醒</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${(snapshot.rows || []).map((row) => `
+                    <tr>
+                      <td>${escapeHtml(row.code)}</td>
+                      <td>${escapeHtml(row.name)}</td>
+                      <td>${escapeHtml(row.latest_price_text)}</td>
+                      <td>${escapeHtml(row.buy_range_text)}</td>
+                    <td>${badge(row.price_status, row.price_status_text)}</td>
+                    <td>${badge(row.market_risk_level, row.market_risk_level_text)} ${badge(row.sector_risk_level, row.sector_risk_level_text)}</td>
+                    <td>${badge(row.final_alert, row.final_alert_text)}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderLogs(logs) {
+      const root = document.getElementById("eventLogs");
+      root.innerHTML = (logs || []).slice(0, 80).map((log) => `
+        <div class="log-line">
+          <strong>${escapeHtml(log.time)}</strong>
+          <span>${escapeHtml(log.level)}</span>
+          <div>${escapeHtml(log.message)}</div>
+        </div>
+      `).join("") || '<div class="muted">暂无事件</div>';
+    }
+
+    async function loadState() {
+      try {
+        const data = await requestJson("/api/state");
+        state.data = data;
+        renderTop(data);
+        renderMetrics(data);
+        renderQuotes(data.latest_rows || []);
+        renderWatchlist(data.watchlist || []);
+        renderPositions(data.positions || {});
+        renderSnapshots(data.summary_history || []);
+        renderLogs(data.event_logs || []);
+      } catch (error) {
+        setMessage("quoteMessage", error.message, true);
+      }
+    }
+
+    document.getElementById("singleForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      const payload = Object.fromEntries(form.entries());
+      try {
+        await requestJson("/api/watchlist", { method: "POST", body: JSON.stringify(payload) });
+        setMessage("singleMessage", "已保存");
+        event.currentTarget.reset();
+        await loadState();
+      } catch (error) {
+        setMessage("singleMessage", error.message, true);
+      }
+    });
+
+    document.getElementById("importButton").addEventListener("click", async () => {
+      const payload = {
+        format: document.getElementById("importFormat").value,
+        content: document.getElementById("importContent").value,
+        replace: document.getElementById("replaceImport").checked,
+      };
+      try {
+        const result = await requestJson("/api/watchlist/import", { method: "POST", body: JSON.stringify(payload) });
+        setMessage("importMessage", `已导入 ${result.count} 只股票`);
+        await loadState();
+      } catch (error) {
+        setMessage("importMessage", error.message, true);
+      }
+    });
+
+    document.getElementById("saveWebhookButton").addEventListener("click", async () => {
+      const webhook = document.getElementById("webhookInput").value;
+      try {
+        await requestJson("/api/settings", {
+          method: "POST",
+          body: JSON.stringify({ wechat_webhook_url: webhook }),
+        });
+        document.getElementById("webhookInput").value = "";
+        setMessage("webhookMessage", "已保存");
+        await loadState();
+      } catch (error) {
+        setMessage("webhookMessage", error.message, true);
+      }
+    });
+
+    document.getElementById("refreshButton").addEventListener("click", async () => {
+      const button = document.getElementById("refreshButton");
+      button.disabled = true;
+      try {
+        await requestJson("/api/refresh", { method: "POST" });
+        await loadState();
+      } catch (error) {
+        setMessage("quoteMessage", error.message, true);
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    loadState();
+    window.setInterval(loadState, 5000);
+  </script>
+</body>
+</html>
