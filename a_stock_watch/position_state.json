@@ -20,5 +20,37 @@
   "600900.SH": {
     "name": "长江电力",
     "bought": false
+  },
+  "300308.SZ": {
+    "name": "中际旭创",
+    "bought": false
+  },
+  "300502.SZ": {
+    "name": "新易盛",
+    "bought": false
+  },
+  "300124.SZ": {
+    "name": "汇川技术",
+    "bought": false
+  },
+  "002472.SZ": {
+    "name": "双环传动",
+    "bought": false
+  },
+  "601689.SH": {
+    "name": "拓普集团",
+    "bought": false
+  },
+  "688322.SH": {
+    "name": "奥比中光",
+    "bought": false
+  },
+  "300130.SZ": {
+    "name": "新国都",
+    "bought": false
+  },
+  "601398.SH": {
+    "name": "工商银行",
+    "bought": false
   }
 }

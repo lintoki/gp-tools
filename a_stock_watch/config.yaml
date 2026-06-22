@@ -1,15 +1,14 @@
-ai_core_watch:
-- 601138.SH
-- 002463.SZ
-- 603228.SH
-- 002130.SZ
-- 300394.SZ
-- 300502.SZ
-- 300308.SZ
-- 300476.SZ
-- 688256.SH
-- 600183.SH
 watchlist:
+- name: 沪电股份
+  code: 002463.SZ
+  market: SZ
+  buy_low: 142.0
+  buy_high: 144.0
+  shares: 100
+  type: AI_PCB核心
+  priority: 1
+  enabled: true
+  note: 已持仓，明天只做持仓管理，不加仓；跌破142警惕，跌破141.5且收不回考虑止损
 - name: 工业富联
   code: 601138.SH
   market: SH
@@ -19,34 +18,84 @@ watchlist:
   type: AI服务器核心
   priority: 2
   enabled: true
-  note: 已有100股，这是补仓计划
-- name: 沃尔核材
-  code: 002130.SZ
+  note: 已持仓，明天只观察不补仓；站稳78.5-79偏强，跌破76转弱
+- name: 中际旭创
+  code: 300308.SZ
   market: SZ
-  buy_low: 19.2
-  buy_high: 19.6
-  shares: 200
-  type: AI高速连接小仓试错
+  buy_low: 1320.0
+  buy_high: 1350.0
+  shares: 0
+  type: AI光模块风向标
+  priority: 3
+  enabled: true
+  note: 只观察不买；进入该区间用于判断AI光模块是否回踩到关键观察区
+- name: 新易盛
+  code: 300502.SZ
+  market: SZ
+  buy_low: 555.0
+  buy_high: 565.0
+  shares: 0
+  type: AI光模块情绪风向标
   priority: 4
   enabled: true
-  note: 小仓试错，不作为主仓
-- name: 长江电力
-  code: 600900.SH
-  market: SH
-  buy_low: 21.5
-  buy_high: 21.8
-  shares: 200
-  type: 防守仓
+  note: 只观察不买；如果和中际旭创一起放量下跌，AI硬件方向谨慎
+- name: 汇川技术
+  code: 300124.SZ
+  market: SZ
+  buy_low: 66.5
+  buy_high: 68.0
+  shares: 100
+  type: 物理AI核心
   priority: 5
   enabled: true
-  note: 防守配置，不追求短线暴利
-- name: 沪电股份
-  code: 002463.SZ
+  note: 物理AI第一候选；机器人、伺服、运动控制方向，到价且板块不崩才考虑
+- name: 双环传动
+  code: 002472.SZ
   market: SZ
-  buy_low: 142.0
-  buy_high: 144.0
+  buy_low: 40.5
+  buy_high: 41.5
   shares: 100
-  type: AI_PCB核心
+  type: 物理AI_减速器
   priority: 6
   enabled: true
-  note: 优先买入
+  note: 物理AI第二候选；弹性比汇川大，波动也更大，只低吸不追
+- name: 拓普集团
+  code: 601689.SH
+  market: SH
+  buy_low: 58.0
+  buy_high: 59.5
+  shares: 100
+  type: 物理AI_执行器
+  priority: 7
+  enabled: true
+  note: 机器人执行器和智能汽车方向；优先级低于汇川和双环，只低吸
+- name: 奥比中光
+  code: 688322.SH
+  market: SH
+  buy_low: 126.0
+  buy_high: 130.0
+  shares: 100
+  type: 物理AI_3D视觉
+  priority: 8
+  enabled: true
+  note: 机器人眼睛方向；有科创板权限才考虑，波动大，小仓观察
+- name: 新国都
+  code: 300130.SZ
+  market: SZ
+  buy_low: 22.0
+  buy_high: 22.8
+  shares: 100
+  type: 金融科技_跨境支付
+  priority: 9
+  enabled: true
+  note: 孙宇晨稳定币/跨境支付方向的A股映射；只能小仓，不做主仓
+- name: 工商银行
+  code: 601398.SH
+  market: SH
+  buy_low: 7.6
+  buy_high: 7.9
+  shares: 0
+  type: 防守风格锚
+  priority: 10
+  enabled: true
+  note: 只观察不买；用于判断资金是否继续切向银行红利防守方向

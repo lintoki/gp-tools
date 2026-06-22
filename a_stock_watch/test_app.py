@@ -55,6 +55,16 @@ class AppTest(unittest.TestCase):
         self.assertNotIn('id="webhookStatus"', html)
         self.assertNotIn("错误：${data.last_error}", html)
 
+    def test_static_page_marks_change_and_status_with_colors(self):
+        html = app_module.INDEX_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("function changeClass", html)
+        self.assertIn("market-up", html)
+        self.assertIn("market-down", html)
+        self.assertIn("${changeValue(row.change_pct, row.change_pct_text)}", html)
+        self.assertIn(".badge.WAIT_PULLBACK", html)
+        self.assertIn(".badge.BUY_CONFIRMED", html)
+
     def test_watch_item_save_preserves_existing_priority_and_enabled(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             config_path = Path(tmpdir) / "config.yaml"

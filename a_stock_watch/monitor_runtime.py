@@ -3,6 +3,7 @@ import json
 import logging
 import threading
 import time
+from collections import deque
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
@@ -48,7 +49,7 @@ from web_config import load_config_document, load_settings
 
 
 MAX_EVENT_LOGS = 200
-MAX_SUMMARY_HISTORY = 120
+MAX_SUMMARY_HISTORY = 10
 
 
 def build_quote_rows(
@@ -189,6 +190,7 @@ class MonitorRuntime:
             "market_risk": {},
             "sector_risk": {},
         }
+        self._load_summary_history()
 
     def start(self) -> None:
         stopping_thread: Optional[threading.Thread] = None
@@ -331,15 +333,63 @@ class MonitorRuntime:
             "sector_risk": _sector_risk_to_dict(sector_risk),
             "rows": copy.deepcopy(rows),
         }
-        self.snapshots_path.parent.mkdir(parents=True, exist_ok=True)
-        with self.snapshots_path.open("a", encoding="utf-8") as file:
-            file.write(json.dumps(snapshot, ensure_ascii=False) + "\n")
+        _write_limited_snapshot(self.snapshots_path, snapshot, MAX_SUMMARY_HISTORY)
 
         with self._lock:
             self._state["last_summary_at"] = snapshot["time"]
             self._state["summary_history"].insert(0, snapshot)
             self._state["summary_history"] = self._state["summary_history"][:MAX_SUMMARY_HISTORY]
         self.add_event("INFO", f"已生成行情快照: {snapshot['time']}")
+
+    def _load_summary_history(self) -> None:
+        snapshots = _load_recent_snapshots(self.snapshots_path, MAX_SUMMARY_HISTORY)
+        if not snapshots:
+            return
+        _rewrite_snapshot_lines(
+            self.snapshots_path,
+            [json.dumps(snapshot, ensure_ascii=False) for snapshot in snapshots],
+        )
+        self._state["last_summary_at"] = str(snapshots[-1].get("time", ""))
+        self._state["summary_history"] = list(reversed(snapshots))
+
+
+def _read_recent_snapshot_lines(path: Path, limit: int) -> List[str]:
+    if limit <= 0 or not path.exists():
+        return []
+    lines: deque[str] = deque(maxlen=limit)
+    with path.open("r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+            if line:
+                lines.append(line)
+    return list(lines)
+
+
+def _rewrite_snapshot_lines(path: Path, lines: List[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = path.with_suffix(path.suffix + ".tmp")
+    with temp_path.open("w", encoding="utf-8") as file:
+        for line in lines[-MAX_SUMMARY_HISTORY:]:
+            file.write(line.rstrip("\n") + "\n")
+    temp_path.replace(path)
+
+
+def _load_recent_snapshots(path: Path, limit: int) -> List[Dict[str, Any]]:
+    snapshots: List[Dict[str, Any]] = []
+    for line in _read_recent_snapshot_lines(path, limit):
+        try:
+            payload = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(payload, dict):
+            snapshots.append(payload)
+    return snapshots
+
+
+def _write_limited_snapshot(path: Path, snapshot: Dict[str, Any], limit: int) -> None:
+    previous = _read_recent_snapshot_lines(path, max(0, limit - 1))
+    previous.append(json.dumps(snapshot, ensure_ascii=False))
+    _rewrite_snapshot_lines(path, previous[-limit:])
 
 
 def write_runtime_state(path: Path, runtime: MonitorRuntime) -> None:

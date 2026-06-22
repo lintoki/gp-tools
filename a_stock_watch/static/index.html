@@ -15,12 +15,17 @@
       --muted: #667085;
       --accent: #0f6b63;
       --accent-soft: #e7f4f2;
+      --blue: #175cd3;
+      --blue-soft: #eff4ff;
       --danger: #b42318;
       --danger-soft: #fff1f0;
       --warn: #a15c07;
       --warn-soft: #fff7e8;
       --ok: #087443;
       --ok-soft: #edf8f2;
+      --rise: #c2410c;
+      --rise-soft: #fff3ed;
+      --neutral-soft: #f2f4f7;
       --shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
     }
 
@@ -218,9 +223,32 @@
       font-weight: 700;
     }
 
-    .BUY_CONFIRMED, .LOW, .SECTOR_RISK_LOW { color: var(--ok); border-color: #a7d9bd; background: var(--ok-soft); }
-    .WATCH_ONLY, .MEDIUM, .UNKNOWN, .SECTOR_RISK_MEDIUM, .SECTOR_RISK_UNKNOWN, .PRICE_IN_ZONE_BUT_NO_CONFIRM { color: var(--warn); border-color: #f0c98a; background: var(--warn-soft); }
-    .RISK_BLOCKED, .BELOW_ZONE_RISK, .HIGH, .SECTOR_RISK_HIGH, .BLOCKED_BY_POSITION { color: var(--danger); border-color: #f2b8b2; background: var(--danger-soft); }
+    .badge.BUY_CONFIRMED { color: var(--rise); border-color: #fdba74; background: var(--rise-soft); }
+    .badge.BUY_ZONE { color: var(--accent); border-color: #9fd6cf; background: var(--accent-soft); }
+    .badge.WAIT_PULLBACK { color: var(--blue); border-color: #b2ccff; background: var(--blue-soft); }
+    .badge.LOW, .badge.SECTOR_RISK_LOW, .badge.ACCEPTANCE_CONFIRMED { color: var(--ok); border-color: #a7d9bd; background: var(--ok-soft); }
+    .badge.WATCH_ONLY, .badge.MEDIUM, .badge.UNKNOWN, .badge.SECTOR_RISK_MEDIUM, .badge.SECTOR_RISK_UNKNOWN, .badge.PRICE_IN_ZONE_BUT_NO_CONFIRM { color: var(--warn); border-color: #f0c98a; background: var(--warn-soft); }
+    .badge.RISK_BLOCKED, .badge.BELOW_ZONE_RISK, .badge.HIGH, .badge.SECTOR_RISK_HIGH, .badge.BELOW_ZONE, .badge.BLOCKED_BY_POSITION { color: var(--danger); border-color: #f2b8b2; background: var(--danger-soft); }
+    .badge.NONE, .badge.NO_PRICE, .badge.MISSING_QUOTE, .badge.ACCEPTANCE_UNKNOWN { color: var(--muted); border-color: var(--line); background: var(--neutral-soft); }
+
+    .change {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 750;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .market-up { color: var(--rise); }
+    .market-down { color: var(--ok); }
+    .market-flat { color: var(--muted); }
+
+    .count-up, .count-down {
+      font-weight: 750;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .count-up { color: var(--rise); }
+    .count-down { color: var(--ok); }
 
     .form-grid {
       display: grid;
@@ -728,6 +756,24 @@
       return `<span class="badge ${escapeHtml(raw)}">${escapeHtml(displayValue || label(raw))}</span>`;
     }
 
+    function changeClass(value) {
+      const number = Number(value);
+      if (!Number.isFinite(number) || number === 0) return "market-flat";
+      return number > 0 ? "market-up" : "market-down";
+    }
+
+    function changeValue(value, displayValue) {
+      return `<span class="change ${changeClass(value)}">${escapeHtml(displayValue || text(value))}</span>`;
+    }
+
+    function sectorBreadthText(sector) {
+      return [
+        `上涨 <span class="count-up">${escapeHtml(text(sector.up_count))}</span>`,
+        `下跌 <span class="count-down">${escapeHtml(text(sector.down_count))}</span>`,
+        `均幅 <span class="change ${changeClass(sector.avg_change_pct)}">${escapeHtml(numberText(sector.avg_change_pct))}%</span>`,
+      ].join(" / ");
+    }
+
     async function requestJson(url, options = {}) {
       const response = await fetch(url, {
         headers: { "Content-Type": "application/json" },
@@ -801,7 +847,7 @@
       document.getElementById("marketRiskValue").innerHTML = badge(market.level);
       document.getElementById("marketRiskSub").textContent = `主力净流入 ${numberText(market.main_net_inflow_yi)} 亿 | ${text(market.reason)}`;
       document.getElementById("sectorRiskValue").innerHTML = badge(sector.level);
-      document.getElementById("sectorRiskSub").textContent = `上涨 ${text(sector.up_count)} / 下跌 ${text(sector.down_count)} | 均幅 ${numberText(sector.avg_change_pct)}%`;
+      document.getElementById("sectorRiskSub").innerHTML = sectorBreadthText(sector);
       document.getElementById("signalValue").textContent = `买点确认 ${counts.BUY_CONFIRMED || 0} / 观察 ${counts.WATCH_ONLY || 0} / 风险拦截 ${counts.RISK_BLOCKED || 0}`;
       document.getElementById("signalSub").textContent = "只提醒，不自动下单";
       document.getElementById("summaryValue").textContent = text(data.last_summary_at);
@@ -815,8 +861,8 @@
           <td>${escapeHtml(row.time)}</td>
           <td>${escapeHtml(row.code)}</td>
           <td>${escapeHtml(row.name)}</td>
-          <td>${escapeHtml(row.latest_price_text)}</td>
-          <td>${escapeHtml(row.change_pct_text)}</td>
+          <td>${changeValue(row.change_pct, row.latest_price_text)}</td>
+          <td>${changeValue(row.change_pct, row.change_pct_text)}</td>
           <td>${escapeHtml(row.amount_text)}</td>
           <td>${escapeHtml(row.buy_range_text)}</td>
           <td>${badge(row.price_status, row.price_status_text)}</td>
@@ -922,7 +968,7 @@
             <div class="snapshot-meta">
               <strong>${escapeHtml(snapshot.time)}</strong>
               <span>${badge(market.level)} ${badge(sector.level)}</span>
-              <span>上涨 ${text(sector.up_count)} / 下跌 ${text(sector.down_count)} / 均幅 ${numberText(sector.avg_change_pct)}%</span>
+              <span>${sectorBreadthText(sector)}</span>
             </div>
             <div class="table-wrap" style="border: 0; border-radius: 0;">
               <table class="snapshot-table">
@@ -940,10 +986,10 @@
                 <tbody>
                   ${(snapshot.rows || []).map((row) => `
                     <tr>
-                      <td>${escapeHtml(row.code)}</td>
-                      <td>${escapeHtml(row.name)}</td>
-                      <td>${escapeHtml(row.latest_price_text)}</td>
-                      <td>${escapeHtml(row.buy_range_text)}</td>
+	                      <td>${escapeHtml(row.code)}</td>
+	                      <td>${escapeHtml(row.name)}</td>
+	                      <td>${changeValue(row.change_pct, row.latest_price_text)}</td>
+	                      <td>${escapeHtml(row.buy_range_text)}</td>
                     <td>${badge(row.price_status, row.price_status_text)}</td>
                     <td>${badge(row.market_risk_level, row.market_risk_level_text)} ${badge(row.sector_risk_level, row.sector_risk_level_text)}</td>
                     <td>${badge(row.final_alert, row.final_alert_text)}</td>
