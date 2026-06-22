@@ -1,6 +1,0 @@
-akshare
-PyYAML
-python-dotenv
-fastapi
-uvicorn
-requests
