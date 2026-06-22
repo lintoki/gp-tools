@@ -88,6 +88,10 @@
       align-items: center;
     }
 
+    .toolbar button {
+      min-height: 32px;
+    }
+
     .pill {
       min-height: 28px;
       display: inline-flex;
@@ -109,10 +113,7 @@
       max-width: 1500px;
       margin: 0 auto;
       padding: 16px 20px 32px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 392px;
-      gap: 16px;
-      align-items: start;
+      display: block;
     }
 
     .content, .side {
@@ -261,6 +262,12 @@
       margin-top: 12px;
     }
 
+    .row-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     button {
       min-height: 36px;
       border: 1px solid var(--line);
@@ -297,6 +304,93 @@
     }
 
     .message.error { color: var(--danger); }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: rgba(15, 23, 42, 0.28);
+    }
+
+    .drawer-backdrop[hidden] {
+      display: none;
+    }
+
+    .settings-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      width: min(820px, 100vw);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      background: #fff;
+      border-left: 1px solid var(--line);
+      box-shadow: -12px 0 32px rgba(16, 24, 40, 0.18);
+      transform: translateX(100%);
+      transition: transform 160ms ease;
+    }
+
+    .settings-drawer.open {
+      transform: translateX(0);
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-soft);
+    }
+
+    .settings-header h2 {
+      font-size: 18px;
+    }
+
+    .settings-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .settings-tabs button {
+      min-height: 32px;
+      padding: 6px 10px;
+      white-space: nowrap;
+    }
+
+    .settings-tabs button.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .settings-body {
+      min-height: 0;
+      overflow: auto;
+      padding: 16px;
+    }
+
+    .settings-panel {
+      display: block;
+    }
+
+    .settings-panel[hidden] {
+      display: none;
+    }
+
+    .settings-panel .table-wrap {
+      max-height: calc(100vh - 210px);
+    }
 
     .snapshots {
       display: grid;
@@ -346,7 +440,6 @@
     .muted { color: var(--muted); }
 
     @media (max-width: 1200px) {
-      main { grid-template-columns: 1fr; }
       .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .toolbar { justify-content: flex-start; }
       .topbar { align-items: flex-start; flex-direction: column; }
@@ -356,6 +449,7 @@
       main { padding: 12px; }
       .metrics, .form-grid { grid-template-columns: 1fr; }
       .brand { min-width: 0; }
+      .settings-drawer { width: 100vw; }
     }
   </style>
 </head>
@@ -368,9 +462,10 @@
       <div class="toolbar">
         <span class="pill" id="runStatus">运行 -</span>
         <span class="pill" id="tradeStatus">交易 -</span>
-        <span class="pill" id="webhookStatus">Webhook -</span>
         <span class="pill" id="fetchStatus">拉取 -</span>
         <button class="primary" id="refreshButton" type="button">刷新</button>
+        <button id="monitorToggleButton" type="button">停止监控</button>
+        <button id="configButton" type="button">配置中心</button>
       </div>
     </div>
   </header>
@@ -437,8 +532,24 @@
       </section>
     </div>
 
-    <aside class="side">
-      <section>
+  </main>
+
+  <div class="drawer-backdrop" id="settingsBackdrop" hidden></div>
+  <aside class="side settings-drawer" id="settingsDrawer" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="settingsTitle">
+    <div class="settings-header">
+      <h2 id="settingsTitle">配置中心</h2>
+      <button id="settingsCloseButton" type="button">关闭</button>
+    </div>
+    <nav class="settings-tabs" aria-label="配置分类">
+      <button class="active" type="button" data-settings-tab="watchlist">监控股票</button>
+      <button type="button" data-settings-tab="single">新增/修改</button>
+      <button type="button" data-settings-tab="import">批量导入</button>
+      <button type="button" data-settings-tab="positions">持仓状态</button>
+      <button type="button" data-settings-tab="webhook">Webhook</button>
+      <button type="button" data-settings-tab="logs">事件日志</button>
+    </nav>
+    <div class="settings-body">
+      <section class="settings-panel" data-settings-panel="single" hidden>
         <div class="section-head">
           <h2>单只股票</h2>
         </div>
@@ -456,12 +567,13 @@
           <label style="margin-top: 10px;">备注<input name="note"></label>
           <div class="actions">
             <button class="primary" type="submit">保存股票</button>
+            <button id="clearSingleButton" type="button">清空</button>
           </div>
           <div class="message" id="singleMessage"></div>
         </form>
       </section>
 
-      <section>
+      <section class="settings-panel" data-settings-panel="import" hidden>
         <div class="section-head">
           <h2>批量导入</h2>
         </div>
@@ -497,7 +609,7 @@
         <div class="message" id="importMessage"></div>
       </section>
 
-      <section>
+      <section class="settings-panel" data-settings-panel="watchlist">
         <div class="section-head">
           <h2>监控列表</h2>
         </div>
@@ -518,9 +630,10 @@
         </div>
       </section>
 
-      <section>
+      <section class="settings-panel" data-settings-panel="webhook" hidden>
         <div class="section-head">
           <h2>Webhook</h2>
+          <span class="pill" id="webhookConfigStatus">Webhook -</span>
         </div>
         <label>企业微信机器人地址
           <input id="webhookInput" type="password" placeholder="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=...">
@@ -531,7 +644,7 @@
         <div class="message" id="webhookMessage"></div>
       </section>
 
-      <section>
+      <section class="settings-panel" data-settings-panel="positions" hidden>
         <div class="section-head">
           <h2>持仓状态</h2>
         </div>
@@ -550,14 +663,14 @@
         </div>
       </section>
 
-      <section>
+      <section class="settings-panel" data-settings-panel="logs" hidden>
         <div class="section-head">
           <h2>事件日志</h2>
         </div>
         <div class="logs" id="eventLogs"></div>
       </section>
-    </aside>
-  </main>
+    </div>
+  </aside>
 
   <script>
     const state = { data: null };
@@ -640,11 +753,40 @@
       trade.textContent = data.trading_time ? "交易时段" : "非交易时段";
       trade.className = data.trading_time ? "pill ok" : "pill warn";
 
-      const webhook = document.getElementById("webhookStatus");
-      webhook.textContent = data.settings.webhook_configured ? `Webhook ${data.settings.webhook_preview}` : "Webhook 未配置";
-      webhook.className = data.settings.webhook_configured ? "pill ok" : "pill warn";
-
       document.getElementById("fetchStatus").textContent = `拉取 ${text(data.last_fetch_at)}`;
+      const toggle = document.getElementById("monitorToggleButton");
+      toggle.textContent = data.running ? "停止监控" : "启动监控";
+      toggle.className = data.running ? "danger" : "primary";
+    }
+
+    function renderSettings(data) {
+      const webhook = document.getElementById("webhookConfigStatus");
+      webhook.textContent = data.settings.webhook_configured ? `已配置 ${data.settings.webhook_preview}` : "Webhook 未配置";
+      webhook.className = data.settings.webhook_configured ? "pill ok" : "pill warn";
+    }
+
+    function showSettingsTab(tab) {
+      document.querySelectorAll("[data-settings-tab]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.settingsTab === tab);
+      });
+      document.querySelectorAll("[data-settings-panel]").forEach((panel) => {
+        panel.hidden = panel.dataset.settingsPanel !== tab;
+      });
+    }
+
+    function openSettingsDrawer(tab = "watchlist") {
+      showSettingsTab(tab);
+      document.getElementById("settingsBackdrop").hidden = false;
+      const drawer = document.getElementById("settingsDrawer");
+      drawer.classList.add("open");
+      drawer.setAttribute("aria-hidden", "false");
+    }
+
+    function closeSettingsDrawer() {
+      document.getElementById("settingsBackdrop").hidden = true;
+      const drawer = document.getElementById("settingsDrawer");
+      drawer.classList.remove("open");
+      drawer.setAttribute("aria-hidden", "true");
     }
 
     function renderMetrics(data) {
@@ -696,9 +838,20 @@
           <td>${numberText(item.buy_low)}-${numberText(item.buy_high)}</td>
           <td>${escapeHtml(item.shares)}</td>
           <td>${item.enabled ? "是" : "否"}</td>
-          <td><button class="danger" type="button" data-delete="${escapeHtml(item.code)}">删除</button></td>
+          <td>
+            <div class="row-actions">
+              <button type="button" data-edit="${escapeHtml(item.code)}">修改</button>
+              <button class="danger" type="button" data-delete="${escapeHtml(item.code)}">删除</button>
+            </div>
+          </td>
         </tr>
       `).join("");
+      body.querySelectorAll("[data-edit]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const item = (state.data?.watchlist || []).find((row) => row.code === button.dataset.edit);
+          if (item) fillSingleForm(item);
+        });
+      });
       body.querySelectorAll("[data-delete]").forEach((button) => {
         button.addEventListener("click", async () => {
           if (!window.confirm(`确认删除 ${button.dataset.delete} 的监控配置？`)) return;
@@ -706,6 +859,30 @@
           await loadState();
         });
       });
+    }
+
+    function fillSingleForm(item) {
+      openSettingsDrawer("single");
+      const form = document.getElementById("singleForm");
+      form.elements.code.value = item.code || "";
+      form.elements.name.value = item.name || "";
+      form.elements.price.value = "";
+      form.elements.shares.value = item.shares || 100;
+      form.elements.buy_low.value = item.buy_low ?? "";
+      form.elements.buy_high.value = item.buy_high ?? "";
+      form.elements.type.value = item.type || "";
+      form.elements.depends_on_not_bought.value = item.depends_on_not_bought || "";
+      form.elements.note.value = item.note || "";
+      setMessage("singleMessage", `正在修改 ${item.name || ""} ${item.code || ""}`);
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+      form.elements.buy_low.focus();
+    }
+
+    function clearSingleForm() {
+      const form = document.getElementById("singleForm");
+      form.reset();
+      form.elements.shares.value = "100";
+      setMessage("singleMessage", "");
     }
 
     function renderPositions(positions) {
@@ -796,6 +973,7 @@
         const data = await requestJson("/api/state");
         state.data = data;
         renderTop(data);
+        renderSettings(data);
         renderMetrics(data);
         renderQuotes(data.latest_rows || []);
         renderWatchlist(data.watchlist || []);
@@ -863,6 +1041,28 @@
         button.disabled = false;
       }
     });
+
+    document.getElementById("monitorToggleButton").addEventListener("click", async () => {
+      const button = document.getElementById("monitorToggleButton");
+      const running = Boolean(state.data && state.data.running);
+      button.disabled = true;
+      try {
+        await requestJson(running ? "/api/monitor/stop" : "/api/monitor/start", { method: "POST" });
+        await loadState();
+      } catch (error) {
+        setMessage("quoteMessage", error.message, true);
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("configButton").addEventListener("click", () => openSettingsDrawer("watchlist"));
+    document.getElementById("settingsCloseButton").addEventListener("click", closeSettingsDrawer);
+    document.getElementById("settingsBackdrop").addEventListener("click", closeSettingsDrawer);
+    document.querySelectorAll("[data-settings-tab]").forEach((button) => {
+      button.addEventListener("click", () => showSettingsTab(button.dataset.settingsTab));
+    });
+    document.getElementById("clearSingleButton").addEventListener("click", clearSingleForm);
 
     loadState();
     window.setInterval(loadState, 5000);

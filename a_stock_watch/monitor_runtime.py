@@ -191,6 +191,16 @@ class MonitorRuntime:
         }
 
     def start(self) -> None:
+        stopping_thread: Optional[threading.Thread] = None
+        with self._lock:
+            if self._thread and self._thread.is_alive():
+                if not self._stop_event.is_set():
+                    return
+                stopping_thread = self._thread
+
+        if stopping_thread is not None:
+            stopping_thread.join(timeout=2)
+
         with self._lock:
             if self._thread and self._thread.is_alive():
                 return

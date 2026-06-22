@@ -130,6 +130,18 @@ def _next_priority() -> int:
     return max(priorities, default=0) + 1
 
 
+def _build_watch_item_for_save(payload: Dict[str, Any]) -> Dict[str, Any]:
+    item = build_watch_item_payload(payload, priority=_next_priority())
+    document = load_config_document(CONFIG_PATH)
+    for existing in document.get("watchlist", []):
+        if existing.get("code") != item["code"]:
+            continue
+        item["priority"] = int(existing.get("priority", item["priority"]))
+        item["enabled"] = bool(existing.get("enabled", item["enabled"]))
+        break
+    return item
+
+
 def _state_payload() -> Dict[str, Any]:
     document = load_config_document(CONFIG_PATH)
     positions = load_json_file(POSITION_STATE_PATH, {})
@@ -184,6 +196,26 @@ def refresh() -> Dict[str, Any]:
         raise _bad_request(exc) from exc
 
 
+@app.post("/api/monitor/start")
+def start_monitor() -> Dict[str, Any]:
+    try:
+        runtime.start()
+        runtime.add_event("INFO", "已手动启动监控后台")
+        return _state_payload()
+    except Exception as exc:
+        raise _bad_request(exc) from exc
+
+
+@app.post("/api/monitor/stop")
+def stop_monitor() -> Dict[str, Any]:
+    try:
+        runtime.stop()
+        runtime.add_event("INFO", "已手动停止监控后台")
+        return _state_payload()
+    except Exception as exc:
+        raise _bad_request(exc) from exc
+
+
 @app.post("/api/settings")
 async def update_settings(request: Request) -> Dict[str, Any]:
     try:
@@ -199,7 +231,7 @@ async def update_settings(request: Request) -> Dict[str, Any]:
 async def add_or_update_watch_item(request: Request) -> Dict[str, Any]:
     try:
         payload = await request.json()
-        item = build_watch_item_payload(payload, priority=_next_priority())
+        item = _build_watch_item_for_save(payload)
         watchlist = upsert_watch_items(CONFIG_PATH, [item])
         ensure_position_entries(POSITION_STATE_PATH, [item])
         runtime.add_event("INFO", f"已保存监控股票: {item['name']} {item['code']}")
