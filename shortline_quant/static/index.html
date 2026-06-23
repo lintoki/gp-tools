@@ -117,7 +117,7 @@
     }
     .metrics {
       display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 10px;
       margin: 14px 0;
     }
@@ -150,6 +150,119 @@
     .level-title {
       margin: 14px 0 6px;
       font-size: 14px;
+    }
+    .abc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .abc-module {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .abc-module-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #f8fafc;
+    }
+    .abc-module-head h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+    .module-count {
+      min-width: 28px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--blue);
+      text-align: center;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .abc-module-body {
+      padding: 10px;
+    }
+    .abc-module .empty {
+      padding: 18px 10px;
+      border: 0;
+      background: transparent;
+    }
+    .abc-module table {
+      font-size: 12px;
+    }
+    .abc-module th, .abc-module td {
+      padding: 7px 6px;
+    }
+    .trade-trigger {
+      position: relative;
+      width: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      font: inherit;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+    }
+    .trade-trigger:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .trade-popover {
+      position: absolute;
+      left: 0;
+      bottom: calc(100% + 8px);
+      z-index: 12;
+      display: none;
+      width: max-content;
+      max-width: min(300px, 70vw);
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+    .trade-trigger:hover .trade-popover,
+    .trade-trigger:focus .trade-popover {
+      display: block;
+    }
+    .trade-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .trade-detail-item {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      background: #fff;
+    }
+    .trade-detail-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .trade-detail-item strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 15px;
     }
     .modal {
       position: fixed;
@@ -220,6 +333,8 @@
       main { grid-template-columns: 1fr; padding: 14px; }
       .side { position: static; }
       .metrics { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .abc-grid { grid-template-columns: 1fr; }
+      .trade-detail-grid { grid-template-columns: 1fr; }
       .config-grid { grid-template-columns: 1fr; }
       .titlebar { align-items: flex-start; }
     }
@@ -239,6 +354,13 @@
       <button id="scan" type="button">触发策略信号</button>
 
       <h3>运行回测</h3>
+      <label for="quickRange">时间筛选</label>
+      <select id="quickRange">
+        <option value="7" selected>最近一周</option>
+        <option value="30">最近一月</option>
+        <option value="90">最近三月</option>
+        <option value="custom">自定义</option>
+      </select>
       <div class="split">
         <div>
           <label for="startDate">开始日</label>
@@ -284,9 +406,13 @@
     const modal = document.querySelector('#modal');
     const modalTitle = document.querySelector('#modalTitle');
     const modalBody = document.querySelector('#modalBody');
+    const quickRangeSelect = document.querySelector('#quickRange');
+    const startDateInput = document.querySelector('#startDate');
+    const endDateInput = document.querySelector('#endDate');
     const strategiesById = new Map();
     let currentConfigPayload = null;
     let currentConfigStrategy = '';
+    let lastBacktestTrades = [];
     const levelNames = {
       A: 'A 级严格买入候选',
       B: 'B 级重点观察候选',
@@ -448,12 +574,17 @@
       return `${year}-${month}-${day}`;
     }
 
-    function initDefaultBacktestDates() {
+    function applyQuickRange(days) {
       const end = new Date();
       const start = new Date(end);
-      start.setMonth(end.getMonth() - 1);
-      document.querySelector('#startDate').value = formatDateInput(start);
-      document.querySelector('#endDate').value = formatDateInput(end);
+      start.setDate(end.getDate() - days);
+      startDateInput.value = formatDateInput(start);
+      endDateInput.value = formatDateInput(end);
+    }
+
+    function initDefaultBacktestDates() {
+      quickRangeSelect.value = '7';
+      applyQuickRange(7);
     }
 
     function pctClass(value) {
@@ -467,64 +598,96 @@
       return '跳过';
     }
 
-    function renderRejections(rejections = []) {
-      if (!rejections.length) return '';
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      }[char]));
+    }
+
+    function valueText(value, fallback = '-') {
+      if (value === undefined || value === null || value === '') return fallback;
+      return escapeHtml(value);
+    }
+
+    function renderTradeHover(trade) {
       return `
-        <h3>剔除原因</h3>
-        <table>
-          <thead><tr><th>股票</th><th>阶段</th><th>原因</th></tr></thead>
-          <tbody>
-            ${rejections.slice(0, 8).map(r => `<tr><td>${r.code} ${r.name}</td><td>${r.stage || '过滤'}</td><td>${(r.reasons || []).join('；')}</td></tr>`).join('')}
-          </tbody>
-        </table>
+        <div><strong>${valueText(trade.symbol)} ${valueText(trade.name)}</strong></div>
+        <div>${valueText(trade.signal_date)} → ${valueText(trade.evaluation_date)}</div>
+        <div>${levelLabel(trade.candidate_level || 'A')} / ${actionLabel(trade.action)}</div>
+        <div>T+1最高 ${valueText(trade.next_day_high_return_pct)}%，收盘 ${valueText(trade.next_day_close_return_pct)}%</div>
       `;
     }
 
-    function renderNearMisses(items = []) {
-      if (!items.length) return '';
+    function renderTradeDetailModal(trade) {
       return `
-        <h3>接近标准观察池</h3>
-        <table>
-          <thead><tr><th>股票</th><th>价格/涨跌幅</th><th>量比/换手</th><th>市值</th><th>未满足原因</th><th>动作</th></tr></thead>
-          <tbody>
-            ${items.slice(0, 5).map(s => `<tr>
-              <td>${s.code} ${s.name}</td>
-              <td>${s.price}<div class="${pctClass(s.pct_chg)}">${s.pct_chg}%</div></td>
-              <td>${s.volume_ratio} / ${s.turnover_rate}%</td>
-              <td>${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</td>
-              <td>${(s.reasons || []).join('；')}<div class="muted">${s.stage || ''}</div></td>
-              <td class="watch">${s.action || '观察，不买入'}</td>
-            </tr>`).join('')}
-          </tbody>
-        </table>
+        <div class="trade-detail-grid">
+          <div class="trade-detail-item"><span>股票</span><strong>${valueText(trade.symbol)} ${valueText(trade.name)}</strong></div>
+          <div class="trade-detail-item"><span>层级/动作</span><strong>${levelLabel(trade.candidate_level || 'A')} / ${actionLabel(trade.action)}</strong></div>
+          <div class="trade-detail-item"><span>结果</span><strong class="${trade.is_correct ? 'ok' : 'bad'}">${trade.is_correct ? '正确' : '失败'}</strong></div>
+          <div class="trade-detail-item"><span>T 日</span><strong>${valueText(trade.signal_date)}</strong></div>
+          <div class="trade-detail-item"><span>T+1</span><strong>${valueText(trade.evaluation_date)}</strong></div>
+          <div class="trade-detail-item"><span>模拟买入价</span><strong>${valueText(trade.entry_price)}</strong></div>
+          <div class="trade-detail-item"><span>股数</span><strong>${valueText(trade.shares)}</strong></div>
+          <div class="trade-detail-item"><span>T+1最高收益</span><strong class="${pctClass(trade.next_day_high_return_pct)}">${valueText(trade.next_day_high_return_pct)}%</strong></div>
+          <div class="trade-detail-item"><span>T+1收盘收益</span><strong class="${pctClass(trade.next_day_close_return_pct)}">${valueText(trade.next_day_close_return_pct)}%</strong></div>
+        </div>
+        <h3>交易原因</h3>
+        <p>${valueText(trade.reason, '无')}</p>
       `;
     }
 
-    function renderCandidateSection(title, items = [], emptyText = '') {
+    function openTradeDetail(index) {
+      const trade = lastBacktestTrades[Number(index)];
+      if (!trade) return;
+      showModal(`交易明细：${trade.symbol || ''} ${trade.name || ''}`, renderTradeDetailModal(trade));
+    }
+
+    function renderCandidateModule({ level, title, items = [], emptyText = '' }) {
       if (!items.length) {
-        return emptyText ? `<h3>${title}</h3><div class="empty">${emptyText}</div>` : '';
+        return `
+          <section class="abc-module abc-module-${level}">
+            <div class="abc-module-head">
+              <h3>${title}</h3>
+              <span class="module-count">0</span>
+            </div>
+            <div class="abc-module-body"><div class="empty">${emptyText || `暂无 ${level} 级候选`}</div></div>
+          </section>
+        `;
       }
       return `
-        <h3>${title}</h3>
-        <table>
-          <thead><tr><th>股票</th><th>价格/涨跌幅</th><th>量比/换手</th><th>市值</th><th>评分</th><th>动作</th><th>尾盘形态</th><th>原因 / 升级条件</th></tr></thead>
-          <tbody>
-            ${items.map(s => `<tr>
-              <td>${s.code} ${s.name}<div class="muted">${s.level ? levelLabel(s.level) : ''}</div></td>
-              <td>${s.price}<div class="${pctClass(s.pct_chg)}">${s.pct_chg}%</div></td>
-              <td>${s.volume_ratio} / ${s.turnover_rate}%</td>
-              <td>${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</td>
-              <td>${s.score}</td>
-              <td class="${s.action === 'buy_candidate' ? 'buy' : 'watch'}">${actionLabel(s.action)}</td>
-              <td>${s.tail_pattern_name || (s.is_intraday_high_breakout_after_1430 ? '尾盘创新高' : '未创新高')}</td>
-              <td>
-                ${(s.reject_reasons || []).join('；') || s.buy_condition || ''}
-                <div class="muted">${(s.upgrade_requirements || []).join('；') || s.sell_rule_next_day || ''}</div>
-              </td>
-            </tr>`).join('')}
-          </tbody>
-        </table>
+        <section class="abc-module abc-module-${level}">
+          <div class="abc-module-head">
+            <h3>${title}</h3>
+            <span class="module-count">${items.length}</span>
+          </div>
+          <div class="abc-module-body">
+            <table>
+              <thead><tr><th>股票</th><th>涨幅</th><th>量/换</th><th>评分</th><th>动作</th><th>形态/条件</th></tr></thead>
+              <tbody>
+                ${items.map(s => `<tr>
+                  <td>${s.code} ${s.name}</td>
+                  <td>${s.price}<div class="${pctClass(s.pct_chg)}">${s.pct_chg}%</div></td>
+                  <td>${s.volume_ratio} / ${s.turnover_rate}%<div class="muted">${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</div></td>
+                  <td>${s.score}</td>
+                  <td class="${s.action === 'buy_candidate' ? 'buy' : 'watch'}">${actionLabel(s.action)}</td>
+                  <td>
+                    ${s.tail_pattern_name || (s.is_intraday_high_breakout_after_1430 ? '尾盘创新高' : '未创新高')}
+                    <div class="muted">${s.buy_condition || (s.upgrade_requirements || []).join('；') || s.sell_rule_next_day || ''}</div>
+                  </td>
+                </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        </section>
       `;
+    }
+
+    function renderCandidateModules(groups) {
+      return `<div class="abc-grid">${groups.map(renderCandidateModule).join('')}</div>`;
     }
 
     function renderLevelStats(levelStats = {}) {
@@ -555,29 +718,53 @@
       const levels = ['A', 'B', 'C'];
       return `
         <h3>ABC 候选明细</h3>
+        <div class="abc-grid">
         ${levels.map(level => {
           const items = trades.filter(trade => (trade.candidate_level || 'A') === level);
           if (!items.length) {
-            return `<h4 class="level-title">${levelLabel(level)}</h4><div class="empty">无${level}级候选</div>`;
+            return `
+              <section class="abc-module abc-module-${level}">
+                <div class="abc-module-head">
+                  <h3>${levelLabel(level)}</h3>
+                  <span class="module-count">0</span>
+                </div>
+                <div class="abc-module-body"><div class="empty">无${level}级候选</div></div>
+              </section>
+            `;
           }
           return `
-            <h4 class="level-title">${levelLabel(level)}</h4>
-            <table>
-              <thead><tr><th>T日</th><th>股票</th><th>模拟买入价</th><th>股数</th><th>T+1最高</th><th>T+1收盘</th><th>结果</th></tr></thead>
-              <tbody>
-                ${items.map(t => `<tr>
-                  <td>${t.signal_date}</td>
-                  <td>${t.symbol} ${t.name}<div class="muted">${actionLabel(t.action)}</div></td>
-                  <td>${t.entry_price}</td>
-                  <td>${t.shares}</td>
-                  <td>${t.next_day_high_return_pct}%</td>
-                  <td>${t.next_day_close_return_pct}%</td>
-                  <td class="${t.is_correct ? 'ok' : 'bad'}">${t.is_correct ? '正确' : '失败'}</td>
-                </tr>`).join('')}
-              </tbody>
-            </table>
+            <section class="abc-module abc-module-${level}">
+              <div class="abc-module-head">
+                <h3>${levelLabel(level)}</h3>
+                <span class="module-count">${items.length}</span>
+              </div>
+              <div class="abc-module-body">
+                <table>
+                  <thead><tr><th>T日</th><th>股票</th><th>买入价</th><th>T+1最高</th><th>结果</th></tr></thead>
+                  <tbody>
+                    ${items.map(t => {
+                      const tradeIndex = trades.indexOf(t);
+                      return `<tr>
+                      <td>${t.signal_date}</td>
+                      <td>
+                        <button class="trade-trigger" type="button" data-trade-index="${tradeIndex}" aria-label="查看 ${t.symbol} ${t.name} 交易明细">
+                          ${t.symbol} ${t.name}
+                          <span class="trade-popover" role="tooltip">${renderTradeHover(t)}</span>
+                        </button>
+                        <div class="muted">${actionLabel(t.action)}</div>
+                      </td>
+                      <td>${t.entry_price}<div class="muted">${t.shares} 股</div></td>
+                      <td>${t.next_day_high_return_pct}%<div class="muted">收盘 ${t.next_day_close_return_pct}%</div></td>
+                      <td class="${t.is_correct ? 'ok' : 'bad'}">${t.is_correct ? '正确' : '失败'}</td>
+                    </tr>`;
+                    }).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </section>
           `;
         }).join('')}
+        </div>
       `;
     }
 
@@ -627,11 +814,7 @@
       const bItems = data.B_watch_candidates || [];
       const cItems = data.C_pool_candidates || [];
       const totalLayered = aItems.length + bItems.length + cItems.length;
-      if (!totalLayered) {
-        const warning = data.data_warning ? `<p class="note">${data.data_warning}</p>` : '';
-        result.innerHTML = `<div class="empty">${data.trade_decision?.reason || data.decision?.note || '今日无符合策略标的，建议空仓'}</div>${warning}${renderNearMisses(data.near_misses)}${renderRejections(data.rejected || data.rejections)}`;
-        return;
-      }
+      const warning = data.data_warning ? `<p class="note">${data.data_warning}</p>` : '';
       result.innerHTML = `
         <div class="metrics">
           ${metric('策略', selectedStrategyName())}
@@ -641,12 +824,13 @@
           ${metric('可买', data.trade_decision?.can_buy ? '是' : '否', data.trade_decision?.can_buy ? 'ok' : 'watch')}
           ${metric('运行时间', data.run_time_valid ? '有效' : '无效', data.run_time_valid ? 'ok' : 'bad')}
         </div>
-        <p class="muted">${data.trade_decision?.reason || data.decision?.note || ''}；生成时间 ${data.timestamp}</p>
-        ${renderCandidateSection('A 级严格买入候选', aItems, '没有 A 级严格买入候选，今日空仓')}
-        ${renderCandidateSection('B 级重点观察候选', bItems)}
-        ${renderCandidateSection('C 级预备观察池', cItems)}
-        ${renderNearMisses(data.near_misses)}
-        ${renderRejections(data.rejected || data.rejections)}
+        <p class="muted">${data.trade_decision?.reason || data.decision?.note || (totalLayered ? '' : '今日无符合策略标的，建议空仓')}；生成时间 ${data.timestamp}</p>
+        ${warning}
+        ${renderCandidateModules([
+          { level: 'A', title: 'A 级严格买入候选', items: aItems, emptyText: '没有 A 级严格买入候选，今日空仓' },
+          { level: 'B', title: 'B 级重点观察候选', items: bItems, emptyText: '暂无 B 级观察候选' },
+          { level: 'C', title: 'C 级预备观察池', items: cItems, emptyText: '暂无 C 级预备候选' },
+        ])}
       `;
     }
 
@@ -655,8 +839,8 @@
       result.innerHTML = '<div class="empty">正在按历史周期拉取市场数据并执行 T+1 验证...</div>';
       const payload = {
         strategy_id: strategySelect.value,
-        start_date: document.querySelector('#startDate').value,
-        end_date: document.querySelector('#endDate').value,
+        start_date: startDateInput.value,
+        end_date: endDateInput.value,
         initial_cash: Number(document.querySelector('#cash').value || 100000),
         commission: 0.0003,
         slippage: 0.001,
@@ -674,6 +858,7 @@
       }
       const s = data.summary;
       const trades = data.trades || [];
+      lastBacktestTrades = trades;
       result.innerHTML = `
         <div class="metrics">
           ${metric('策略质量', s.quality.grade, `grade-${s.quality.grade}`)}
@@ -703,6 +888,26 @@
     });
     document.querySelector('#scan').addEventListener('click', scanSignals);
     document.querySelector('#run').addEventListener('click', runBacktest);
+    result.addEventListener('click', event => {
+      const trigger = event.target.closest('[data-trade-index]');
+      if (trigger) openTradeDetail(trigger.dataset.tradeIndex);
+    });
+    result.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const trigger = event.target.closest('[data-trade-index]');
+      if (!trigger) return;
+      event.preventDefault();
+      openTradeDetail(trigger.dataset.tradeIndex);
+    });
+    quickRangeSelect.addEventListener('change', () => {
+      const days = Number(quickRangeSelect.value);
+      if (Number.isFinite(days)) applyQuickRange(days);
+    });
+    [startDateInput, endDateInput].forEach(input => {
+      input.addEventListener('change', () => {
+        quickRangeSelect.value = 'custom';
+      });
+    });
     document.querySelector('#showStandards').addEventListener('click', openStandards);
     document.querySelector('#editConfig').addEventListener('click', openConfigEditor);
     document.querySelector('#closeModal').addEventListener('click', closeModal);
