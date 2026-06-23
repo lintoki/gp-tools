@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>短线量化策略工作台</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f6f9;
+      --panel: #ffffff;
+      --line: #d8dee8;
+      --text: #172033;
+      --muted: #667085;
+      --blue: #1f5fbf;
+      --green: #147a3d;
+      --red: #b93815;
+      --amber: #9a6700;
+      --soft: #eef4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      padding: 18px 28px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    h1 { margin: 0; font-size: 22px; }
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    h3 { margin: 18px 0 8px; font-size: 15px; }
+    main {
+      display: grid;
+      grid-template-columns: 340px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 28px 28px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .side {
+      position: sticky;
+      top: 16px;
+      align-self: start;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    select, input, button {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 10px;
+      font-size: 14px;
+      background: #fff;
+    }
+    button {
+      margin-top: 12px;
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .secondary {
+      background: #fff;
+      color: var(--blue);
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .note, .muted {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .note {
+      margin-top: 12px;
+      padding: 10px;
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      background: #fff;
+    }
+    .metric span { display: block; color: var(--muted); font-size: 12px; }
+    .metric strong { display: block; margin-top: 4px; font-size: 20px; }
+    .grade-A, .grade-B, .ok { color: var(--green); }
+    .grade-C, .watch { color: var(--amber); }
+    .grade-D, .bad { color: var(--red); }
+    .buy { color: var(--green); font-weight: 700; }
+    .reject { color: var(--red); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: #fff;
+    }
+    th, td {
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; padding: 14px; }
+      .side { position: static; }
+      .metrics { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>短线量化策略工作台</h1>
+    <div class="note">策略负责筛股票；信号只看当前候选，回测才选择历史周期并验证 T+1 表现。系统不自动下单。</div>
+  </header>
+  <main>
+    <aside class="panel side">
+      <h2>策略控制</h2>
+      <label for="strategy">选择策略</label>
+      <select id="strategy"></select>
+
+      <button id="scan" type="button">触发策略信号</button>
+
+      <h3>运行回测</h3>
+      <div class="split">
+        <div>
+          <label for="startDate">开始日</label>
+          <input id="startDate" type="date">
+        </div>
+        <div>
+          <label for="endDate">结束日</label>
+          <input id="endDate" type="date">
+        </div>
+      </div>
+      <label for="cash">模拟资金</label>
+      <input id="cash" type="number" value="100000">
+      <button id="run" class="secondary" type="button">运行回测</button>
+      <p class="muted">回测逻辑：T 日按策略从市场筛候选，T+1 只验证这些候选是否冲高或兑现。</p>
+    </aside>
+
+    <section class="panel">
+      <h2 id="viewTitle">策略说明</h2>
+      <div id="result" class="muted">正在加载策略...</div>
+    </section>
+  </main>
+
+  <script>
+    const strategySelect = document.querySelector('#strategy');
+    const result = document.querySelector('#result');
+    const viewTitle = document.querySelector('#viewTitle');
+    const strategiesById = new Map();
+
+    function metric(label, value, cls = '') {
+      return `<div class="metric"><span>${label}</span><strong class="${cls}">${value}</strong></div>`;
+    }
+
+    function formatDateInput(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function initDefaultBacktestDates() {
+      const end = new Date();
+      const start = new Date(end);
+      start.setMonth(end.getMonth() - 1);
+      document.querySelector('#startDate').value = formatDateInput(start);
+      document.querySelector('#endDate').value = formatDateInput(end);
+    }
+
+    function pctClass(value) {
+      return Number(value) >= 0 ? 'ok' : 'bad';
+    }
+
+    function actionLabel(action) {
+      if (action === 'buy_candidate' || action === 'buy_or_watch') return '买入候选';
+      if (action === 'watch') return '观察';
+      return action || '跳过';
+    }
+
+    function renderRejections(rejections = []) {
+      if (!rejections.length) return '';
+      return `
+        <h3>剔除原因</h3>
+        <table>
+          <thead><tr><th>股票</th><th>阶段</th><th>原因</th></tr></thead>
+          <tbody>
+            ${rejections.slice(0, 8).map(r => `<tr><td>${r.code} ${r.name}</td><td>${r.stage}</td><td>${(r.reasons || []).join('；')}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderNearMisses(items = []) {
+      if (!items.length) return '';
+      return `
+        <h3>接近标准观察池</h3>
+        <table>
+          <thead><tr><th>股票</th><th>价格/涨跌幅</th><th>量比/换手</th><th>市值</th><th>未满足原因</th><th>动作</th></tr></thead>
+          <tbody>
+            ${items.slice(0, 5).map(s => `<tr>
+              <td>${s.code} ${s.name}</td>
+              <td>${s.price}<div class="${pctClass(s.pct_chg)}">${s.pct_chg}%</div></td>
+              <td>${s.volume_ratio} / ${s.turnover_rate}%</td>
+              <td>${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</td>
+              <td>${(s.reasons || []).join('；')}<div class="muted">${s.stage || ''}</div></td>
+              <td class="watch">${s.action || '观察，不买入'}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function showStrategy() {
+      const strategy = strategiesById.get(strategySelect.value);
+      if (!strategy) return;
+      viewTitle.textContent = '策略说明';
+      result.innerHTML = `
+        <h2>${strategy.name}</h2>
+        <p>${strategy.description}</p>
+        <h3>适用周期</h3>
+        <p class="muted">${strategy.supported_timeframes.join(' / ')}</p>
+        <h3>参数</h3>
+        <table>
+          <thead><tr><th>参数</th><th>默认值</th></tr></thead>
+          <tbody>
+            ${Object.entries(strategy.params_schema).map(([key, meta]) => `<tr><td>${meta.label || key}</td><td>${meta.default}</td></tr>`).join('')}
+          </tbody>
+        </table>
+        <h3>注意</h3>
+        <p class="muted">${strategy.limitations.join('；')}</p>
+      `;
+    }
+
+    async function loadStrategies() {
+      const res = await fetch('/api/strategies');
+      const data = await res.json();
+      data.strategies.forEach(s => strategiesById.set(s.strategy_id, s));
+      strategySelect.innerHTML = data.strategies.map(s => `<option value="${s.strategy_id}">${s.name}</option>`).join('');
+      showStrategy();
+    }
+
+    async function scanSignals() {
+      viewTitle.textContent = '策略输出';
+      result.innerHTML = '<div class="empty">正在从市场拉取最新数据并筛选股票...</div>';
+      const res = await fetch('/api/signals', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ strategy_id: strategySelect.value, params: {} })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        result.innerHTML = `<div class="empty">${data.detail || '实时行情源暂时不可用，请稍后重试。'}</div>`;
+        return;
+      }
+      if (!data.candidates.length) {
+        const warning = data.data_warning ? `<p class="note">${data.data_warning}</p>` : '';
+        result.innerHTML = `<div class="empty">${data.decision?.note || '今日无符合策略标的，建议空仓'}</div>${warning}${renderNearMisses(data.near_misses)}${renderRejections(data.rejections)}`;
+        return;
+      }
+      result.innerHTML = `
+        <div class="metrics">
+          ${metric('策略', data.strategy)}
+          ${metric('候选数量', data.candidates.length)}
+          ${metric('可买', data.decision?.can_buy ? '是' : '否', data.decision?.can_buy ? 'ok' : 'watch')}
+          ${metric('运行时间', data.run_time_valid ? '有效' : '无效', data.run_time_valid ? 'ok' : 'bad')}
+          ${metric('生成时间', data.timestamp)}
+        </div>
+        <p class="muted">${data.decision?.note || ''}</p>
+        <table>
+          <thead><tr><th>股票</th><th>价格/涨跌幅</th><th>量比/换手</th><th>市值</th><th>评分</th><th>动作</th><th>尾盘形态</th><th>操作规则</th></tr></thead>
+          <tbody>
+            ${data.candidates.map(s => `<tr>
+              <td>${s.code} ${s.name}</td>
+              <td>${s.price}<div class="${pctClass(s.pct_chg)}">${s.pct_chg}%</div></td>
+              <td>${s.volume_ratio} / ${s.turnover_rate}%</td>
+              <td>${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</td>
+              <td>${s.score}</td>
+              <td class="${s.action === 'watch' ? 'watch' : 'buy'}">${actionLabel(s.action)}</td>
+              <td>${s.tail_pattern_name || (s.is_intraday_high_breakout_after_1430 ? '尾盘创新高' : '未创新高')}</td>
+              <td>${s.buy_condition}<div class="muted">${s.sell_rule_next_day}</div></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        ${renderNearMisses(data.near_misses)}
+        ${renderRejections(data.rejections)}
+      `;
+    }
+
+    async function runBacktest() {
+      viewTitle.textContent = '回测结果';
+      result.innerHTML = '<div class="empty">正在按历史周期拉取市场数据并执行 T+1 验证...</div>';
+      const payload = {
+        strategy_id: strategySelect.value,
+        start_date: document.querySelector('#startDate').value,
+        end_date: document.querySelector('#endDate').value,
+        initial_cash: Number(document.querySelector('#cash').value || 100000),
+        commission: 0.0003,
+        slippage: 0.001,
+        params: {}
+      };
+      const res = await fetch('/api/backtests', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        result.innerHTML = `<div class="empty">${data.detail || '回测失败'}</div>`;
+        return;
+      }
+      const s = data.summary;
+      result.innerHTML = `
+        <div class="metrics">
+          ${metric('策略质量', s.quality.grade, `grade-${s.quality.grade}`)}
+          ${metric('信号正确率', `${s.signal_accuracy_pct}%`)}
+          ${metric('按天正确率', `${s.day_accuracy_pct}%`)}
+          ${metric('候选信号', s.evaluated_signals)}
+          ${metric('总收益', `${s.total_return_pct}%`)}
+        </div>
+        <p class="muted">${s.start_date} 至 ${s.end_date}；${s.evaluation_rule}</p>
+        <p>${s.operation_advice}</p>
+        <table>
+          <thead><tr><th>T日</th><th>T+1</th><th>股票</th><th>结果</th><th>T+1最高</th><th>T+1收盘</th><th>原因</th></tr></thead>
+          <tbody>
+            ${data.trades.map(t => `<tr><td>${t.signal_date}</td><td>${t.evaluation_date}</td><td>${t.symbol} ${t.name}</td><td class="${t.is_correct ? 'ok' : 'bad'}">${t.is_correct ? '正确' : '失败'}</td><td>${t.next_day_high_return_pct}%</td><td>${t.next_day_close_return_pct}%</td><td>${t.reason}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    strategySelect.addEventListener('change', showStrategy);
+    document.querySelector('#scan').addEventListener('click', scanSignals);
+    document.querySelector('#run').addEventListener('click', runBacktest);
+    initDefaultBacktestDates();
+    loadStrategies();
+  </script>
+</body>
+</html>
