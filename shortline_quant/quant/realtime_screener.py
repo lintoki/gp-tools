@@ -9,6 +9,8 @@ import akshare as ak
 import pandas as pd
 import requests
 
+from quant.strategy_config import merge_strategy_config
+
 
 MAIN_BOARD_PREFIXES = ("000", "001", "002", "003", "600", "601", "603", "605")
 EXCLUDED_PREFIXES = ("300", "301", "688", "689", "8", "4")
@@ -18,6 +20,7 @@ TAIL_END = "15:00:00"
 MAX_CANDIDATES = 10
 MAX_REJECTIONS = 10
 MAX_NEAR_MISSES = 5
+LEVEL_ORDER = {"A": 0, "B": 1, "C": 2, "rejected": 3}
 LIMIT_UP_CACHE_COLUMNS = ["code", "name", "trade_date", "close_price", "limit_up_price", "limit_up_reason"]
 REJECTION_STAGE_LABELS = {
     "rough_filter": "涨幅榜粗筛",
@@ -71,12 +74,13 @@ class RealtimeStrategyScreener:
         self.provider = provider
         self.now_func = now_func
 
-    def run(self, strategy_id: str) -> Dict[str, Any]:
+    def run(self, strategy_id: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         if strategy_id not in STRATEGY_META:
             raise KeyError(f"unknown realtime strategy: {strategy_id}")
 
         now = self.now_func()
         meta = STRATEGY_META[strategy_id]
+        config = merge_strategy_config(strategy_id, params or {})
         run_time_valid = now.time() >= AFTER_1430
         base = self._base_result(strategy_id, now, run_time_valid)
         if not run_time_valid:
@@ -92,36 +96,53 @@ class RealtimeStrategyScreener:
                 "note": "行情榜数据源暂时不可用，建议空仓等待，稍后重试。",
             }
             return base
-        rough_quotes, rejections = _rough_filter(quotes)
+        pool_quotes, rejections, raw_rank_count, main_board_count = _three_level_pool_filter(quotes, config)
         try:
             index_pct_chg = float(self.provider.get_index_pct_chg())
         except Exception:
             index_pct_chg = 0.0
             base["data_warning"] = "大盘指数数据暂时不可用，已按 0% 近似计算相对强度。"
         trade_date = now.date().isoformat()
-        codes = [item["code"] for item in rough_quotes]
+        codes = [item["code"] for item in pool_quotes]
         try:
             limit_up_counts = self.provider.get_limit_up_counts(codes, trade_date, lookback=20)
         except Exception:
             limit_up_counts = {}
             base["data_warning"] = "涨停缓存读取失败，已按无涨停记录处理。"
 
-        candidates = []
-        for quote in rough_quotes:
+        level_buckets = {"A": [], "B": [], "C": []}
+        for quote in pool_quotes:
             if strategy_id == "overnight_arbitrage":
-                candidate, reject = self._evaluate_yang(quote, trade_date, index_pct_chg, limit_up_counts)
+                candidate, reject = self._evaluate_yang_layered(quote, trade_date, index_pct_chg, limit_up_counts, config)
             else:
-                candidate, reject = self._evaluate_tail_30m(quote, trade_date)
+                candidate, reject = self._evaluate_tail_30m_layered(quote, trade_date, config)
             if candidate:
-                candidates.append(candidate)
+                level_buckets[candidate["level"]].append(candidate)
             if reject:
                 rejections.append(reject)
 
-        candidates = sorted(candidates, key=lambda item: item["score"], reverse=True)[:MAX_CANDIDATES]
-        base["candidates"] = candidates
-        base["near_misses"] = [] if candidates else _build_near_misses(rejections)
-        base["rejections"] = rejections[:MAX_REJECTIONS]
-        base["decision"] = _decision(strategy_id, candidates, meta["empty_note"])
+        a_candidates = sorted(level_buckets["A"], key=lambda item: item["score"], reverse=True)[:MAX_CANDIDATES]
+        b_candidates = sorted(level_buckets["B"], key=lambda item: item["score"], reverse=True)[:MAX_CANDIDATES]
+        c_candidates = sorted(level_buckets["C"], key=lambda item: item["score"], reverse=True)[:MAX_CANDIDATES]
+        rejected = rejections[:MAX_REJECTIONS]
+        trade_decision = _trade_decision(a_candidates)
+        base["A_buy_candidates"] = a_candidates
+        base["B_watch_candidates"] = b_candidates
+        base["C_pool_candidates"] = c_candidates
+        base["rejected"] = rejected
+        base["candidates"] = a_candidates
+        base["near_misses"] = [] if a_candidates or b_candidates or c_candidates else _build_near_misses(rejections)
+        base["rejections"] = rejected
+        base["trade_decision"] = trade_decision
+        base["decision"] = {"can_buy": trade_decision["can_buy"], "max_buy_count": 1, "note": trade_decision["reason"]}
+        base["stats"] = {
+            "raw_rank_count": raw_rank_count,
+            "main_board_count": main_board_count,
+            "C_pool_count": len(c_candidates),
+            "B_watch_count": len(b_candidates),
+            "A_buy_count": len(a_candidates),
+            "rejected_count": len(rejections),
+        }
         return base
 
     def _base_result(self, strategy_id: str, now: datetime, run_time_valid: bool) -> Dict[str, Any]:
@@ -129,11 +150,30 @@ class RealtimeStrategyScreener:
         result = {
             "strategy": meta["strategy"],
             "timestamp": now.strftime("%Y-%m-%d %H:%M:%S"),
+            "strategy_mode": "strict_buy_relaxed_watch",
             "filters": meta["filters"],
+            "A_buy_candidates": [],
+            "B_watch_candidates": [],
+            "C_pool_candidates": [],
+            "rejected": [],
             "candidates": [],
             "near_misses": [],
             "rejections": [],
             "data_warning": "",
+            "trade_decision": {
+                "can_buy": False,
+                "reason": "没有 A 级严格买入候选，今日空仓",
+                "max_buy_count": 1,
+                "allow_auto_trade": False,
+            },
+            "stats": {
+                "raw_rank_count": 0,
+                "main_board_count": 0,
+                "C_pool_count": 0,
+                "B_watch_count": 0,
+                "A_buy_count": 0,
+                "rejected_count": 0,
+            },
             "decision": {
                 "can_buy": False,
                 "max_buy_count": 1,
@@ -146,6 +186,121 @@ class RealtimeStrategyScreener:
             result["window"] = "14:30-15:00"
             result["run_time_valid"] = run_time_valid
         return result
+
+    def _evaluate_yang_layered(
+        self,
+        quote: Dict[str, Any],
+        trade_date: str,
+        index_pct_chg: float,
+        limit_up_counts: Dict[str, int],
+        config: Dict[str, Any],
+    ) -> Tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+        limit_count = int(limit_up_counts.get(quote["code"], 0))
+        known_reasons = ["近20个交易日无涨停记录"] if limit_count <= 0 else []
+        c_basic_reasons = _yang_c_reject_reasons(quote, "", config)
+        if c_basic_reasons:
+            return {}, _rejection(quote, "hard_filter", c_basic_reasons, _yang_upgrade_requirements(c_basic_reasons))
+        missing_intraday_stage = "hard_filter" if known_reasons else "intraday"
+        try:
+            intraday = _prepare_intraday(self.provider.get_intraday_bars(quote["code"], trade_date))
+        except Exception:
+            return {}, _rejection(quote, missing_intraday_stage, known_reasons + ["分时数据源暂时不可用"], ["补充分时数据后重新评估"])
+        if intraday.empty:
+            return {}, _rejection(quote, missing_intraday_stage, known_reasons + ["缺少分时数据"], ["补充 14:30-15:00 分时数据"])
+
+        metrics = _intraday_metrics(intraday, quote)
+        volume_status, _, volume_reject = _tail_volume_status(intraday)
+        relative_strength = float(quote["pct_chg"]) - index_pct_chg
+        score, risk_flags = _score_yang(quote, max(limit_count, 1), metrics, relative_strength)
+
+        a_reasons = _yang_a_reject_reasons(quote, limit_count, metrics, relative_strength, volume_reject, score, config)
+        if not a_reasons:
+            return _candidate(
+                quote,
+                level="A",
+                action="buy_candidate",
+                score=score,
+                reject_reasons=[],
+                upgrade_requirements=[],
+                extra=_yang_extra(quote, limit_count, metrics, relative_strength, risk_flags),
+            ), None
+
+        b_reasons = _yang_b_reject_reasons(quote, limit_count, metrics, relative_strength, volume_reject, config)
+        if not b_reasons:
+            return _candidate(
+                quote,
+                level="B",
+                action="watch",
+                score=min(score, 69.9),
+                reject_reasons=a_reasons,
+                upgrade_requirements=_yang_upgrade_requirements(a_reasons, metrics),
+                extra=_yang_extra(quote, limit_count, metrics, relative_strength, risk_flags),
+            ), None
+
+        c_reasons = _yang_c_reject_reasons(quote, volume_reject, config)
+        if not c_reasons:
+            return _candidate(
+                quote,
+                level="C",
+                action="watch",
+                score=min(max(score, 45), 59.9),
+                reject_reasons=a_reasons + b_reasons,
+                upgrade_requirements=_yang_upgrade_requirements(a_reasons + b_reasons, metrics),
+                extra=_yang_extra(quote, limit_count, metrics, relative_strength, risk_flags),
+            ), None
+
+        return {}, _rejection(quote, "hard_filter", c_reasons, _yang_upgrade_requirements(a_reasons + b_reasons + c_reasons, metrics))
+
+    def _evaluate_tail_30m_layered(self, quote: Dict[str, Any], trade_date: str, config: Dict[str, Any]) -> Tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+        c_basic_reasons = _tail_c_reject_reasons(quote, "", config)
+        if c_basic_reasons:
+            return {}, _rejection(quote, "hard_filter", c_basic_reasons, _tail_upgrade_requirements(c_basic_reasons, TailPattern("", "", "reject", 0)))
+
+        try:
+            intraday = _prepare_intraday(self.provider.get_intraday_bars(quote["code"], trade_date))
+        except Exception:
+            return {}, _rejection(quote, "intraday", ["分时数据源暂时不可用"], ["补充分时数据后重新评估"])
+        if intraday.empty:
+            return {}, _rejection(quote, "intraday", ["缺少分时数据"], ["补充 14:30-15:00 分时数据"])
+
+        try:
+            daily = self.provider.get_daily_features(quote["code"], trade_date)
+        except Exception:
+            daily = {"ma5": 0, "ma30": 0, "ma_structure": "unknown"}
+
+        metrics = _intraday_metrics(intraday, quote)
+        pattern = _classify_tail_pattern(intraday, quote, metrics)
+        volume_status, volume_score, volume_reject = _tail_volume_status(intraday)
+        fund_status, fund_score, fund_reject = _fund_flow_status(intraday)
+        ma_reasons, ma_score = _ma_score(daily)
+        breakout_score = 10 if metrics.breakout_after_1430 else 0
+        score = round(30 + max(pattern.score, 0) + volume_score + fund_score + ma_score + breakout_score, 1)
+        extra = _tail_extra(quote, pattern, volume_status, fund_status, daily, metrics)
+
+        if pattern.key in {"up_then_down_break_open", "down_then_weak_rebound"}:
+            return {}, _rejection(quote, "tail_pattern", [pattern.reason], ["尾盘形态修复为 C、D 或 F 后再观察"])
+
+        a_reasons = _tail_a_reject_reasons(quote, metrics, pattern, volume_reject, fund_reject, ma_reasons, score, config)
+        if not a_reasons:
+            return _candidate(quote, "A", "buy_candidate", score, [], [], extra), None
+
+        b_reasons = _tail_b_reject_reasons(quote, metrics, pattern, volume_reject, daily, config)
+        if not b_reasons:
+            return _candidate(quote, "B", "watch", min(score, 69.9), a_reasons, _tail_upgrade_requirements(a_reasons, pattern), extra), None
+
+        c_reasons = _tail_c_reject_reasons(quote, volume_reject, config)
+        if not c_reasons:
+            return _candidate(
+                quote,
+                "C",
+                "watch",
+                min(max(score, 45), 59.9),
+                a_reasons + b_reasons,
+                _tail_upgrade_requirements(a_reasons + b_reasons, pattern),
+                extra,
+            ), None
+
+        return {}, _rejection(quote, "hard_filter", c_reasons, _tail_upgrade_requirements(a_reasons + b_reasons + c_reasons, pattern))
 
     def _evaluate_yang(
         self,
@@ -171,14 +326,14 @@ class RealtimeStrategyScreener:
         metrics = _intraday_metrics(intraday, quote)
         intraday_reasons = []
         if metrics.above_vwap_ratio < 0.70:
-            intraday_reasons.append("全天在 VWAP 上方比例低于 0.70")
+            intraday_reasons.append("全天在分时均价线上方比例低于 0.70")
         if not metrics.current_above_vwap:
-            intraday_reasons.append("当前价格跌破 VWAP")
+            intraday_reasons.append("当前价格跌破分时均价线")
         relative_strength = float(quote["pct_chg"]) - index_pct_chg
         if relative_strength < 2:
             intraday_reasons.append("相对强度低于 2")
         if metrics.breakout_after_1430 and not metrics.pullback_above_vwap:
-            intraday_reasons.append("尾盘创高后跌破 VWAP")
+            intraday_reasons.append("尾盘创高后跌破分时均价线")
         if intraday_reasons:
             return {}, _rejection(quote, "intraday", intraday_reasons)
 
@@ -567,6 +722,37 @@ class TailPattern:
     reason: str = ""
 
 
+def _three_level_pool_filter(quotes: Iterable[Dict[str, Any]], config: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], int, int]:
+    c_cfg = _level_config(config, "C")
+    selected = []
+    rejections = []
+    raw_count = 0
+    main_board_count = 0
+    for raw in quotes:
+        raw_count += 1
+        quote = _normalize_quote(raw)
+        reasons = []
+        if not _is_main_board(quote["code"]):
+            reasons.append("非沪深主板")
+        if _is_st_or_delist(quote["name"]) or quote.get("is_st"):
+            reasons.append("ST、退市或风险警示")
+        if quote.get("is_suspended"):
+            reasons.append("停牌")
+        if not reasons:
+            main_board_count += 1
+        if not c_cfg["min_pct_chg"] <= float(quote["pct_chg"]) <= c_cfg["max_pct_chg"]:
+            reasons.append(f"当前涨幅不在 {_fmt_threshold(c_cfg['min_pct_chg'])}%-{_fmt_threshold(c_cfg['max_pct_chg'])}% 观察池范围")
+        if reasons:
+            rejections.append(_rejection(quote, "rough_filter", reasons, ["进入主板非 ST 且涨幅回到 2%-6% 后再观察"]))
+        else:
+            selected.append(quote)
+    return selected, rejections, raw_count, main_board_count
+
+
+def _level_config(config: Dict[str, Any], level: str) -> Dict[str, Any]:
+    return config.get("levels", {}).get(level, {})
+
+
 def _rough_filter(quotes: Iterable[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     selected = []
     rejections = []
@@ -594,14 +780,278 @@ def _normalize_quote(raw: Dict[str, Any]) -> Dict[str, Any]:
         "code": code,
         "name": str(raw.get("name", "")),
         "price": _num(raw.get("price"), 0),
-        "pct_chg": _num(raw.get("pct_chg"), 0),
+        "pct_chg": _normalize_percent(raw.get("pct_chg")),
         "volume_ratio": _num(raw.get("volume_ratio"), 0),
-        "turnover_rate": _num(raw.get("turnover_rate"), 0),
-        "total_market_cap": _num(raw.get("total_market_cap"), 0),
+        "turnover_rate": _normalize_percent(raw.get("turnover_rate")),
+        "total_market_cap": _normalize_market_cap(raw.get("total_market_cap")),
         "open": _num(raw.get("open"), _num(raw.get("price"), 0)),
         "is_st": bool(raw.get("is_st", False)),
         "is_suspended": bool(raw.get("is_suspended", False)),
     }
+
+
+def _candidate(
+    quote: Dict[str, Any],
+    level: str,
+    action: str,
+    score: float,
+    reject_reasons: List[str],
+    upgrade_requirements: List[str],
+    extra: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    item = {
+        "code": quote["code"],
+        "name": quote["name"],
+        "level": level,
+        "action": action,
+        "price": _round(quote["price"], 2),
+        "pct_chg": _round(quote["pct_chg"], 2),
+        "volume_ratio": _round(quote["volume_ratio"], 2),
+        "turnover_rate": _round(quote["turnover_rate"], 2),
+        "total_market_cap": _round(quote["total_market_cap"], 0),
+        "score": round(float(score), 1),
+        "reject_reasons": reject_reasons,
+        "upgrade_requirements": upgrade_requirements,
+    }
+    if extra:
+        item.update(extra)
+    return item
+
+
+def _yang_extra(
+    quote: Dict[str, Any],
+    limit_count: int,
+    metrics: IntradayMetrics,
+    relative_strength: float,
+    risk_flags: List[str],
+) -> Dict[str, Any]:
+    return {
+        "limit_up_count_20d": limit_count,
+        "above_vwap_ratio": _round(metrics.above_vwap_ratio, 2),
+        "relative_strength": _round(relative_strength, 2),
+        "is_intraday_high_breakout_after_1430": metrics.breakout_after_1430,
+        "is_pullback_above_vwap": metrics.pullback_above_vwap,
+        "risk_flags": risk_flags,
+        "buy_condition": "14:30 后创当日新高，回踩分时均价线不破才允许买入",
+        "sell_rule_next_day": "次日 9:30-10:00 只卖不加仓",
+    }
+
+
+def _tail_extra(
+    quote: Dict[str, Any],
+    pattern: TailPattern,
+    volume_status: str,
+    fund_status: str,
+    daily: Dict[str, Any],
+    metrics: IntradayMetrics,
+) -> Dict[str, Any]:
+    return {
+        "tail_pattern": pattern.key,
+        "tail_pattern_name": pattern.name,
+        "tail_volume_status": volume_status,
+        "fund_flow_status": fund_status,
+        "ma5": _round(daily.get("ma5", 0), 2),
+        "ma30": _round(daily.get("ma30", 0), 2),
+        "ma_structure": daily.get("ma_structure", "unknown"),
+        "is_intraday_high_breakout_after_1430": metrics.breakout_after_1430,
+        "buy_condition": "尾盘创新高后不跌破分时均价线才允许买入",
+        "sell_rule_next_day": "次日早盘或上午获利了结，弱势则止损离场",
+    }
+
+
+def _yang_a_reject_reasons(
+    quote: Dict[str, Any],
+    limit_count: int,
+    metrics: IntradayMetrics,
+    relative_strength: float,
+    volume_reject: str,
+    score: float,
+    config: Dict[str, Any],
+) -> List[str]:
+    cfg = _level_config(config, "A")
+    reasons = []
+    pct = float(quote["pct_chg"])
+    if not cfg["min_pct_chg"] <= pct <= cfg["max_pct_chg"]:
+        reasons.append(f"当前涨幅未达到 A 级 {cfg['min_pct_chg']}%-{cfg['max_pct_chg']}%")
+    if limit_count < cfg.get("min_limit_up_count_20d", 1):
+        reasons.append("近20个交易日无涨停记录")
+    if float(quote["volume_ratio"]) < cfg["min_volume_ratio"]:
+        reasons.append(f"量比低于 A 级 {cfg['min_volume_ratio']}")
+    if not cfg["min_turnover_rate"] <= float(quote["turnover_rate"]) <= cfg["max_turnover_rate"]:
+        reasons.append(f"换手率未达到 A 级 {cfg['min_turnover_rate']}%-{cfg['max_turnover_rate']}%")
+    cap_billion = float(quote["total_market_cap"]) / 100_000_000
+    if not cfg["min_market_cap_billion"] <= cap_billion <= cfg["max_market_cap_billion"]:
+        reasons.append(f"总市值未达到 A 级 {cfg['min_market_cap_billion']} 亿-{cfg['max_market_cap_billion']} 亿")
+    if metrics.above_vwap_ratio < cfg["min_above_vwap_ratio"]:
+        reasons.append(f"均价线上方比例只有 {metrics.above_vwap_ratio:.2f}，未达到 A 级 {cfg['min_above_vwap_ratio']:.2f}")
+    if not metrics.current_above_vwap:
+        reasons.append("当前价格跌破分时均价线")
+    if relative_strength < cfg.get("min_relative_strength", 0):
+        reasons.append(f"相对强度低于 A 级 {cfg.get('min_relative_strength', 0)}")
+    if not (metrics.breakout_after_1430 and metrics.pullback_above_vwap):
+        reasons.append("未在 14:30 后创当日新高")
+    if volume_reject:
+        reasons.append(volume_reject)
+    if score < cfg.get("min_score", 70):
+        reasons.append(f"评分低于 A 级 {cfg.get('min_score', 70)}: {score}")
+    return reasons
+
+
+def _yang_b_reject_reasons(
+    quote: Dict[str, Any],
+    limit_count: int,
+    metrics: IntradayMetrics,
+    relative_strength: float,
+    volume_reject: str,
+    config: Dict[str, Any],
+) -> List[str]:
+    cfg = _level_config(config, "B")
+    reasons = []
+    if not cfg["min_pct_chg"] <= float(quote["pct_chg"]) <= cfg["max_pct_chg"]:
+        reasons.append(f"当前涨幅未达到 B 级 {cfg['min_pct_chg']}%-{cfg['max_pct_chg']}%")
+    if float(quote["volume_ratio"]) < cfg["min_volume_ratio"]:
+        reasons.append(f"量比低于 B 级 {cfg['min_volume_ratio']}")
+    if not cfg["min_turnover_rate"] <= float(quote["turnover_rate"]) <= cfg["max_turnover_rate"]:
+        reasons.append(f"换手率不在 B 级 {cfg['min_turnover_rate']}%-{cfg['max_turnover_rate']}%")
+    cap_billion = float(quote["total_market_cap"]) / 100_000_000
+    if not cfg["min_market_cap_billion"] <= cap_billion <= cfg["max_market_cap_billion"]:
+        reasons.append(f"总市值不在 B 级 {cfg['min_market_cap_billion']} 亿-{cfg['max_market_cap_billion']} 亿")
+    if limit_count < cfg.get("min_limit_up_count_20d", 1):
+        reasons.append("近20个交易日无涨停记录")
+    if metrics.above_vwap_ratio < cfg.get("min_above_vwap_ratio", 0):
+        reasons.append(f"均价线上方比例只有 {metrics.above_vwap_ratio:.2f}，未达到 B 级 {cfg.get('min_above_vwap_ratio', 0):.2f}")
+    if not metrics.current_above_vwap:
+        reasons.append("当前价格明显跌破分时均价线")
+    if relative_strength < cfg.get("min_relative_strength", 0):
+        reasons.append(f"相对强度低于 B 级 {cfg.get('min_relative_strength', 0)}")
+    if volume_reject:
+        reasons.append(volume_reject)
+    return reasons
+
+
+def _yang_c_reject_reasons(quote: Dict[str, Any], volume_reject: str, config: Dict[str, Any]) -> List[str]:
+    cfg = _level_config(config, "C")
+    reasons = []
+    if not cfg["min_pct_chg"] <= float(quote["pct_chg"]) <= cfg["max_pct_chg"]:
+        reasons.append(f"当前涨幅未达到 C 级 {cfg['min_pct_chg']}%-{cfg['max_pct_chg']}%")
+    if float(quote["volume_ratio"]) < cfg["min_volume_ratio"]:
+        reasons.append(f"量比低于 C 级 {cfg['min_volume_ratio']}")
+    if not cfg["min_turnover_rate"] <= float(quote["turnover_rate"]) <= cfg["max_turnover_rate"]:
+        reasons.append(f"换手率不在 C 级 {cfg['min_turnover_rate']}%-{cfg['max_turnover_rate']}%")
+    cap_billion = float(quote["total_market_cap"]) / 100_000_000
+    if not cfg["min_market_cap_billion"] <= cap_billion <= cfg["max_market_cap_billion"]:
+        reasons.append(f"总市值不在 C 级 {cfg['min_market_cap_billion']} 亿-{cfg['max_market_cap_billion']} 亿")
+    if volume_reject:
+        reasons.append(volume_reject)
+    return reasons
+
+
+def _yang_upgrade_requirements(reasons: List[str], metrics: Optional[IntradayMetrics] = None) -> List[str]:
+    requirements = []
+    joined = "；".join(reasons)
+    if "未在 14:30 后创当日新高" in joined:
+        requirements.append("需要 14:30 后放量突破当日新高")
+    if "分时均价线" in joined:
+        requirements.append("当前价格保持在分时均价线上方")
+    if "均价线上方比例" in joined:
+        requirements.append("均价线上方比例提升到 0.70 以上")
+    if "涨停" in joined:
+        requirements.append("近 20 个交易日至少出现 1 次涨停")
+    if "相对强度" in joined:
+        requirements.append("相对强度提升到 2 以上")
+    if not requirements:
+        requirements.append("补齐 A 级硬条件后再考虑买入")
+    return list(dict.fromkeys(requirements))
+
+
+def _tail_a_reject_reasons(
+    quote: Dict[str, Any],
+    metrics: IntradayMetrics,
+    pattern: TailPattern,
+    volume_reject: str,
+    fund_reject: str,
+    ma_reasons: List[str],
+    score: float,
+    config: Dict[str, Any],
+) -> List[str]:
+    cfg = _level_config(config, "A")
+    reasons = []
+    if not cfg["min_pct_chg"] <= float(quote["pct_chg"]) <= cfg["max_pct_chg"]:
+        reasons.append(f"涨幅未达到 A 级 {cfg['min_pct_chg']}%-{cfg['max_pct_chg']}%")
+    if float(quote["volume_ratio"]) < cfg["min_volume_ratio"]:
+        reasons.append(f"量比低于 A 级 {cfg['min_volume_ratio']}")
+    if not cfg["min_turnover_rate"] <= float(quote["turnover_rate"]) <= cfg["max_turnover_rate"]:
+        reasons.append(f"换手率未达到 A 级 {cfg['min_turnover_rate']}%-{cfg['max_turnover_rate']}%")
+    cap_billion = float(quote["total_market_cap"]) / 100_000_000
+    if not cfg["min_market_cap_billion"] <= cap_billion <= cfg["max_market_cap_billion"]:
+        reasons.append(f"总市值未达到 A 级 {cfg['min_market_cap_billion']} 亿-{cfg['max_market_cap_billion']} 亿")
+    if pattern.key not in {"mild_rise_above_vwap_volume_up", "rise_pullback_hold_vwap", "qualified_break_intraday_high"}:
+        reasons.append("尾盘形态未达到 A 级 C、D、F")
+    if not metrics.breakout_after_1430:
+        reasons.append("未在 14:30 后创当日新高")
+    if not metrics.current_above_vwap:
+        reasons.append("当前价格跌破分时均价线")
+    reasons.extend(ma_reasons)
+    if volume_reject:
+        reasons.append(volume_reject)
+    if fund_reject:
+        reasons.append(fund_reject)
+    if score < cfg.get("min_score", 70):
+        reasons.append(f"评分低于 A 级 {cfg.get('min_score', 70)}: {score}")
+    return reasons
+
+
+def _tail_b_reject_reasons(
+    quote: Dict[str, Any],
+    metrics: IntradayMetrics,
+    pattern: TailPattern,
+    volume_reject: str,
+    daily: Dict[str, Any],
+    config: Dict[str, Any],
+) -> List[str]:
+    cfg = _level_config(config, "B")
+    reasons = []
+    if not cfg["min_pct_chg"] <= float(quote["pct_chg"]) <= cfg["max_pct_chg"]:
+        reasons.append(f"当前涨幅未达到 B 级 {cfg['min_pct_chg']}%-{cfg['max_pct_chg']}%")
+    if float(quote["volume_ratio"]) < cfg["min_volume_ratio"]:
+        reasons.append(f"量比低于 B 级 {cfg['min_volume_ratio']}")
+    if not cfg["min_turnover_rate"] <= float(quote["turnover_rate"]) <= cfg["max_turnover_rate"]:
+        reasons.append(f"换手率不在 B 级 {cfg['min_turnover_rate']}%-{cfg['max_turnover_rate']}%")
+    cap_billion = float(quote["total_market_cap"]) / 100_000_000
+    if not cfg["min_market_cap_billion"] <= cap_billion <= cfg["max_market_cap_billion"]:
+        reasons.append(f"总市值不在 B 级 {cfg['min_market_cap_billion']} 亿-{cfg['max_market_cap_billion']} 亿")
+    if pattern.key not in {"mild_rise_above_vwap_volume_up", "rise_pullback_hold_vwap", "qualified_break_intraday_high"}:
+        reasons.append("尾盘形态不是 B 级可观察形态")
+    ma5 = _num(daily.get("ma5"), 0)
+    ma30 = _num(daily.get("ma30"), 0)
+    if ma30 and ma5 < ma30 * 0.98:
+        reasons.append("5 日线距离 30 日线过远")
+    if not metrics.current_above_vwap:
+        reasons.append("当前价格明显跌破分时均价线")
+    if volume_reject:
+        reasons.append(volume_reject)
+    return reasons
+
+
+def _tail_c_reject_reasons(quote: Dict[str, Any], volume_reject: str, config: Dict[str, Any]) -> List[str]:
+    return _yang_c_reject_reasons(quote, volume_reject, config)
+
+
+def _tail_upgrade_requirements(reasons: List[str], pattern: TailPattern) -> List[str]:
+    requirements = []
+    joined = "；".join(reasons)
+    if "创当日新高" in joined or pattern.key != "qualified_break_intraday_high":
+        requirements.append("14:30 后放量突破或接近突破当日新高")
+    if "均线" in joined or "5 日线" in joined:
+        requirements.append("5 日线重新站上 30 日线并保持向上")
+    if "分时均价线" in joined:
+        requirements.append("当前价格重新站回分时均价线上方")
+    if "评分" in joined:
+        requirements.append("评分提升到 70 以上")
+    if not requirements:
+        requirements.append("补齐 A 级尾盘形态和硬条件后再考虑买入")
+    return list(dict.fromkeys(requirements))
+
 
 
 def _base_hard_filter_reasons(quote: Dict[str, Any]) -> List[str]:
@@ -868,17 +1318,48 @@ def _decision(strategy_id: str, candidates: List[Dict[str, Any]], empty_note: st
     return {"can_buy": can_buy, "max_buy_count": 1, "note": note}
 
 
-def _rejection(quote: Dict[str, Any], stage: str, reasons: List[str]) -> Dict[str, Any]:
+def _trade_decision(a_candidates: List[Dict[str, Any]]) -> Dict[str, Any]:
+    if not a_candidates:
+        return {
+            "can_buy": False,
+            "reason": "没有 A 级严格买入候选，今日空仓",
+            "max_buy_count": 1,
+            "allow_auto_trade": False,
+        }
+    top = max(a_candidates, key=lambda item: item["score"])
+    return {
+        "can_buy": True,
+        "reason": "存在 A 级严格买入候选，只允许选择 score 最高的 1 只",
+        "max_buy_count": 1,
+        "allow_auto_trade": False,
+        "selected_code": top["code"],
+        "selected_name": top["name"],
+        "selected_score": top["score"],
+    }
+
+
+def _rejection(
+    quote: Dict[str, Any],
+    stage: str,
+    reasons: List[str],
+    upgrade_requirements: Optional[List[str]] = None,
+) -> Dict[str, Any]:
+    upgrade_requirements = upgrade_requirements or ["补齐 A 级硬条件后再观察"]
     return {
         "code": quote.get("code", ""),
         "name": quote.get("name", ""),
+        "level": "rejected",
+        "action": "reject",
         "price": _round(quote.get("price", 0), 2),
         "pct_chg": _round(quote.get("pct_chg", 0), 2),
         "volume_ratio": _round(quote.get("volume_ratio", 0), 2),
         "turnover_rate": _round(quote.get("turnover_rate", 0), 2),
         "total_market_cap": _round(quote.get("total_market_cap", 0), 0),
+        "score": 0,
         "stage": REJECTION_STAGE_LABELS.get(stage, stage),
         "reasons": reasons,
+        "reject_reasons": reasons,
+        "upgrade_requirements": upgrade_requirements,
     }
 
 
@@ -941,5 +1422,28 @@ def _num(value: Any, default: float = 0.0) -> float:
         return default
 
 
+def _normalize_percent(value: Any, default: float = 0.0) -> float:
+    number = _num(value, default)
+    if number != 0 and abs(number) <= 1:
+        return number * 100
+    return number
+
+
+def _normalize_market_cap(value: Any, default: float = 0.0) -> float:
+    number = _num(value, default)
+    if number <= 0:
+        return default
+    if number < 10_000:
+        return number * 100_000_000
+    if number < 1_000_000_000:
+        return number * 10_000
+    return number
+
+
 def _round(value: Any, digits: int) -> float:
     return round(_num(value), digits)
+
+
+def _fmt_threshold(value: Any) -> str:
+    number = _num(value)
+    return str(int(number)) if number.is_integer() else str(number)

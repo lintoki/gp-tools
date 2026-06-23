@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 
 import pandas as pd
 
-from quant.realtime_screener import AkshareRealtimeProvider, RealtimeStrategyScreener
+from quant.realtime_screener import AkshareRealtimeProvider, RealtimeStrategyScreener, _normalize_quote
 
 
 def quote(code, name, pct_chg, price=10.0, volume_ratio=2.0, turnover_rate=6.0, cap=10_000_000_000):
@@ -137,10 +137,10 @@ class RealtimeScreenerTest(unittest.TestCase):
         candidate = result["candidates"][0]
         self.assertEqual("605305", candidate["code"])
         self.assertGreaterEqual(candidate["score"], 70)
-        self.assertEqual("buy_or_watch", candidate["action"])
+        self.assertEqual("buy_candidate", candidate["action"])
         self.assertEqual("次日 9:30-10:00 只卖不加仓", candidate["sell_rule_next_day"])
         rejected = {item["code"]: item["reasons"] for item in result["rejections"]}
-        self.assertIn("当前涨幅不在 3%-5%", rejected["000029"])
+        self.assertIn("当前涨幅不在 2%-6% 观察池范围", rejected["000029"])
         self.assertIn("非沪深主板", rejected["300001"])
         self.assertIn("近20个交易日无涨停记录", rejected["600666"])
         stages = {item["stage"] for item in result["rejections"]}
@@ -148,6 +148,59 @@ class RealtimeScreenerTest(unittest.TestCase):
         self.assertIn("硬性条件过滤", stages)
         self.assertNotIn("rough_filter", stages)
         self.assertNotIn("hard_filter", stages)
+
+    def test_yang_strategy_outputs_three_candidate_levels(self):
+        provider = StubRealtimeProvider(
+            quotes=[
+                quote("605305", "A级", 4.1, price=42.76, volume_ratio=2.4, turnover_rate=5.41, cap=8_979_000_000),
+                quote("603111", "B级", 4.0, price=20.0, volume_ratio=1.2, turnover_rate=4.5, cap=4_800_000_000),
+                quote("002222", "C级", 2.2, price=12.0, volume_ratio=0.9, turnover_rate=3.5, cap=4_200_000_000),
+                quote("300001", "创业板示例", 4.0),
+            ],
+            intraday_by_code={
+                "605305": intraday(
+                    [
+                        ("2026-06-23 09:30", 41.0, 40.8, 1000, 10),
+                        ("2026-06-23 14:20", 42.0, 41.4, 1200, 12),
+                        ("2026-06-23 14:35", 42.8, 41.8, 1400, 18),
+                        ("2026-06-23 14:55", 42.7, 42.0, 1400, 20),
+                    ]
+                ),
+                "603111": intraday(
+                    [
+                        ("2026-06-23 09:30", 19.3, 19.2, 1000, 10),
+                        ("2026-06-23 13:50", 20.3, 19.8, 1000, 12),
+                        ("2026-06-23 14:35", 20.0, 19.8, 1100, 13),
+                        ("2026-06-23 14:55", 20.1, 19.9, 1100, 13),
+                    ]
+                ),
+                "002222": intraday(
+                    [
+                        ("2026-06-23 09:30", 11.7, 11.7, 1000, 1),
+                        ("2026-06-23 14:35", 12.0, 11.9, 900, 1),
+                        ("2026-06-23 14:55", 12.0, 11.9, 900, 1),
+                    ]
+                ),
+            },
+            limit_up_counts={"605305": 1, "603111": 1, "002222": 0},
+            index_pct_chg=0.3,
+        )
+        screener = RealtimeStrategyScreener(provider, now_func=lambda: datetime(2026, 6, 23, 14, 45))
+
+        result = screener.run("overnight_arbitrage")
+
+        self.assertEqual("strict_buy_relaxed_watch", result["strategy_mode"])
+        self.assertEqual(["605305"], [item["code"] for item in result["A_buy_candidates"]])
+        self.assertEqual(["603111"], [item["code"] for item in result["B_watch_candidates"]])
+        self.assertEqual(["002222"], [item["code"] for item in result["C_pool_candidates"]])
+        self.assertEqual("buy_candidate", result["A_buy_candidates"][0]["action"])
+        self.assertEqual("watch", result["B_watch_candidates"][0]["action"])
+        self.assertIn("需要 14:30 后放量突破当日新高", result["B_watch_candidates"][0]["upgrade_requirements"])
+        self.assertTrue(result["trade_decision"]["can_buy"])
+        self.assertEqual(1, result["trade_decision"]["max_buy_count"])
+        self.assertEqual(1, result["stats"]["A_buy_count"])
+        self.assertEqual(1, result["stats"]["B_watch_count"])
+        self.assertEqual(1, result["stats"]["C_pool_count"])
 
     def test_yang_strategy_returns_near_misses_when_no_candidates_match(self):
         provider = StubRealtimeProvider(
@@ -169,7 +222,7 @@ class RealtimeScreenerTest(unittest.TestCase):
         self.assertLessEqual(len(result["near_misses"]), 5)
         self.assertEqual("600666", result["near_misses"][0]["code"])
         self.assertEqual("观察，不买入", result["near_misses"][0]["action"])
-        self.assertIn("近20个交易日无涨停记录", result["near_misses"][0]["reasons"])
+        self.assertIn("缺少分时数据", result["near_misses"][0]["reasons"])
 
     def test_yang_strategy_outputs_watch_when_candidate_has_no_tail_breakout(self):
         provider = StubRealtimeProvider(
@@ -191,9 +244,49 @@ class RealtimeScreenerTest(unittest.TestCase):
 
         result = screener.run("overnight_arbitrage")
 
-        self.assertEqual(1, len(result["candidates"]))
-        self.assertEqual("watch", result["candidates"][0]["action"])
-        self.assertFalse(result["decision"]["can_buy"])
+        self.assertEqual([], result["A_buy_candidates"])
+        self.assertEqual(1, len(result["B_watch_candidates"]))
+        self.assertEqual("watch", result["B_watch_candidates"][0]["action"])
+        self.assertFalse(result["trade_decision"]["can_buy"])
+
+    def test_three_level_decision_cannot_buy_without_a_candidates(self):
+        provider = StubRealtimeProvider(
+            quotes=[quote("603111", "B级", 4.0, price=20.0, volume_ratio=1.2, turnover_rate=4.5, cap=4_800_000_000)],
+            intraday_by_code={
+                "603111": intraday(
+                    [
+                        ("2026-06-23 09:30", 19.3, 19.2, 1000, 10),
+                        ("2026-06-23 13:50", 20.3, 19.8, 1000, 12),
+                        ("2026-06-23 14:35", 20.0, 19.8, 1100, 13),
+                        ("2026-06-23 14:55", 20.1, 19.9, 1100, 13),
+                    ]
+                )
+            },
+            limit_up_counts={"603111": 1},
+            index_pct_chg=0.3,
+        )
+        screener = RealtimeStrategyScreener(provider, now_func=lambda: datetime(2026, 6, 23, 14, 45))
+
+        result = screener.run("overnight_arbitrage")
+
+        self.assertEqual([], result["A_buy_candidates"])
+        self.assertEqual(1, len(result["B_watch_candidates"]))
+        self.assertFalse(result["trade_decision"]["can_buy"])
+        self.assertEqual("没有 A 级严格买入候选，今日空仓", result["trade_decision"]["reason"])
+
+    def test_signal_scan_skips_intraday_fetch_when_quote_misses_c_pool_basics(self):
+        provider = StubRealtimeProvider(
+            quotes=[quote("603999", "基础不合格", 4.0, price=10.0, volume_ratio=0.4, turnover_rate=1.0, cap=2_000_000_000)],
+            intraday_by_code={},
+            limit_up_counts={"603999": 1},
+            index_pct_chg=0.2,
+        )
+        screener = RealtimeStrategyScreener(provider, now_func=lambda: datetime(2026, 6, 23, 14, 45))
+
+        result = screener.run("overnight_arbitrage")
+
+        self.assertEqual([], provider.intraday_codes)
+        self.assertIn("603999", {item["code"] for item in result["rejected"]})
 
     def test_tail_30m_strategy_outputs_pattern_and_rejection_reasons(self):
         provider = StubRealtimeProvider(
@@ -233,6 +326,61 @@ class RealtimeScreenerTest(unittest.TestCase):
         self.assertGreaterEqual(candidate["score"], 70)
         rejected = {item["code"]: item["reasons"] for item in result["rejections"]}
         self.assertIn("尾盘先涨后落并跌破开盘价", rejected["603001"])
+
+    def test_tail_strategy_rejects_pattern_a_and_keeps_weaker_pattern_in_c_pool(self):
+        provider = StubRealtimeProvider(
+            quotes=[
+                quote("603001", "逃跑形态", 4.0, price=18.1, volume_ratio=2.0, turnover_rate=6.0, cap=9_000_000_000),
+                quote("603002", "震荡形态", 2.5, price=18.1, volume_ratio=0.9, turnover_rate=3.5, cap=4_500_000_000),
+            ],
+            intraday_by_code={
+                "603001": intraday(
+                    [
+                        ("2026-06-23 09:30", 18.0, 17.9, 1000, 5),
+                        ("2026-06-23 14:31", 18.6, 18.1, 1600, 6),
+                        ("2026-06-23 14:45", 17.8, 18.0, 2200, -20),
+                        ("2026-06-23 14:55", 17.7, 18.0, 2300, -30),
+                    ]
+                ),
+                "603002": intraday(
+                    [
+                        ("2026-06-23 09:30", 18.0, 18.0, 1000, 1),
+                        ("2026-06-23 14:20", 18.2, 18.0, 1000, 1),
+                        ("2026-06-23 14:31", 18.1, 18.15, 900, 1),
+                        ("2026-06-23 14:45", 18.1, 18.15, 900, 1),
+                        ("2026-06-23 14:55", 18.1, 18.15, 900, 1),
+                    ]
+                ),
+            },
+            daily_features={
+                "603001": {"ma5": 18.2, "ma30": 17.6, "ma_structure": "ma5_above_ma30_and_up"},
+                "603002": {"ma5": 18.0, "ma30": 17.9, "ma_structure": "ma5_above_ma30"},
+            },
+        )
+        screener = RealtimeStrategyScreener(provider, now_func=lambda: datetime(2026, 6, 23, 14, 50))
+
+        result = screener.run("tail_30m_reversal")
+
+        self.assertEqual(["603002"], [item["code"] for item in result["C_pool_candidates"]])
+        self.assertEqual("sideways_no_signal", result["C_pool_candidates"][0]["tail_pattern"])
+        self.assertIn("603001", {item["code"] for item in result["rejected"]})
+
+    def test_quote_normalization_handles_percent_and_market_cap_units(self):
+        normalized = _normalize_quote(
+            {
+                "code": "605305",
+                "name": "中际联合",
+                "price": 42.76,
+                "pct_chg": 0.041,
+                "volume_ratio": 2.4,
+                "turnover_rate": 0.0541,
+                "total_market_cap": 89.79,
+            }
+        )
+
+        self.assertAlmostEqual(4.1, normalized["pct_chg"])
+        self.assertAlmostEqual(5.41, normalized["turnover_rate"])
+        self.assertEqual(8_979_000_000, normalized["total_market_cap"])
 
     def test_eastmoney_ranked_quote_fetch_stops_after_page_drops_below_three_pct(self):
         first = Mock()

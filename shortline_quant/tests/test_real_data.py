@@ -1,9 +1,10 @@
 import unittest
+from datetime import date
 from unittest.mock import Mock, patch
 
 import pandas as pd
 
-from quant.real_data import fetch_a_share_bars
+from quant.real_data import fetch_a_share_bars, fetch_ranked_backtest_bars
 
 
 class RealDataTest(unittest.TestCase):
@@ -105,6 +106,231 @@ class RealDataTest(unittest.TestCase):
 
             self.assertEqual(["000001"], sorted(result))
             self.assertEqual(2, len(result["000001"]))
+
+    def test_fetch_ranked_backtest_bars_uses_daily_ranked_pool_not_full_market_scan(self):
+        strong_pool = pd.DataFrame(
+            [
+                {
+                    "代码": "605305",
+                    "名称": "中际联合",
+                    "涨跌幅": 4.1,
+                    "最新价": 42.76,
+                    "成交额": 800000000,
+                    "总市值": 8979000000,
+                    "换手率": 5.41,
+                    "量比": 2.4,
+                    "是否新高": "是",
+                },
+                {
+                    "代码": "300001",
+                    "名称": "创业板示例",
+                    "涨跌幅": 4.2,
+                    "最新价": 11.0,
+                    "成交额": 100000000,
+                    "总市值": 8000000000,
+                    "换手率": 6.0,
+                    "量比": 2.0,
+                    "是否新高": "是",
+                },
+                {
+                    "代码": "600000",
+                    "名称": "涨幅过高",
+                    "涨跌幅": 6.0,
+                    "最新价": 10.0,
+                    "成交额": 100000000,
+                    "总市值": 8000000000,
+                    "换手率": 6.0,
+                    "量比": 2.0,
+                    "是否新高": "是",
+                },
+            ]
+        )
+        limit_up_pool = pd.DataFrame([{"代码": "605305", "名称": "中际联合"}])
+        history = pd.DataFrame(
+            [
+                {
+                    "日期": "2026-06-22",
+                    "开盘": 41.0,
+                    "收盘": 42.76,
+                    "最高": 43.0,
+                    "最低": 40.8,
+                    "成交量": 1000000,
+                    "成交额": 800000000,
+                    "涨跌幅": 4.1,
+                    "换手率": 5.41,
+                },
+                {
+                    "日期": "2026-06-23",
+                    "开盘": 43.0,
+                    "收盘": 43.4,
+                    "最高": 44.0,
+                    "最低": 42.5,
+                    "成交量": 900000,
+                    "成交额": 780000000,
+                    "涨跌幅": 1.5,
+                    "换手率": 4.2,
+                },
+            ]
+        )
+
+        with patch(
+            "quant.real_data.ak.stock_info_a_code_name",
+            side_effect=AssertionError("回测不应该全市场逐股扫描"),
+        ), patch("quant.real_data.ak.stock_zt_pool_strong_em", return_value=strong_pool) as ranked_pool, patch(
+            "quant.real_data.ak.stock_zt_pool_em", return_value=limit_up_pool
+        ), patch(
+            "quant.real_data._fetch_daily_history", return_value=history
+        ) as history_fetch:
+            result = fetch_ranked_backtest_bars("2026-06-22", "2026-06-22", strategy_id="overnight_arbitrage")
+
+            self.assertEqual(["600000", "605305"], sorted(result))
+            self.assertEqual(1, ranked_pool.call_count)
+            self.assertEqual(["605305", "600000"], [call.args[0] for call in history_fetch.call_args_list])
+            signal_row = result["605305"].loc[pd.Timestamp(date(2026, 6, 22))]
+            self.assertEqual(4.1, signal_row["pct_chg"])
+            self.assertEqual(2.4, signal_row["volume_ratio"])
+            self.assertGreaterEqual(signal_row["has_limit_up_20d"], 1)
+
+    def test_fetch_ranked_backtest_bars_keeps_relaxed_pool_before_history_for_level_backtest(self):
+        strong_pool = pd.DataFrame(
+            [
+                {
+                    "代码": "605305",
+                    "名称": "中际联合",
+                    "涨跌幅": 4.1,
+                    "最新价": 42.76,
+                    "成交额": 800000000,
+                    "总市值": 8979000000,
+                    "换手率": 5.41,
+                    "量比": 2.4,
+                    "是否新高": "是",
+                },
+                {
+                    "代码": "603000",
+                    "名称": "无涨停基因",
+                    "涨跌幅": 4.0,
+                    "最新价": 18.0,
+                    "成交额": 500000000,
+                    "总市值": 9000000000,
+                    "换手率": 6.0,
+                    "量比": 2.0,
+                    "是否新高": "是",
+                },
+                {
+                    "代码": "603001",
+                    "名称": "超过观察池",
+                    "涨跌幅": 4.0,
+                    "最新价": 18.0,
+                    "成交额": 500000000,
+                    "总市值": 9000000000,
+                    "换手率": 13.0,
+                    "量比": 2.0,
+                    "是否新高": "是",
+                },
+            ]
+        )
+        limit_up_pool = pd.DataFrame([{"代码": "605305", "名称": "中际联合"}])
+        history = pd.DataFrame(
+            [
+                {
+                    "日期": "2026-06-22",
+                    "开盘": 41.0,
+                    "收盘": 42.76,
+                    "最高": 43.0,
+                    "最低": 40.8,
+                    "成交量": 1000000,
+                    "成交额": 800000000,
+                    "涨跌幅": 4.1,
+                    "换手率": 5.41,
+                },
+                {
+                    "日期": "2026-06-23",
+                    "开盘": 43.0,
+                    "收盘": 43.4,
+                    "最高": 44.0,
+                    "最低": 42.5,
+                    "成交量": 900000,
+                    "成交额": 780000000,
+                    "涨跌幅": 1.5,
+                    "换手率": 4.2,
+                },
+            ]
+        )
+
+        with patch("quant.real_data.ak.stock_zt_pool_strong_em", return_value=strong_pool), patch(
+            "quant.real_data.ak.stock_zt_pool_em", return_value=limit_up_pool
+        ), patch("quant.real_data._fetch_daily_history", return_value=history) as history_fetch:
+            result = fetch_ranked_backtest_bars("2026-06-22", "2026-06-22", strategy_id="overnight_arbitrage")
+
+            self.assertEqual(["603000", "605305"], sorted(result))
+            self.assertEqual(["605305", "603000"], [call.args[0] for call in history_fetch.call_args_list])
+
+    def test_fetch_ranked_backtest_bars_uses_configured_c_level_range_before_history(self):
+        strong_pool = pd.DataFrame(
+            [
+                {
+                    "代码": "605305",
+                    "名称": "中际联合",
+                    "涨跌幅": 4.1,
+                    "最新价": 42.76,
+                    "成交额": 800000000,
+                    "总市值": 8979000000,
+                    "换手率": 5.41,
+                    "量比": 2.4,
+                    "是否新高": "是",
+                },
+                {
+                    "代码": "603000",
+                    "名称": "低于配置",
+                    "涨跌幅": 2.5,
+                    "最新价": 18.0,
+                    "成交额": 500000000,
+                    "总市值": 9000000000,
+                    "换手率": 6.0,
+                    "量比": 2.0,
+                    "是否新高": "否",
+                },
+            ]
+        )
+        history = pd.DataFrame(
+            [
+                {
+                    "日期": "2026-06-22",
+                    "开盘": 41.0,
+                    "收盘": 42.76,
+                    "最高": 43.0,
+                    "最低": 40.8,
+                    "成交量": 1000000,
+                    "成交额": 800000000,
+                    "涨跌幅": 4.1,
+                    "换手率": 5.41,
+                },
+                {
+                    "日期": "2026-06-23",
+                    "开盘": 43.0,
+                    "收盘": 43.4,
+                    "最高": 44.0,
+                    "最低": 42.5,
+                    "成交量": 900000,
+                    "成交额": 780000000,
+                    "涨跌幅": 1.5,
+                    "换手率": 4.2,
+                },
+            ]
+        )
+
+        with patch("quant.real_data.ak.stock_zt_pool_strong_em", return_value=strong_pool), patch(
+            "quant.real_data.ak.stock_zt_pool_em", return_value=pd.DataFrame()
+        ), patch("quant.real_data._fetch_daily_history", return_value=history) as history_fetch:
+            result = fetch_ranked_backtest_bars(
+                "2026-06-22",
+                "2026-06-22",
+                strategy_id="overnight_arbitrage",
+                strategy_config={"levels": {"C": {"min_pct_chg": 3.5}}},
+            )
+
+            self.assertEqual(["605305"], sorted(result))
+            self.assertEqual(["605305"], [call.args[0] for call in history_fetch.call_args_list])
 
 
 if __name__ == "__main__":

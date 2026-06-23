@@ -47,7 +47,7 @@ def build_operation_advice(strategy_id: str, quality: Dict[str, Any]) -> str:
         )
     elif strategy_id == "tail_30m_reversal":
         detail = (
-            "14:30 后只看涨幅 3%-5% 主板股的尾盘 30 分钟，优先选择尾盘创新高、回踩 VWAP 不破、"
+            "14:30 后只看涨幅 3%-5% 主板股的尾盘 30 分钟，优先选择尾盘创新高、回踩分时均价线不破、"
             "成交量温和放大、5 日线强于 30 日线的股票；形态 A、B、E 直接跳过。"
             "次日早盘或上午必须处理，只卖不加仓，不把隔夜套利做成长线持仓。"
         )

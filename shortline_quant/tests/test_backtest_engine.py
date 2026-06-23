@@ -84,6 +84,80 @@ class BacktestEngineTest(unittest.TestCase):
         self.assertEqual("historical_daily_ranked_quotes", result.summary["universe_mode"])
         self.assertIn("涨幅榜", result.summary["stock_pool_rule"])
 
+    def test_backtest_evaluates_a_b_c_candidate_levels_and_simulates_all_levels(self):
+        def bars(code, name, pct_chg, volume_ratio, turnover_rate, cap_billion, has_limit_up, relative_strength, above_vwap, close_near_high):
+            return pd.DataFrame(
+                [
+                    {
+                        "date": "2026-06-22",
+                        "code": code,
+                        "name": name,
+                        "open": 10.0,
+                        "high": 10.7,
+                        "low": 9.9,
+                        "close": 10.4,
+                        "volume": 1000000,
+                        "amount": 10400000,
+                        "pct_chg": pct_chg,
+                        "volume_ratio": volume_ratio,
+                        "turnover_rate": turnover_rate,
+                        "market_cap_billion": cap_billion,
+                        "has_limit_up_20d": has_limit_up,
+                        "relative_strength": relative_strength,
+                        "above_vwap": above_vwap,
+                        "ma5_gt_ma30": 1,
+                        "close_near_high": close_near_high,
+                    },
+                    {
+                        "date": "2026-06-23",
+                        "code": code,
+                        "name": name,
+                        "open": 10.5,
+                        "high": 10.8,
+                        "low": 10.2,
+                        "close": 10.6,
+                        "volume": 900000,
+                        "amount": 9540000,
+                        "pct_chg": 1.9,
+                        "volume_ratio": 1.0,
+                        "turnover_rate": 4.0,
+                        "market_cap_billion": cap_billion,
+                        "has_limit_up_20d": has_limit_up,
+                        "relative_strength": 0.5,
+                        "above_vwap": 1,
+                        "ma5_gt_ma30": 1,
+                        "close_near_high": 0.5,
+                    },
+                ]
+            ).assign(date=lambda df: pd.to_datetime(df["date"])).set_index("date")
+
+        engine = BacktestEngine(StrategyRegistry.load_builtin())
+
+        result = engine.run(
+            strategy_id="overnight_arbitrage",
+            bars_by_symbol={
+                "605305": bars("605305", "A级", 4.1, 2.0, 6.0, 100.0, 1, 3.0, 1, 0.9),
+                "603111": bars("603111", "B级", 4.0, 1.1, 4.5, 48.0, 1, 1.5, 1, 0.65),
+                "002222": bars("002222", "C级", 2.2, 0.9, 3.5, 42.0, 0, 0.5, 1, 0.5),
+            },
+            initial_cash=100000,
+            commission=0.0003,
+            slippage=0.001,
+            params={"start_date": "2026-06-22", "end_date": "2026-06-22"},
+        )
+
+        levels = {trade["symbol"]: trade["candidate_level"] for trade in result.trades}
+        self.assertEqual({"605305": "A", "603111": "B", "002222": "C"}, levels)
+        self.assertGreater(next(t for t in result.trades if t["symbol"] == "605305")["shares"], 0)
+        self.assertGreater(next(t for t in result.trades if t["symbol"] == "603111")["shares"], 0)
+        self.assertGreater(next(t for t in result.trades if t["symbol"] == "002222")["shares"], 0)
+        self.assertEqual(1, result.summary["level_stats"]["A"]["evaluated_signals"])
+        self.assertEqual(1, result.summary["level_stats"]["B"]["evaluated_signals"])
+        self.assertEqual(1, result.summary["level_stats"]["C"]["evaluated_signals"])
+        self.assertTrue(result.summary["level_stats"]["A"]["simulated_buy"])
+        self.assertTrue(result.summary["level_stats"]["B"]["simulated_buy"])
+        self.assertTrue(result.summary["level_stats"]["C"]["simulated_buy"])
+
     def test_backtest_generates_quality_score_trades_and_operation_advice(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

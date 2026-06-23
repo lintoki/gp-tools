@@ -103,8 +103,60 @@ class AppTest(unittest.TestCase):
             self.assertEqual("yang_yongxing_overnight_arbitrage_8_steps", payload["strategy"])
             self.assertGreater(len(payload["candidates"]), 0)
             self.assertEqual("605305", payload["candidates"][0]["code"])
-            self.assertEqual("buy_or_watch", payload["candidates"][0]["action"])
+            self.assertEqual("buy_candidate", payload["candidates"][0]["action"])
             self.assertIn("rejections", payload)
+
+    def test_api_saves_strategy_config_and_signals_use_saved_values(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            app = create_app(
+                base_dir=Path(tmp),
+                history_provider=sample_history_provider,
+                recent_provider=sample_recent_provider,
+                realtime_provider=sample_realtime_provider(),
+                now_func=lambda: datetime(2026, 6, 23, 14, 40),
+            )
+            client = TestClient(app)
+
+            saved = client.put(
+                "/api/strategy-configs/overnight_arbitrage",
+                json={"levels": {"A": {"max_pct_chg": 4.0}}},
+            )
+            self.assertEqual(200, saved.status_code)
+            self.assertEqual(4.0, saved.json()["config"]["levels"]["A"]["max_pct_chg"])
+
+            response = client.post(
+                "/api/signals",
+                json={"strategy_id": "overnight_arbitrage", "params": {}},
+            )
+
+            self.assertEqual(200, response.status_code)
+            payload = response.json()
+            self.assertEqual([], payload["A_buy_candidates"])
+            self.assertEqual(["605305"], [item["code"] for item in payload["B_watch_candidates"]])
+            stored_file = Path(tmp) / "data" / "strategy_configs.json"
+            self.assertTrue(stored_file.exists())
+
+    def test_api_resets_strategy_config_to_defaults(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            app = create_app(
+                base_dir=Path(tmp),
+                history_provider=sample_history_provider,
+                recent_provider=sample_recent_provider,
+                realtime_provider=sample_realtime_provider(),
+                now_func=lambda: datetime(2026, 6, 23, 14, 40),
+            )
+            client = TestClient(app)
+
+            client.put(
+                "/api/strategy-configs/overnight_arbitrage",
+                json={"levels": {"A": {"max_pct_chg": 4.0}}},
+            )
+            reset = client.delete("/api/strategy-configs/overnight_arbitrage")
+
+            self.assertEqual(200, reset.status_code)
+            self.assertEqual(5.0, reset.json()["config"]["levels"]["A"]["max_pct_chg"])
+            response = client.post("/api/signals", json={"strategy_id": "overnight_arbitrage", "params": {}})
+            self.assertEqual(["605305"], [item["code"] for item in response.json()["A_buy_candidates"]])
 
     def test_api_backtest_uses_ranked_quote_universe_without_fixed_symbol_limit(self):
         seen_limits = []
@@ -140,6 +192,35 @@ class AppTest(unittest.TestCase):
             self.assertEqual("daily_cross_section", payload["summary"]["backtest_mode"])
             self.assertEqual("historical_daily_ranked_quotes", payload["summary"]["universe_mode"])
             self.assertEqual([None], seen_limits)
+
+    def test_api_backtest_default_provider_uses_ranked_backtest_pool(self):
+        with tempfile.TemporaryDirectory() as tmp, unittest.mock.patch(
+            "app.fetch_ranked_backtest_bars",
+            return_value=sample_history_provider("2025-02-01", "2025-03-31", None),
+        ) as ranked_provider, unittest.mock.patch(
+            "app.fetch_a_share_bars",
+            side_effect=AssertionError("默认回测不应该调用全市场逐股历史 provider"),
+        ):
+            app = create_app(base_dir=Path(tmp), recent_provider=sample_recent_provider)
+            client = TestClient(app)
+
+            response = client.post(
+                "/api/backtests",
+                json={
+                    "strategy_id": "tail_30m_reversal",
+                    "start_date": "2025-02-01",
+                    "end_date": "2025-03-31",
+                    "initial_cash": 100000,
+                    "commission": 0.0003,
+                    "slippage": 0.001,
+                    "params": {},
+                },
+            )
+
+            self.assertEqual(200, response.status_code)
+            called_args = ranked_provider.call_args.args
+            self.assertEqual(("2025-02-01", "2025-03-31", None, "tail_30m_reversal"), called_args[:4])
+            self.assertEqual(2.0, called_args[4]["levels"]["C"]["min_pct_chg"])
 
     def test_api_backtest_accepts_history_date_range(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -190,7 +271,7 @@ class AppTest(unittest.TestCase):
             self.assertEqual(200, response.status_code)
             payload = response.json()
             rejected = {item["code"]: item["reasons"] for item in payload["rejections"]}
-            self.assertIn("当前涨幅不在 3%-5%", rejected["000029"])
+            self.assertIn("当前涨幅不在 2%-6% 观察池范围", rejected["000029"])
             self.assertNotIn("stock_code", payload)
 
     def test_api_signal_scan_returns_chinese_warning_when_market_source_fails(self):
@@ -281,6 +362,10 @@ class AppTest(unittest.TestCase):
             self.assertIn("尾盘形态", html)
             self.assertIn("接近标准观察池", html)
             self.assertIn("剔除原因", html)
+            self.assertIn("ABC 标准", html)
+            self.assertIn("修改配置", html)
+            self.assertIn("恢复默认", html)
+            self.assertIn("ABC 候选明细", html)
             self.assertIn("initDefaultBacktestDates", html)
             self.assertIn("setMonth(end.getMonth() - 1)", html)
             self.assertNotIn('value="2025-01-02"', html)

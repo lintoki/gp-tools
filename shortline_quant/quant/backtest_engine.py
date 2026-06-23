@@ -7,7 +7,8 @@ import pandas as pd
 from quant.models import BacktestResult
 from quant.quality import build_operation_advice, build_quality
 from quant.realtime_screener import _is_main_board, _is_st_or_delist
-from quant.signal_runner import _match_strategy, _merge_params
+from quant.signal_runner import _merge_params
+from quant.strategy_config import merge_strategy_config
 
 
 class BacktestEngine:
@@ -101,10 +102,10 @@ def _evaluate_symbol_by_next_day(
             continue
         if end_date and signal_date_str > end_date:
             continue
-        if not _passes_historical_daily_ranked_universe(symbol, signal_row):
+        if not _passes_historical_daily_ranked_universe(strategy_id, symbol, signal_row, params):
             continue
-        matched, reason = _match_strategy(strategy_id, signal_row, params)
-        if not matched:
+        classification = _classify_backtest_candidate(strategy_id, signal_row, params)
+        if classification["level"] == "rejected":
             continue
 
         entry_price = float(signal_row["close"]) * (1 + slippage)
@@ -140,14 +141,21 @@ def _evaluate_symbol_by_next_day(
                 "next_day_close_return_pct": round(next_day_close_return_pct, 2),
                 "is_correct": is_correct,
                 "evaluation_basis": "next_day_high",
+                "candidate_level": classification["level"],
+                "action": classification["action"],
+                "reject_reasons": classification["reject_reasons"],
+                "upgrade_requirements": classification["upgrade_requirements"],
+                "evaluation_only": False,
                 "hold_days": 1,
-                "reason": reason,
+                "reason": classification["reason"],
             }
         )
     return trades
 
 
-def _passes_historical_daily_ranked_universe(symbol: str, row: pd.Series) -> bool:
+def _passes_historical_daily_ranked_universe(strategy_id: str, symbol: str, row: pd.Series, params: Dict[str, Any]) -> bool:
+    config = merge_strategy_config(strategy_id, params)
+    c_cfg = _level_cfg(config, "C")
     code = str(row.get("code", symbol)).zfill(6)
     name = str(row.get("name", ""))
     pct_chg = float(row.get("pct_chg", 0))
@@ -158,7 +166,172 @@ def _passes_historical_daily_ranked_universe(symbol: str, row: pd.Series) -> boo
         return False
     if close_price <= 0:
         return False
-    return 3 <= pct_chg <= 5
+    return _between_cfg(pct_chg, c_cfg, "pct_chg")
+
+
+def _classify_backtest_candidate(strategy_id: str, row: pd.Series, params: Dict[str, Any]) -> Dict[str, Any]:
+    config = merge_strategy_config(strategy_id, params)
+    a_reasons = _backtest_a_reject_reasons(strategy_id, row, config)
+    if not a_reasons:
+        return {
+            "level": "A",
+            "action": "buy_candidate",
+            "reason": "A级严格买入候选，T+1 纳入模拟买入验证",
+            "reject_reasons": [],
+            "upgrade_requirements": [],
+        }
+
+    b_reasons = _backtest_b_reject_reasons(strategy_id, row, config)
+    if not b_reasons:
+        return {
+            "level": "B",
+            "action": "watch",
+            "reason": "B级重点观察候选，T+1 纳入模拟买入验证；实盘仍只观察不自动下单",
+            "reject_reasons": a_reasons,
+            "upgrade_requirements": _backtest_upgrade_requirements(strategy_id, row, config),
+        }
+
+    c_reasons = _backtest_c_reject_reasons(row, config)
+    if not c_reasons:
+        return {
+            "level": "C",
+            "action": "watch",
+            "reason": "C级预备观察池，T+1 纳入模拟买入验证；实盘只用于复盘观察",
+            "reject_reasons": list(dict.fromkeys(a_reasons + b_reasons)),
+            "upgrade_requirements": _backtest_upgrade_requirements(strategy_id, row, config),
+        }
+
+    return {
+        "level": "rejected",
+        "action": "reject",
+        "reason": "不满足 A/B/C 候选池条件",
+        "reject_reasons": c_reasons,
+        "upgrade_requirements": _backtest_upgrade_requirements(strategy_id, row, config),
+    }
+
+
+def _backtest_a_reject_reasons(strategy_id: str, row: pd.Series, config: Dict[str, Any]) -> List[str]:
+    cfg = _level_cfg(config, "A")
+    reasons = []
+    if not _between_cfg(_row_float(row, "pct_chg"), cfg, "pct_chg"):
+        reasons.append(_range_reason("涨幅", "A", cfg, "pct_chg"))
+    if _row_float(row, "volume_ratio") < cfg.get("min_volume_ratio", 1):
+        reasons.append(f"量比低于 A 级 {cfg.get('min_volume_ratio', 1)}")
+    if not _between_cfg(_row_float(row, "turnover_rate"), cfg, "turnover_rate"):
+        reasons.append(_range_reason("换手率", "A", cfg, "turnover_rate"))
+    if not _between_cfg(_row_float(row, "market_cap_billion"), cfg, "market_cap_billion"):
+        reasons.append(_range_reason("总市值", "A", cfg, "market_cap_billion", " 亿"))
+    if _above_vwap_value(row) < cfg.get("min_above_vwap_ratio", 0):
+        reasons.append("日线近似分时均价线承接不足")
+    if strategy_id == "overnight_arbitrage":
+        if _row_float(row, "has_limit_up_20d") < cfg.get("min_limit_up_count_20d", 1):
+            reasons.append(f"近20个交易日涨停次数低于 A 级 {cfg.get('min_limit_up_count_20d', 1)}")
+        if _row_float(row, "relative_strength") < cfg.get("min_relative_strength", 0):
+            reasons.append(f"相对强度低于 A 级 {cfg.get('min_relative_strength', 0)}")
+        if _row_float(row, "close_near_high") < cfg.get("min_close_near_high", 0):
+            reasons.append("收盘位置未接近日内高位")
+    if strategy_id == "tail_30m_reversal":
+        if _row_float(row, "ma5_gt_ma30") < 1:
+            reasons.append("均线结构未达到 A 级")
+        if _row_float(row, "close_near_high") < cfg.get("min_close_near_high", 0):
+            reasons.append("收盘位置未接近日内高位")
+        if _row_float(row, "close") <= _row_float(row, "open"):
+            reasons.append("收盘没有强于开盘")
+    if _has_row_value(row, "score") and _row_float(row, "score") < cfg.get("min_score", 0):
+        reasons.append(f"评分低于 A 级 {cfg.get('min_score', 0)}")
+    return reasons
+
+
+def _backtest_b_reject_reasons(strategy_id: str, row: pd.Series, config: Dict[str, Any]) -> List[str]:
+    cfg = _level_cfg(config, "B")
+    reasons = []
+    if not _between_cfg(_row_float(row, "pct_chg"), cfg, "pct_chg"):
+        reasons.append(_range_reason("涨幅", "B", cfg, "pct_chg"))
+    if _row_float(row, "volume_ratio") < cfg.get("min_volume_ratio", 0):
+        reasons.append(f"量比低于 B 级 {cfg.get('min_volume_ratio', 0)}")
+    if not _between_cfg(_row_float(row, "turnover_rate"), cfg, "turnover_rate"):
+        reasons.append(_range_reason("换手率", "B", cfg, "turnover_rate"))
+    if not _between_cfg(_row_float(row, "market_cap_billion"), cfg, "market_cap_billion"):
+        reasons.append(_range_reason("总市值", "B", cfg, "market_cap_billion", " 亿"))
+    if _above_vwap_value(row) < cfg.get("min_above_vwap_ratio", 0):
+        reasons.append("均价承接未达到 B 级")
+    if strategy_id == "overnight_arbitrage":
+        if _row_float(row, "has_limit_up_20d") < cfg.get("min_limit_up_count_20d", 0):
+            reasons.append(f"近20个交易日涨停次数低于 B 级 {cfg.get('min_limit_up_count_20d', 0)}")
+        if _row_float(row, "relative_strength") < cfg.get("min_relative_strength", 0):
+            reasons.append(f"相对强度低于 B 级 {cfg.get('min_relative_strength', 0)}")
+    if strategy_id == "tail_30m_reversal" and _row_float(row, "ma5_gt_ma30") < 1:
+        reasons.append("均线结构未达到 B 级")
+    if _row_float(row, "close_near_high") < cfg.get("min_close_near_high", 0):
+        reasons.append("收盘位置未达到 B 级")
+    return reasons
+
+
+def _backtest_c_reject_reasons(row: pd.Series, config: Dict[str, Any]) -> List[str]:
+    cfg = _level_cfg(config, "C")
+    reasons = []
+    if not _between_cfg(_row_float(row, "pct_chg"), cfg, "pct_chg"):
+        reasons.append(_range_reason("涨幅", "C", cfg, "pct_chg"))
+    if _row_float(row, "volume_ratio") < cfg.get("min_volume_ratio", 0):
+        reasons.append(f"量比低于 C 级 {cfg.get('min_volume_ratio', 0)}")
+    if not _between_cfg(_row_float(row, "turnover_rate"), cfg, "turnover_rate"):
+        reasons.append(_range_reason("换手率", "C", cfg, "turnover_rate"))
+    if not _between_cfg(_row_float(row, "market_cap_billion"), cfg, "market_cap_billion"):
+        reasons.append(_range_reason("总市值", "C", cfg, "market_cap_billion", " 亿"))
+    return reasons
+
+
+def _backtest_upgrade_requirements(strategy_id: str, row: pd.Series, config: Dict[str, Any]) -> List[str]:
+    requirements = []
+    for reason in _backtest_a_reject_reasons(strategy_id, row, config):
+        if "涨幅" in reason:
+            requirements.append("涨幅进入 3%-5% 区间")
+        elif "量比" in reason:
+            requirements.append("量比提升到 1 以上")
+        elif "换手率" in reason:
+            requirements.append("换手率进入 5%-10%")
+        elif "总市值" in reason:
+            requirements.append("总市值进入 50 亿-200 亿")
+        elif "涨停" in reason:
+            requirements.append("近20个交易日至少有 1 次涨停")
+        elif "相对强度" in reason:
+            requirements.append("相对强度提升到 2 以上")
+        elif "均线" in reason:
+            requirements.append("均线结构转为 5 日线上穿或站上 30 日线")
+        elif "高位" in reason:
+            requirements.append("尾盘收盘位置接近日内高位")
+    if not requirements:
+        requirements.append("补齐 A 级硬条件后才允许买入")
+    return list(dict.fromkeys(requirements))
+
+
+def _level_cfg(config: Dict[str, Any], level: str) -> Dict[str, Any]:
+    return config.get("levels", {}).get(level, {})
+
+
+def _between_cfg(value: float, cfg: Dict[str, Any], key: str) -> bool:
+    return float(cfg.get(f"min_{key}", float("-inf"))) <= float(value) <= float(cfg.get(f"max_{key}", float("inf")))
+
+
+def _range_reason(label: str, level: str, cfg: Dict[str, Any], key: str, unit: str = "%") -> str:
+    return f"{label}未达到 {level} 级 {cfg.get(f'min_{key}')}{unit}-{cfg.get(f'max_{key}')}{unit}"
+
+
+def _row_float(row: pd.Series, key: str, default: float = 0.0) -> float:
+    try:
+        return float(row.get(key, default))
+    except (TypeError, ValueError):
+        return default
+
+
+def _above_vwap_value(row: pd.Series) -> float:
+    if _has_row_value(row, "above_vwap_ratio"):
+        return _row_float(row, "above_vwap_ratio")
+    return _row_float(row, "above_vwap")
+
+
+def _has_row_value(row: pd.Series, key: str) -> bool:
+    return key in row.index and pd.notna(row.get(key))
 
 
 def _build_summary(
@@ -174,6 +347,7 @@ def _build_summary(
     correct_signals = sum(1 for trade in trades if trade["is_correct"])
     signal_accuracy = correct_signals / evaluated_signals * 100 if evaluated_signals else 0.0
     daily_results = _build_daily_results(trades)
+    level_stats = _build_level_stats(trades)
     correct_days = sum(1 for item in daily_results if item["is_correct_day"])
     day_accuracy = correct_days / len(daily_results) * 100 if daily_results else 0.0
     wins = [trade for trade in trades if trade["pnl"] > 0]
@@ -203,6 +377,7 @@ def _build_summary(
         if evaluated_signals
         else 0.0,
         "daily_results": daily_results[-30:],
+        "level_stats": level_stats,
     }
 
 
@@ -228,6 +403,26 @@ def _build_daily_results(trades: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             }
         )
     return results
+
+
+def _build_level_stats(trades: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
+    result = {}
+    for level in ["A", "B", "C"]:
+        level_trades = [trade for trade in trades if trade.get("candidate_level") == level]
+        evaluated = len(level_trades)
+        correct = sum(1 for trade in level_trades if trade["is_correct"])
+        result[level] = {
+            "evaluated_signals": evaluated,
+            "correct_signals": correct,
+            "accuracy_pct": round(correct / evaluated * 100, 2) if evaluated else 0.0,
+            "avg_next_day_high_return_pct": round(
+                sum(trade["next_day_high_return_pct"] for trade in level_trades) / evaluated, 2
+            )
+            if evaluated
+            else 0.0,
+            "simulated_buy": True,
+        }
+    return result
 
 
 def _build_equity_curve(initial_cash: float, trades: List[Dict[str, Any]]) -> List[Dict[str, Any]]:

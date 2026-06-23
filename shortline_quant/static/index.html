@@ -77,6 +77,28 @@
       background: #fff;
       color: var(--blue);
     }
+    .titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .titlebar h2 { margin: 0; }
+    .title-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .title-actions button, .small-button {
+      width: auto;
+      min-height: 34px;
+      margin-top: 0;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--blue);
+    }
     .split {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -125,6 +147,67 @@
       vertical-align: top;
     }
     th { color: var(--muted); font-weight: 600; }
+    .level-title {
+      margin: 14px 0 6px;
+      font-size: 14px;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.34);
+    }
+    .modal.hidden { display: none; }
+    .modal-card {
+      width: min(880px, 96vw);
+      max-height: 88vh;
+      overflow: auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18);
+    }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .modal-head h2 { margin: 0; }
+    .config-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .config-level {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .config-row {
+      display: grid;
+      grid-template-columns: minmax(118px, 1fr) 108px;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      color: var(--text);
+      font-size: 13px;
+    }
+    .config-row input {
+      min-height: 32px;
+      text-align: right;
+    }
+    .status-line {
+      min-height: 20px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
     .empty {
       padding: 28px;
       text-align: center;
@@ -137,6 +220,8 @@
       main { grid-template-columns: 1fr; padding: 14px; }
       .side { position: static; }
       .metrics { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .config-grid { grid-template-columns: 1fr; }
+      .titlebar { align-items: flex-start; }
     }
   </style>
 </head>
@@ -171,19 +256,189 @@
     </aside>
 
     <section class="panel">
-      <h2 id="viewTitle">策略说明</h2>
+      <div class="titlebar">
+        <h2 id="viewTitle">策略说明</h2>
+        <div class="title-actions">
+          <button id="showStandards" type="button">ABC 标准</button>
+          <button id="editConfig" type="button">修改配置</button>
+        </div>
+      </div>
       <div id="result" class="muted">正在加载策略...</div>
     </section>
   </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="modalTitle">配置</h2>
+        <button id="closeModal" class="small-button" type="button">关闭</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
 
   <script>
     const strategySelect = document.querySelector('#strategy');
     const result = document.querySelector('#result');
     const viewTitle = document.querySelector('#viewTitle');
+    const modal = document.querySelector('#modal');
+    const modalTitle = document.querySelector('#modalTitle');
+    const modalBody = document.querySelector('#modalBody');
     const strategiesById = new Map();
+    let currentConfigPayload = null;
+    let currentConfigStrategy = '';
+    const levelNames = {
+      A: 'A 级严格买入候选',
+      B: 'B 级重点观察候选',
+      C: 'C 级预备观察池',
+    };
 
     function metric(label, value, cls = '') {
       return `<div class="metric"><span>${label}</span><strong class="${cls}">${value}</strong></div>`;
+    }
+
+    function selectedStrategy() {
+      return strategiesById.get(strategySelect.value);
+    }
+
+    function selectedStrategyName() {
+      return selectedStrategy()?.name || '当前策略';
+    }
+
+    function levelLabel(level) {
+      return levelNames[level] || `${level} 级`;
+    }
+
+    function timeframeLabel(value) {
+      const labels = {
+        day: '日线',
+        '5m-later': '尾盘分时',
+        '30m-later': '尾盘 30 分钟',
+      };
+      return labels[value] || '自定义周期';
+    }
+
+    function showModal(title, bodyHtml) {
+      modalTitle.textContent = title;
+      modalBody.innerHTML = bodyHtml;
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+
+    async function fetchStrategyConfig() {
+      const strategyId = strategySelect.value;
+      if (currentConfigPayload && currentConfigStrategy === strategyId) {
+        return currentConfigPayload;
+      }
+      const res = await fetch(`/api/strategy-configs/${strategyId}`);
+      const payload = await res.json();
+      if (!res.ok) {
+        throw new Error(payload.detail || '读取配置失败');
+      }
+      currentConfigPayload = payload;
+      currentConfigStrategy = strategyId;
+      return payload;
+    }
+
+    function renderStandards(payload) {
+      const levels = ['A', 'B', 'C'];
+      return `
+        <p class="muted">${selectedStrategyName()} 当前分层标准。A 级才是严格买入候选，B/C 只做观察和回测验证。</p>
+        <table>
+          <thead><tr><th>层级</th><th>标准</th></tr></thead>
+          <tbody>
+            ${levels.map(level => `<tr><td>${payload.level_labels?.[level] || levelLabel(level)}</td><td>${payload.standards?.[level] || ''}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    async function openStandards() {
+      try {
+        const payload = await fetchStrategyConfig();
+        showModal('ABC 标准', renderStandards(payload));
+      } catch (error) {
+        showModal('ABC 标准', `<div class="empty">${error.message}</div>`);
+      }
+    }
+
+    function renderConfigEditor(payload) {
+      const levels = ['A', 'B', 'C'];
+      return `
+        <p class="muted">修改后会直接保存到本地服务端配置文件，后续触发策略和回测都会使用新值。</p>
+        <div class="config-grid">
+          ${levels.map(level => {
+            const values = payload.config?.levels?.[level] || {};
+            return `<div class="config-level">
+              <h3>${payload.level_labels?.[level] || levelLabel(level)}</h3>
+              ${Object.entries(values).map(([key, value]) => `<label class="config-row">
+                <span>${payload.field_labels?.[key] || '配置项'}</span>
+                <input data-config-input="1" data-level="${level}" data-key="${key}" type="number" step="0.01" value="${value}">
+              </label>`).join('')}
+            </div>`;
+          }).join('')}
+        </div>
+        <button id="resetConfig" class="secondary" type="button">恢复默认</button>
+        <div id="configStatus" class="status-line"></div>
+      `;
+    }
+
+    async function openConfigEditor() {
+      try {
+        const payload = await fetchStrategyConfig();
+        showModal('修改配置', renderConfigEditor(payload));
+      } catch (error) {
+        showModal('修改配置', `<div class="empty">${error.message}</div>`);
+      }
+    }
+
+    function collectConfigFromInputs() {
+      const levels = {};
+      modalBody.querySelectorAll('[data-config-input]').forEach(input => {
+        const level = input.dataset.level;
+        const key = input.dataset.key;
+        levels[level] = levels[level] || {};
+        const value = Number(input.value);
+        levels[level][key] = Number.isFinite(value) ? value : input.value;
+      });
+      return { levels };
+    }
+
+    async function saveConfigFromInputs() {
+      const status = modalBody.querySelector('#configStatus');
+      if (status) status.textContent = '正在保存...';
+      const res = await fetch(`/api/strategy-configs/${strategySelect.value}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(collectConfigFromInputs())
+      });
+      const payload = await res.json();
+      if (!res.ok) {
+        if (status) status.textContent = payload.detail || '保存失败';
+        return;
+      }
+      currentConfigPayload = payload;
+      currentConfigStrategy = strategySelect.value;
+      if (status) status.textContent = `已保存 ${new Date().toLocaleTimeString('zh-CN', { hour12: false })}`;
+    }
+
+    async function resetConfigToDefault() {
+      const status = modalBody.querySelector('#configStatus');
+      if (status) status.textContent = '正在恢复默认...';
+      const res = await fetch(`/api/strategy-configs/${strategySelect.value}`, { method: 'DELETE' });
+      const payload = await res.json();
+      if (!res.ok) {
+        if (status) status.textContent = payload.detail || '恢复失败';
+        return;
+      }
+      currentConfigPayload = payload;
+      currentConfigStrategy = strategySelect.value;
+      modalBody.innerHTML = renderConfigEditor(payload);
+      const newStatus = modalBody.querySelector('#configStatus');
+      if (newStatus) newStatus.textContent = '已恢复默认';
     }
 
     function formatDateInput(date) {
@@ -208,7 +463,8 @@
     function actionLabel(action) {
       if (action === 'buy_candidate' || action === 'buy_or_watch') return '买入候选';
       if (action === 'watch') return '观察';
-      return action || '跳过';
+      if (action === 'reject') return '剔除';
+      return '跳过';
     }
 
     function renderRejections(rejections = []) {
@@ -218,7 +474,7 @@
         <table>
           <thead><tr><th>股票</th><th>阶段</th><th>原因</th></tr></thead>
           <tbody>
-            ${rejections.slice(0, 8).map(r => `<tr><td>${r.code} ${r.name}</td><td>${r.stage}</td><td>${(r.reasons || []).join('；')}</td></tr>`).join('')}
+            ${rejections.slice(0, 8).map(r => `<tr><td>${r.code} ${r.name}</td><td>${r.stage || '过滤'}</td><td>${(r.reasons || []).join('；')}</td></tr>`).join('')}
           </tbody>
         </table>
       `;
@@ -244,20 +500,101 @@
       `;
     }
 
+    function renderCandidateSection(title, items = [], emptyText = '') {
+      if (!items.length) {
+        return emptyText ? `<h3>${title}</h3><div class="empty">${emptyText}</div>` : '';
+      }
+      return `
+        <h3>${title}</h3>
+        <table>
+          <thead><tr><th>股票</th><th>价格/涨跌幅</th><th>量比/换手</th><th>市值</th><th>评分</th><th>动作</th><th>尾盘形态</th><th>原因 / 升级条件</th></tr></thead>
+          <tbody>
+            ${items.map(s => `<tr>
+              <td>${s.code} ${s.name}<div class="muted">${s.level ? levelLabel(s.level) : ''}</div></td>
+              <td>${s.price}<div class="${pctClass(s.pct_chg)}">${s.pct_chg}%</div></td>
+              <td>${s.volume_ratio} / ${s.turnover_rate}%</td>
+              <td>${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</td>
+              <td>${s.score}</td>
+              <td class="${s.action === 'buy_candidate' ? 'buy' : 'watch'}">${actionLabel(s.action)}</td>
+              <td>${s.tail_pattern_name || (s.is_intraday_high_breakout_after_1430 ? '尾盘创新高' : '未创新高')}</td>
+              <td>
+                ${(s.reject_reasons || []).join('；') || s.buy_condition || ''}
+                <div class="muted">${(s.upgrade_requirements || []).join('；') || s.sell_rule_next_day || ''}</div>
+              </td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderLevelStats(levelStats = {}) {
+      const levels = ['A', 'B', 'C'];
+      if (!levels.some(level => levelStats[level])) return '';
+      return `
+        <h3>分层回测</h3>
+        <table>
+          <thead><tr><th>层级</th><th>验证信号</th><th>正确数</th><th>正确率</th><th>T+1平均最高</th><th>是否模拟买入</th></tr></thead>
+          <tbody>
+            ${levels.map(level => {
+              const item = levelStats[level] || {};
+              return `<tr>
+                <td>${levelLabel(level)}</td>
+                <td>${item.evaluated_signals || 0}</td>
+                <td>${item.correct_signals || 0}</td>
+                <td>${item.accuracy_pct || 0}%</td>
+                <td>${item.avg_next_day_high_return_pct || 0}%</td>
+                <td>${item.simulated_buy ? '是' : '否'}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderBacktestLevelTrades(trades = []) {
+      const levels = ['A', 'B', 'C'];
+      return `
+        <h3>ABC 候选明细</h3>
+        ${levels.map(level => {
+          const items = trades.filter(trade => (trade.candidate_level || 'A') === level);
+          if (!items.length) {
+            return `<h4 class="level-title">${levelLabel(level)}</h4><div class="empty">无${level}级候选</div>`;
+          }
+          return `
+            <h4 class="level-title">${levelLabel(level)}</h4>
+            <table>
+              <thead><tr><th>T日</th><th>股票</th><th>模拟买入价</th><th>股数</th><th>T+1最高</th><th>T+1收盘</th><th>结果</th></tr></thead>
+              <tbody>
+                ${items.map(t => `<tr>
+                  <td>${t.signal_date}</td>
+                  <td>${t.symbol} ${t.name}<div class="muted">${actionLabel(t.action)}</div></td>
+                  <td>${t.entry_price}</td>
+                  <td>${t.shares}</td>
+                  <td>${t.next_day_high_return_pct}%</td>
+                  <td>${t.next_day_close_return_pct}%</td>
+                  <td class="${t.is_correct ? 'ok' : 'bad'}">${t.is_correct ? '正确' : '失败'}</td>
+                </tr>`).join('')}
+              </tbody>
+            </table>
+          `;
+        }).join('')}
+      `;
+    }
+
     function showStrategy() {
-      const strategy = strategiesById.get(strategySelect.value);
+      const strategy = selectedStrategy();
       if (!strategy) return;
       viewTitle.textContent = '策略说明';
       result.innerHTML = `
         <h2>${strategy.name}</h2>
         <p>${strategy.description}</p>
         <h3>适用周期</h3>
-        <p class="muted">${strategy.supported_timeframes.join(' / ')}</p>
+        <p class="muted">${strategy.supported_timeframes.map(timeframeLabel).join(' / ')}</p>
         <h3>参数</h3>
         <table>
           <thead><tr><th>参数</th><th>默认值</th></tr></thead>
           <tbody>
-            ${Object.entries(strategy.params_schema).map(([key, meta]) => `<tr><td>${meta.label || key}</td><td>${meta.default}</td></tr>`).join('')}
+            ${Object.values(strategy.params_schema).map(meta => `<tr><td>${meta.label || '参数'}</td><td>${meta.default}</td></tr>`).join('')}
           </tbody>
         </table>
         <h3>注意</h3>
@@ -286,37 +623,30 @@
         result.innerHTML = `<div class="empty">${data.detail || '实时行情源暂时不可用，请稍后重试。'}</div>`;
         return;
       }
-      if (!data.candidates.length) {
+      const aItems = data.A_buy_candidates || [];
+      const bItems = data.B_watch_candidates || [];
+      const cItems = data.C_pool_candidates || [];
+      const totalLayered = aItems.length + bItems.length + cItems.length;
+      if (!totalLayered) {
         const warning = data.data_warning ? `<p class="note">${data.data_warning}</p>` : '';
-        result.innerHTML = `<div class="empty">${data.decision?.note || '今日无符合策略标的，建议空仓'}</div>${warning}${renderNearMisses(data.near_misses)}${renderRejections(data.rejections)}`;
+        result.innerHTML = `<div class="empty">${data.trade_decision?.reason || data.decision?.note || '今日无符合策略标的，建议空仓'}</div>${warning}${renderNearMisses(data.near_misses)}${renderRejections(data.rejected || data.rejections)}`;
         return;
       }
       result.innerHTML = `
         <div class="metrics">
-          ${metric('策略', data.strategy)}
-          ${metric('候选数量', data.candidates.length)}
-          ${metric('可买', data.decision?.can_buy ? '是' : '否', data.decision?.can_buy ? 'ok' : 'watch')}
+          ${metric('策略', selectedStrategyName())}
+          ${metric('A买入', aItems.length, aItems.length ? 'ok' : 'watch')}
+          ${metric('B观察', bItems.length)}
+          ${metric('C预备池', cItems.length)}
+          ${metric('可买', data.trade_decision?.can_buy ? '是' : '否', data.trade_decision?.can_buy ? 'ok' : 'watch')}
           ${metric('运行时间', data.run_time_valid ? '有效' : '无效', data.run_time_valid ? 'ok' : 'bad')}
-          ${metric('生成时间', data.timestamp)}
         </div>
-        <p class="muted">${data.decision?.note || ''}</p>
-        <table>
-          <thead><tr><th>股票</th><th>价格/涨跌幅</th><th>量比/换手</th><th>市值</th><th>评分</th><th>动作</th><th>尾盘形态</th><th>操作规则</th></tr></thead>
-          <tbody>
-            ${data.candidates.map(s => `<tr>
-              <td>${s.code} ${s.name}</td>
-              <td>${s.price}<div class="${pctClass(s.pct_chg)}">${s.pct_chg}%</div></td>
-              <td>${s.volume_ratio} / ${s.turnover_rate}%</td>
-              <td>${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</td>
-              <td>${s.score}</td>
-              <td class="${s.action === 'watch' ? 'watch' : 'buy'}">${actionLabel(s.action)}</td>
-              <td>${s.tail_pattern_name || (s.is_intraday_high_breakout_after_1430 ? '尾盘创新高' : '未创新高')}</td>
-              <td>${s.buy_condition}<div class="muted">${s.sell_rule_next_day}</div></td>
-            </tr>`).join('')}
-          </tbody>
-        </table>
+        <p class="muted">${data.trade_decision?.reason || data.decision?.note || ''}；生成时间 ${data.timestamp}</p>
+        ${renderCandidateSection('A 级严格买入候选', aItems, '没有 A 级严格买入候选，今日空仓')}
+        ${renderCandidateSection('B 级重点观察候选', bItems)}
+        ${renderCandidateSection('C 级预备观察池', cItems)}
         ${renderNearMisses(data.near_misses)}
-        ${renderRejections(data.rejections)}
+        ${renderRejections(data.rejected || data.rejections)}
       `;
     }
 
@@ -343,6 +673,7 @@
         return;
       }
       const s = data.summary;
+      const trades = data.trades || [];
       result.innerHTML = `
         <div class="metrics">
           ${metric('策略质量', s.quality.grade, `grade-${s.quality.grade}`)}
@@ -353,18 +684,37 @@
         </div>
         <p class="muted">${s.start_date} 至 ${s.end_date}；${s.evaluation_rule}</p>
         <p>${s.operation_advice}</p>
+        ${renderLevelStats(s.level_stats)}
+        ${renderBacktestLevelTrades(trades)}
+        <h3>T+1 交易明细</h3>
         <table>
-          <thead><tr><th>T日</th><th>T+1</th><th>股票</th><th>结果</th><th>T+1最高</th><th>T+1收盘</th><th>原因</th></tr></thead>
+          <thead><tr><th>T日</th><th>T+1</th><th>层级</th><th>股票</th><th>结果</th><th>T+1最高</th><th>T+1收盘</th><th>原因</th></tr></thead>
           <tbody>
-            ${data.trades.map(t => `<tr><td>${t.signal_date}</td><td>${t.evaluation_date}</td><td>${t.symbol} ${t.name}</td><td class="${t.is_correct ? 'ok' : 'bad'}">${t.is_correct ? '正确' : '失败'}</td><td>${t.next_day_high_return_pct}%</td><td>${t.next_day_close_return_pct}%</td><td>${t.reason}</td></tr>`).join('')}
+            ${trades.map(t => `<tr><td>${t.signal_date}</td><td>${t.evaluation_date}</td><td>${levelLabel(t.candidate_level || 'A')}<div class="muted">${actionLabel(t.action)}</div></td><td>${t.symbol} ${t.name}</td><td class="${t.is_correct ? 'ok' : 'bad'}">${t.is_correct ? '正确' : '失败'}</td><td>${t.next_day_high_return_pct}%</td><td>${t.next_day_close_return_pct}%</td><td>${t.reason}</td></tr>`).join('')}
           </tbody>
         </table>
       `;
     }
 
-    strategySelect.addEventListener('change', showStrategy);
+    strategySelect.addEventListener('change', () => {
+      currentConfigPayload = null;
+      currentConfigStrategy = '';
+      showStrategy();
+    });
     document.querySelector('#scan').addEventListener('click', scanSignals);
     document.querySelector('#run').addEventListener('click', runBacktest);
+    document.querySelector('#showStandards').addEventListener('click', openStandards);
+    document.querySelector('#editConfig').addEventListener('click', openConfigEditor);
+    document.querySelector('#closeModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeModal();
+    });
+    modalBody.addEventListener('change', event => {
+      if (event.target.matches('[data-config-input]')) saveConfigFromInputs();
+    });
+    modalBody.addEventListener('click', event => {
+      if (event.target.id === 'resetConfig') resetConfigToDefault();
+    });
     initDefaultBacktestDates();
     loadStrategies();
   </script>
