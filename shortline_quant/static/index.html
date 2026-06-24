@@ -598,6 +598,17 @@
       return '跳过';
     }
 
+    function stageLabel(stage) {
+      const labels = {
+        rough_filter: '涨幅榜粗筛',
+        hard_filter: '硬性条件过滤',
+        intraday_filter: '分时强度过滤',
+        tail_pattern_filter: '尾盘形态过滤',
+        scoring_filter: '评分过滤',
+      };
+      return labels[stage] || stage || '过滤';
+    }
+
     function escapeHtml(value) {
       return String(value ?? '').replace(/[&<>"']/g, char => ({
         '&': '&amp;',
@@ -688,6 +699,48 @@
 
     function renderCandidateModules(groups) {
       return `<div class="abc-grid">${groups.map(renderCandidateModule).join('')}</div>`;
+    }
+
+    function reasonText(reasons = []) {
+      if (!Array.isArray(reasons) || !reasons.length) return '未返回具体原因';
+      return reasons.map(reason => valueText(reason)).join('；');
+    }
+
+    function renderNearMisses(items = []) {
+      if (!items.length) return '';
+      return `
+        <h3>接近标准观察池</h3>
+        <table>
+          <thead><tr><th>股票</th><th>价格/涨跌幅</th><th>量比/换手</th><th>市值</th><th>未满足原因</th><th>建议动作</th></tr></thead>
+          <tbody>
+            ${items.slice(0, 5).map(s => `<tr>
+              <td>${valueText(s.code)} ${valueText(s.name)}</td>
+              <td>${valueText(s.price)}<div class="${pctClass(s.pct_chg)}">${valueText(s.pct_chg)}%</div></td>
+              <td>${valueText(s.volume_ratio)} / ${valueText(s.turnover_rate)}%</td>
+              <td>${Math.round(Number(s.total_market_cap || 0) / 100000000)} 亿</td>
+              <td>${reasonText(s.reasons)}<div class="muted">${valueText(stageLabel(s.stage))}</div></td>
+              <td class="watch">${valueText(s.action || '观察，不买入')}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderRejections(rejections = []) {
+      if (!rejections.length) return '';
+      return `
+        <h3>剔除原因</h3>
+        <table>
+          <thead><tr><th>股票</th><th>阶段</th><th>原因</th></tr></thead>
+          <tbody>
+            ${rejections.slice(0, 8).map(item => `<tr>
+              <td>${valueText(item.code)} ${valueText(item.name)}</td>
+              <td>${valueText(stageLabel(item.stage))}</td>
+              <td>${reasonText(item.reasons)}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      `;
     }
 
     function renderLevelStats(levelStats = {}) {
@@ -818,9 +871,12 @@
       result.innerHTML = `
         <div class="metrics">
           ${metric('策略', selectedStrategyName())}
+          ${metric('涨幅榜', data.stats?.raw_rank_count ?? 0)}
+          ${metric('主板', data.stats?.main_board_count ?? 0)}
           ${metric('A买入', aItems.length, aItems.length ? 'ok' : 'watch')}
           ${metric('B观察', bItems.length)}
           ${metric('C预备池', cItems.length)}
+          ${metric('剔除', data.stats?.rejected_count ?? 0)}
           ${metric('可买', data.trade_decision?.can_buy ? '是' : '否', data.trade_decision?.can_buy ? 'ok' : 'watch')}
           ${metric('运行时间', data.run_time_valid ? '有效' : '无效', data.run_time_valid ? 'ok' : 'bad')}
         </div>
@@ -831,6 +887,8 @@
           { level: 'B', title: 'B 级重点观察候选', items: bItems, emptyText: '暂无 B 级观察候选' },
           { level: 'C', title: 'C 级预备观察池', items: cItems, emptyText: '暂无 C 级预备候选' },
         ])}
+        ${renderNearMisses(data.near_misses || [])}
+        ${renderRejections(data.rejections || data.rejected || [])}
       `;
     }
 
