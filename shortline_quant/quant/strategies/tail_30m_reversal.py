@@ -38,7 +38,7 @@ def get_spec() -> StrategySpec:
     return StrategySpec(
         strategy_id="tail_30m_reversal",
         name="尾盘30分钟强承接策略",
-        description="14:30-15:00 分析主板 3%-5% 股票的尾盘形态，识别次日早盘冲高套利机会。",
+        description="请求时分析主板 3%-5% 股票的分时强弱，尾盘阶段重点识别次日早盘冲高套利机会。",
         source_note="/Users/zhihu/Desktop/尾盘交易",
         supported_timeframes=["day", "30m-later", "5m-later"],
         default_params={

@@ -39,7 +39,7 @@ STRATEGY_META = {
         "strategy": "yang_yongxing_overnight_arbitrage_8_steps",
         "empty_note": "今日无符合策略标的，建议空仓",
         "filters": {
-            "time": "after_14_30",
+            "time": "请求即触发",
             "board": "main_board_only",
             "pct_chg": "3%-5%",
             "limit_up_20d": ">=1",
@@ -81,10 +81,8 @@ class RealtimeStrategyScreener:
         now = self.now_func()
         meta = STRATEGY_META[strategy_id]
         config = merge_strategy_config(strategy_id, params or {})
-        run_time_valid = now.time() >= AFTER_1430
+        run_time_valid = True
         base = self._base_result(strategy_id, now, run_time_valid)
-        if not run_time_valid:
-            return base
 
         try:
             quotes = self.provider.get_ranked_quotes()
@@ -358,7 +356,7 @@ class RealtimeStrategyScreener:
             "score": score,
             "action": action,
             "risk_flags": risk_flags,
-            "buy_condition": "14:30 后创当日新高，回踩分时均价线不破才允许买入",
+            "buy_condition": "尾盘阶段创当日新高，回踩分时均价线不破才允许买入",
             "sell_rule_next_day": "次日 9:30-10:00 只卖不加仓",
         }, None
 
@@ -832,7 +830,7 @@ def _yang_extra(
         "is_intraday_high_breakout_after_1430": metrics.breakout_after_1430,
         "is_pullback_above_vwap": metrics.pullback_above_vwap,
         "risk_flags": risk_flags,
-        "buy_condition": "14:30 后创当日新高，回踩分时均价线不破才允许买入",
+        "buy_condition": "尾盘阶段创当日新高，回踩分时均价线不破才允许买入",
         "sell_rule_next_day": "次日 9:30-10:00 只卖不加仓",
     }
 
@@ -889,7 +887,7 @@ def _yang_a_reject_reasons(
     if relative_strength < cfg.get("min_relative_strength", 0):
         reasons.append(f"相对强度低于 A 级 {cfg.get('min_relative_strength', 0)}")
     if not (metrics.breakout_after_1430 and metrics.pullback_above_vwap):
-        reasons.append("未在 14:30 后创当日新高")
+        reasons.append("未在尾盘阶段创当日新高")
     if volume_reject:
         reasons.append(volume_reject)
     if score < cfg.get("min_score", 70):
@@ -949,8 +947,8 @@ def _yang_c_reject_reasons(quote: Dict[str, Any], volume_reject: str, config: Di
 def _yang_upgrade_requirements(reasons: List[str], metrics: Optional[IntradayMetrics] = None) -> List[str]:
     requirements = []
     joined = "；".join(reasons)
-    if "未在 14:30 后创当日新高" in joined:
-        requirements.append("需要 14:30 后放量突破当日新高")
+    if "未在尾盘阶段创当日新高" in joined:
+        requirements.append("需要尾盘阶段放量突破当日新高")
     if "分时均价线" in joined:
         requirements.append("当前价格保持在分时均价线上方")
     if "均价线上方比例" in joined:
@@ -988,7 +986,7 @@ def _tail_a_reject_reasons(
     if pattern.key not in {"mild_rise_above_vwap_volume_up", "rise_pullback_hold_vwap", "qualified_break_intraday_high"}:
         reasons.append("尾盘形态未达到 A 级 C、D、F")
     if not metrics.breakout_after_1430:
-        reasons.append("未在 14:30 后创当日新高")
+        reasons.append("未在尾盘阶段创当日新高")
     if not metrics.current_above_vwap:
         reasons.append("当前价格跌破分时均价线")
     reasons.extend(ma_reasons)
@@ -1041,7 +1039,7 @@ def _tail_upgrade_requirements(reasons: List[str], pattern: TailPattern) -> List
     requirements = []
     joined = "；".join(reasons)
     if "创当日新高" in joined or pattern.key != "qualified_break_intraday_high":
-        requirements.append("14:30 后放量突破或接近突破当日新高")
+        requirements.append("尾盘阶段放量突破或接近突破当日新高")
     if "均线" in joined or "5 日线" in joined:
         requirements.append("5 日线重新站上 30 日线并保持向上")
     if "分时均价线" in joined:
