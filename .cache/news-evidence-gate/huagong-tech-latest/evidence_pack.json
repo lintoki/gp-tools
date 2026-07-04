@@ -1,0 +1,1129 @@
+{
+  "ticker_or_query": "华工科技",
+  "market": "A",
+  "audit_time": "2026-07-04T20:30:16",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "WARN",
+  "coverage_score": 49,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "covered",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "d99615097f0e8727",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-05 华工科技:2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202606041823256370",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-06-04 19:23:15:448",
+        "eiTime": "2026-06-04 19:24:11:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-05 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-05 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:2025年年度权益分派实施公告",
+        "title_ch": "华工科技:2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202606041823256370.html",
+      "published_at": "2026-06-05 00:00:00"
+    },
+    {
+      "id": "eac9fe2378f0763a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-21 华工科技:股票交易异常波动公告",
+      "raw": {
+        "art_code": "AN202605201822494129",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004007",
+            "column_name": "股票交易异常波动"
+          }
+        ],
+        "display_time": "2026-05-20 17:22:09:695",
+        "eiTime": "2026-05-20 17:23:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-21 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-21 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:股票交易异常波动公告",
+        "title_ch": "华工科技:股票交易异常波动公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "trading_anomaly"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202605201822494129.html",
+      "published_at": "2026-05-21 00:00:00"
+    },
+    {
+      "id": "bcd2c0fe5c88cca7",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-14 华工科技:2026年第一季度业绩预告",
+      "raw": {
+        "art_code": "AN202604131821151337",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-04-13 16:11:10:610",
+        "eiTime": "2026-04-13 16:12:07:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-14 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-14 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:2026年第一季度业绩预告",
+        "title_ch": "华工科技:2026年第一季度业绩预告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604131821151337.html",
+      "published_at": "2026-04-14 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [
+    {
+      "type": "structured_price_volume_anomaly",
+      "source": "price_volume:sina_quote",
+      "detail": "行情: 华工科技 000988 最新153.95 涨跌幅-1.44% 最高159.86 最低149.90 振幅6.38% 成交额89.71亿 时间2026-07-03 15:00:00",
+      "matched_news": true,
+      "risk": "medium",
+      "raw": {
+        "url": "https://hq.sinajs.cn/list=sz000988",
+        "fields": [
+          "华工科技",
+          "151.690",
+          "156.200",
+          "153.950",
+          "159.860",
+          "149.900",
+          "153.940",
+          "153.950",
+          "57738731",
+          "8970631282.430",
+          "2300",
+          "153.940",
+          "3700",
+          "153.930",
+          "40800",
+          "153.920",
+          "1400",
+          "153.910",
+          "16700",
+          "153.900",
+          "26408",
+          "153.950",
+          "25300",
+          "153.960",
+          "7202",
+          "153.970",
+          "5000",
+          "153.980",
+          "1000",
+          "153.990",
+          "2026-07-03",
+          "15:00:00",
+          "00"
+        ],
+        "pct": -1.440460947503197,
+        "amplitude": 6.376440460947509,
+        "amount": 8970631282.43,
+        "anomaly": true
+      }
+    }
+  ],
+  "missing_sources": [
+    "price_volume:eastmoney_kline failed: urlopen failed: Remote end closed connection without response; curl fallback failed code=56: curl: (56) schannel: server closed abruptly (missing close_notify)\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "bec1fd29175614e6",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-02 华工科技:关于参加湖北辖区上市公司2026年投资者集体接待日活动的公告",
+      "raw": {
+        "art_code": "AN202607011826630774",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001004003",
+            "column_name": "调研活动"
+          }
+        ],
+        "display_time": "2026-07-01 16:08:11:265",
+        "eiTime": "2026-07-01 16:09:17:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-02 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-02 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:关于参加湖北辖区上市公司2026年投资者集体接待日活动的公告",
+        "title_ch": "华工科技:关于参加湖北辖区上市公司2026年投资者集体接待日活动的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202607011826630774.html",
+      "published_at": "2026-07-02 00:00:00"
+    },
+    {
+      "id": "7c5292ee9e086906",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-26 华工科技:北京市嘉源律师事务所关于华工科技产业股份有限公司2026年第二次临时股东会的法律意见书",
+      "raw": {
+        "art_code": "AN202606251823852040",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-06-25 17:38:08:514",
+        "eiTime": "2026-06-25 17:39:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-26 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-26 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:北京市嘉源律师事务所关于华工科技产业股份有限公司2026年第二次临时股东会的法律意见书",
+        "title_ch": "华工科技:北京市嘉源律师事务所关于华工科技产业股份有限公司2026年第二次临时股东会的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202606251823852040.html",
+      "published_at": "2026-06-26 00:00:00"
+    },
+    {
+      "id": "5f6fb0d944a3b4e6",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-26 华工科技:2026年第二次临时股东会决议公告",
+      "raw": {
+        "art_code": "AN202606251823852036",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          }
+        ],
+        "display_time": "2026-06-25 17:38:08:531",
+        "eiTime": "2026-06-25 17:39:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-26 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-26 11:59:51",
+        "source_type": "331",
+        "title": "华工科技:2026年第二次临时股东会决议公告",
+        "title_ch": "华工科技:2026年第二次临时股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202606251823852036.html",
+      "published_at": "2026-06-26 00:00:00"
+    },
+    {
+      "id": "bf47384ebc2ddd72",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-09 华工科技:第九届董事会第二十五次会议决议公告",
+      "raw": {
+        "art_code": "AN202606081823364935",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-06-08 18:54:09:098",
+        "eiTime": "2026-06-08 18:55:14:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-09 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:第九届董事会第二十五次会议决议公告",
+        "title_ch": "华工科技:第九届董事会第二十五次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202606081823364935.html",
+      "published_at": "2026-06-09 00:00:00"
+    },
+    {
+      "id": "7173ea04748de5a1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-09 华工科技:关于召开2026年第二次临时股东会的通知",
+      "raw": {
+        "art_code": "AN202606081823364929",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003001002",
+            "column_name": "召开股东大会通知"
+          }
+        ],
+        "display_time": "2026-06-08 18:54:09:054",
+        "eiTime": "2026-06-08 18:55:14:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-09 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:关于召开2026年第二次临时股东会的通知",
+        "title_ch": "华工科技:关于召开2026年第二次临时股东会的通知",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202606081823364929.html",
+      "published_at": "2026-06-09 00:00:00"
+    },
+    {
+      "id": "ddf1420c5f7190fe",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-09 华工科技:董事、高级管理人员薪酬管理制度(2026年6月)",
+      "raw": {
+        "art_code": "AN202606081823364924",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-06-08 18:54:09:054",
+        "eiTime": "2026-06-08 18:55:14:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-09 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:董事、高级管理人员薪酬管理制度(2026年6月)",
+        "title_ch": "华工科技:董事、高级管理人员薪酬管理制度(2026年6月)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202606081823364924.html",
+      "published_at": "2026-06-09 00:00:00"
+    },
+    {
+      "id": "d99615097f0e8727",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-05 华工科技:2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202606041823256370",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-06-04 19:23:15:448",
+        "eiTime": "2026-06-04 19:24:11:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-05 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-05 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:2025年年度权益分派实施公告",
+        "title_ch": "华工科技:2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202606041823256370.html",
+      "published_at": "2026-06-05 00:00:00"
+    },
+    {
+      "id": "c411843e99298af3",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-23 华工科技:公司章程(2026年5月)",
+      "raw": {
+        "art_code": "AN202605221822693385",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001002",
+            "column_name": "公司章程"
+          }
+        ],
+        "display_time": "2026-05-22 20:31:09:473",
+        "eiTime": "2026-05-22 20:31:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-23 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:公司章程(2026年5月)",
+        "title_ch": "华工科技:公司章程(2026年5月)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202605221822693385.html",
+      "published_at": "2026-05-23 00:00:00"
+    },
+    {
+      "id": "98a3beb2ff45d0cb",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-23 华工科技:反舞弊管理制度(2026年5月)",
+      "raw": {
+        "art_code": "AN202605221822693384",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-05-22 20:31:09:370",
+        "eiTime": "2026-05-22 20:31:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-23 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:反舞弊管理制度(2026年5月)",
+        "title_ch": "华工科技:反舞弊管理制度(2026年5月)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202605221822693384.html",
+      "published_at": "2026-05-23 00:00:00"
+    },
+    {
+      "id": "5ca65b5c8029a31c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-23 华工科技:第九届董事会第二十四次会议决议公告",
+      "raw": {
+        "art_code": "AN202605221822693383",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-05-22 20:31:09:482",
+        "eiTime": "2026-05-22 20:32:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-23 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:第九届董事会第二十四次会议决议公告",
+        "title_ch": "华工科技:第九届董事会第二十四次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202605221822693383.html",
+      "published_at": "2026-05-23 00:00:00"
+    },
+    {
+      "id": "1096afa15945ba1b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-23 华工科技:关于变更经营范围并修订《公司章程》的公告",
+      "raw": {
+        "art_code": "AN202605221822693386",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005001004",
+            "column_name": "公司经营范围变更"
+          },
+          {
+            "column_code": "001002005003",
+            "column_name": "公司章程修订"
+          }
+        ],
+        "display_time": "2026-05-22 20:31:09:313",
+        "eiTime": "2026-05-22 20:32:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-23 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:关于变更经营范围并修订《公司章程》的公告",
+        "title_ch": "华工科技:关于变更经营范围并修订《公司章程》的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202605221822693386.html",
+      "published_at": "2026-05-23 00:00:00"
+    },
+    {
+      "id": "eac9fe2378f0763a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-21 华工科技:股票交易异常波动公告",
+      "raw": {
+        "art_code": "AN202605201822494129",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004007",
+            "column_name": "股票交易异常波动"
+          }
+        ],
+        "display_time": "2026-05-20 17:22:09:695",
+        "eiTime": "2026-05-20 17:23:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-21 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-21 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:股票交易异常波动公告",
+        "title_ch": "华工科技:股票交易异常波动公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "trading_anomaly"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202605201822494129.html",
+      "published_at": "2026-05-21 00:00:00"
+    },
+    {
+      "id": "18ef9794727b37b0",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-28 华工科技:关于与专业投资机构共同投资暨关联交易的公告",
+      "raw": {
+        "art_code": "AN202604271821630895",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007005",
+            "column_name": "关联交易"
+          }
+        ],
+        "display_time": "2026-04-27 19:54:20:848",
+        "eiTime": "2026-04-27 19:55:22:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-28 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:关于与专业投资机构共同投资暨关联交易的公告",
+        "title_ch": "华工科技:关于与专业投资机构共同投资暨关联交易的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604271821630895.html",
+      "published_at": "2026-04-28 00:00:00"
+    },
+    {
+      "id": "687fb7b73684d544",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-27 华工科技:第九届董事会第二十三次会议决议公告",
+      "raw": {
+        "art_code": "AN202604261821589060",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-04-26 15:34:02:304",
+        "eiTime": "2026-04-26 15:35:16:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-27 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:第九届董事会第二十三次会议决议公告",
+        "title_ch": "华工科技:第九届董事会第二十三次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604261821589060.html",
+      "published_at": "2026-04-27 00:00:00"
+    },
+    {
+      "id": "2f580a434d6db9e2",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-27 华工科技:2026年一季度报告",
+      "raw": {
+        "art_code": "AN202604261821588992",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001003001",
+            "column_name": "一季度报告全文"
+          }
+        ],
+        "display_time": "2026-04-26 15:34:00:987",
+        "eiTime": "2026-04-26 15:35:29:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-27 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:2026年一季度报告",
+        "title_ch": "华工科技:2026年一季度报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604261821588992.html",
+      "published_at": "2026-04-27 00:00:00"
+    },
+    {
+      "id": "b24e4118de771d02",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-17 华工科技:北京市嘉源律师事务所关于华工科技产业股份有限公司2025年年度股东会的法律意见书",
+      "raw": {
+        "art_code": "AN202604161821272440",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-04-16 20:13:12:449",
+        "eiTime": "2026-04-16 20:13:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-17 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-17 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:北京市嘉源律师事务所关于华工科技产业股份有限公司2025年年度股东会的法律意见书",
+        "title_ch": "华工科技:北京市嘉源律师事务所关于华工科技产业股份有限公司2025年年度股东会的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604161821272440.html",
+      "published_at": "2026-04-17 00:00:00"
+    },
+    {
+      "id": "bbeae7da4434fa67",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-17 华工科技:2025年年度股东会决议公告",
+      "raw": {
+        "art_code": "AN202604161821272441",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001004",
+            "column_name": "分配方案决议公告"
+          },
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          }
+        ],
+        "display_time": "2026-04-16 20:13:12:449",
+        "eiTime": "2026-04-16 20:14:12:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-17 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-17 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:2025年年度股东会决议公告",
+        "title_ch": "华工科技:2025年年度股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604161821272441.html",
+      "published_at": "2026-04-17 00:00:00"
+    },
+    {
+      "id": "12dfdb5400105e71",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-14 华工科技:关于向香港联交所递交境外上市外资股(H股)发行并上市申请并刊发申请资料的公告",
+      "raw": {
+        "art_code": "AN202604141821166202",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-14 08:44:07:395",
+        "eiTime": "2026-04-14 08:45:08:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-14 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-14 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:关于向香港联交所递交境外上市外资股(H股)发行并上市申请并刊发申请资料的公告",
+        "title_ch": "华工科技:关于向香港联交所递交境外上市外资股(H股)发行并上市申请并刊发申请资料的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604141821166202.html",
+      "published_at": "2026-04-14 00:00:00"
+    },
+    {
+      "id": "bcd2c0fe5c88cca7",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-14 华工科技:2026年第一季度业绩预告",
+      "raw": {
+        "art_code": "AN202604131821151337",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-04-13 16:11:10:610",
+        "eiTime": "2026-04-13 16:12:07:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-14 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-14 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:2026年第一季度业绩预告",
+        "title_ch": "华工科技:2026年第一季度业绩预告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202604131821151337.html",
+      "published_at": "2026-04-14 00:00:00"
+    },
+    {
+      "id": "8f66aa2c9a30fc76",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-03-31 华工科技:2025年度第一期短期融资券(科创债)兑付完成的公告",
+      "raw": {
+        "art_code": "AN202603301820866151",
+        "codes": [
+          {
+            "ann_type": "A,SZA",
+            "inner_code": "27211294165062",
+            "market_code": "0",
+            "short_name": "华工科技",
+            "stock_code": "000988"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          },
+          {
+            "column_code": "003008001001",
+            "column_name": "一般兑付公告"
+          }
+        ],
+        "display_time": "2026-03-30 19:05:11:509",
+        "eiTime": "2026-03-30 19:06:07:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-03-31 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-03-31 12:00:00",
+        "source_type": "331",
+        "title": "华工科技:2025年度第一期短期融资券(科创债)兑付完成的公告",
+        "title_ch": "华工科技:2025年度第一期短期融资券(科创债)兑付完成的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://data.eastmoney.com/notices/detail/000988/AN202603301820866151.html",
+      "published_at": "2026-03-31 00:00:00"
+    },
+    {
+      "id": "1e7e5efbc308d391",
+      "source": "price_volume:sina_quote",
+      "title": "行情: 华工科技 000988 最新153.95 涨跌幅-1.44% 最高159.86 最低149.90 振幅6.38% 成交额89.71亿 时间2026-07-03 15:00:00",
+      "raw": {
+        "url": "https://hq.sinajs.cn/list=sz000988",
+        "fields": [
+          "华工科技",
+          "151.690",
+          "156.200",
+          "153.950",
+          "159.860",
+          "149.900",
+          "153.940",
+          "153.950",
+          "57738731",
+          "8970631282.430",
+          "2300",
+          "153.940",
+          "3700",
+          "153.930",
+          "40800",
+          "153.920",
+          "1400",
+          "153.910",
+          "16700",
+          "153.900",
+          "26408",
+          "153.950",
+          "25300",
+          "153.960",
+          "7202",
+          "153.970",
+          "5000",
+          "153.980",
+          "1000",
+          "153.990",
+          "2026-07-03",
+          "15:00:00",
+          "00"
+        ],
+        "pct": -1.440460947503197,
+        "amplitude": 6.376440460947509,
+        "amount": 8970631282.43,
+        "anomaly": true
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:30:13",
+      "url": "https://hq.sinajs.cn/list=sz000988",
+      "published_at": "2026-07-03 15:00:00"
+    },
+    {
+      "id": "c6c266bb4988ddbd",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 华工科技，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=%E5%8D%8E%E5%B7%A5%E7%A7%91%E6%8A%80&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-04T20:30:16",
+      "url": "https://so.eastmoney.com/news/s?keyword=%E5%8D%8E%E5%B7%A5%E7%A7%91%E6%8A%80&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "f83d14a76f500ed6",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 华工科技，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=%E5%8D%8E%E5%B7%A5%E7%A7%91%E6%8A%80",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-04T20:30:16",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=%E5%8D%8E%E5%B7%A5%E7%A7%91%E6%8A%80",
+      "coverage_only": true
+    }
+  ]
+}

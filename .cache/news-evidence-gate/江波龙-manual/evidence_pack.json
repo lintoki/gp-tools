@@ -1,0 +1,144 @@
+{
+  "ticker_or_query": "301308 江波龙",
+  "market": "A",
+  "audit_time": "2026-07-04T20:28:29",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "WARN",
+  "coverage_score": 43,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "missing",
+    "flash_news": "missing",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "covered",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "094fa324615f5d3f",
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2026年半年度业绩预告：预计营业收入220.00亿元至250.00亿元，归母净利润92.00亿元至110.00亿元",
+      "raw": {
+        "source": "cninfo_official_disclosure",
+        "title": "江波龙2026年半年度业绩预告：预计营业收入220.00亿元至250.00亿元，归母净利润92.00亿元至110.00亿元",
+        "url": "https://static.cninfo.com.cn/finalpage/2026-07-03/1225409631.PDF",
+        "published_at": "2026-07-03",
+        "confirmed": true,
+        "reliability": 10
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 10,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:28:29"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "official_disclosure:eastmoney_announcements failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to np-anotice-stock.eastmoney.com port 443 after 5 ms: Could not connect to server\n",
+    "price_volume:sina_quote failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to hq.sinajs.cn port 443 after 5 ms: Could not connect to server\n",
+    "price_volume:eastmoney_kline failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to push2his.eastmoney.com port 443 after 7 ms: Could not connect to server\n",
+    "market_news:eastmoney_search failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to so.eastmoney.com port 443 after 5 ms: Could not connect to server\n",
+    "flash_news:eastmoney_kuaixun failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to kuaixun.eastmoney.com port 443 after 5 ms: Could not connect to server\n",
+    "STOCK_SKILLS_HOME not set and no builtin collectors succeeded"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "f3732167650690cb",
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2025年年度报告：营业收入227.66亿元、归母净利润14.23亿元、扣非归母净利润12.89亿元、经营现金流-12.01亿元、期末存货116.78亿元",
+      "raw": {
+        "source": "cninfo_official_disclosure",
+        "title": "江波龙2025年年度报告：营业收入227.66亿元、归母净利润14.23亿元、扣非归母净利润12.89亿元、经营现金流-12.01亿元、期末存货116.78亿元",
+        "url": "https://static.cninfo.com.cn/finalpage/2026-04-28/1225214128.PDF",
+        "published_at": "2026-04-28",
+        "confirmed": true,
+        "reliability": 10
+      },
+      "event_categories": [],
+      "reliability": 10,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:28:29"
+    },
+    {
+      "id": "1bd672ff4808ff4d",
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2026年一季度报告：营业收入99.09亿元、归母净利润38.62亿元、扣非归母净利润39.43亿元、经营现金流-28.75亿元、期末存货179.61亿元",
+      "raw": {
+        "source": "cninfo_official_disclosure",
+        "title": "江波龙2026年一季度报告：营业收入99.09亿元、归母净利润38.62亿元、扣非归母净利润39.43亿元、经营现金流-28.75亿元、期末存货179.61亿元",
+        "url": "https://static.cninfo.com.cn/finalpage/2026-04-28/1225214140.PDF",
+        "published_at": "2026-04-28",
+        "confirmed": true,
+        "reliability": 10
+      },
+      "event_categories": [],
+      "reliability": 10,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:28:29"
+    },
+    {
+      "id": "094fa324615f5d3f",
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2026年半年度业绩预告：预计营业收入220.00亿元至250.00亿元，归母净利润92.00亿元至110.00亿元",
+      "raw": {
+        "source": "cninfo_official_disclosure",
+        "title": "江波龙2026年半年度业绩预告：预计营业收入220.00亿元至250.00亿元，归母净利润92.00亿元至110.00亿元",
+        "url": "https://static.cninfo.com.cn/finalpage/2026-07-03/1225409631.PDF",
+        "published_at": "2026-07-03",
+        "confirmed": true,
+        "reliability": 10
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 10,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:28:29"
+    },
+    {
+      "id": "8cf6113fc4c1e9ff",
+      "source": "google_finance_quote",
+      "title": "江波龙301308:SHE 2026-07-03收盘价618.02元，日涨3.14%，市值2535.1亿元，成交量2064万股，52周高749.88元、52周低79.80元",
+      "raw": {
+        "source": "google_finance_quote",
+        "title": "江波龙301308:SHE 2026-07-03收盘价618.02元，日涨3.14%，市值2535.1亿元，成交量2064万股，52周高749.88元、52周低79.80元",
+        "url": "https://www.google.com/finance/quote/301308:SHE",
+        "published_at": "2026-07-03",
+        "confirmed": true,
+        "reliability": 7
+      },
+      "event_categories": [],
+      "reliability": 7,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:28:29"
+    }
+  ]
+}

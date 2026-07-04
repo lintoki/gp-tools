@@ -1,0 +1,53 @@
+{
+  "ticker_or_query": "301308 江波龙",
+  "market": "A",
+  "audit_time": "2026-07-04T20:35:00",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "BLOCK",
+  "coverage_score": 0,
+  "confidence_cap": 2,
+  "source_coverage": {
+    "official_disclosure": "missing",
+    "market_news": "missing",
+    "flash_news": "missing",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "not_checked",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "missing",
+    "72h": "missing",
+    "7d": "missing",
+    "30d": "missing",
+    "90d": "missing"
+  },
+  "material_events": [],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "official_disclosure:eastmoney_announcements failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to np-anotice-stock.eastmoney.com port 443 after 5 ms: Could not connect to server\n",
+    "price_volume:sina_quote failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to hq.sinajs.cn port 443 after 8 ms: Could not connect to server\n",
+    "price_volume:eastmoney_kline failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to push2his.eastmoney.com port 443 after 5 ms: Could not connect to server\n",
+    "market_news:eastmoney_search failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to so.eastmoney.com port 443 after 5 ms: Could not connect to server\n",
+    "flash_news:eastmoney_kuaixun failed: urlopen failed: <urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>; curl fallback failed code=7: curl: (7) Failed to connect to kuaixun.eastmoney.com port 443 after 5 ms: Could not connect to server\n",
+    "STOCK_SKILLS_HOME not set and no builtin collectors succeeded"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": []
+}

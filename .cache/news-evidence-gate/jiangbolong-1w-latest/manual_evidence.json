@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2026年半年度业绩预告：2026年1月1日至6月30日预计营业收入220.00亿元至250.00亿元，归母净利润92.00亿元至110.00亿元，扣非净利润90.00亿元至105.00亿元",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-07-03/1225409631.PDF",
+      "published_at": "2026-07-03",
+      "confirmed": true,
+      "reliability": 10
+    },
+    {
+      "source": "cninfo_official_disclosure_boundary",
+      "title": "边界信息：江波龙董事李志雄股份减持计划实施完毕，2026年5月12日至6月25日减持2,399,924股，占目前总股本0.5673%，减持均价575.69元/股；公告日为2026年6月26日",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-26/1225392391.PDF",
+      "published_at": "2026-06-26",
+      "confirmed": true,
+      "reliability": 10
+    },
+    {
+      "source": "google_finance_quote",
+      "title": "江波龙301308:SHE 2026年7月3日15:04最新价618.02元，日涨3.14%，日内高646.85元、低574.10元，市值2535.1亿元，成交量2064万股，52周高749.88元、低79.80元",
+      "url": "https://www.google.com/finance/quote/301308:SHE",
+      "published_at": "2026-07-03",
+      "confirmed": true,
+      "reliability": 7
+    }
+  ]
+}

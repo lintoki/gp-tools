@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2025年年度报告：营业收入227.66亿元、归母净利润14.23亿元、扣非归母净利润12.89亿元、经营现金流-12.01亿元、期末存货116.78亿元",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-28/1225214128.PDF",
+      "published_at": "2026-04-28",
+      "confirmed": true,
+      "reliability": 10
+    },
+    {
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2026年一季度报告：营业收入99.09亿元、归母净利润38.62亿元、扣非归母净利润39.43亿元、经营现金流-28.75亿元、期末存货179.61亿元",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-28/1225214140.PDF",
+      "published_at": "2026-04-28",
+      "confirmed": true,
+      "reliability": 10
+    },
+    {
+      "source": "cninfo_official_disclosure",
+      "title": "江波龙2026年半年度业绩预告：预计营业收入220.00亿元至250.00亿元，归母净利润92.00亿元至110.00亿元",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-07-03/1225409631.PDF",
+      "published_at": "2026-07-03",
+      "confirmed": true,
+      "reliability": 10
+    },
+    {
+      "source": "google_finance_quote",
+      "title": "江波龙301308:SHE 2026-07-03收盘价618.02元，日涨3.14%，市值2535.1亿元，成交量2064万股，52周高749.88元、52周低79.80元",
+      "url": "https://www.google.com/finance/quote/301308:SHE",
+      "published_at": "2026-07-03",
+      "confirmed": true,
+      "reliability": 7
+    }
+  ]
+}
