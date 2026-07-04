@@ -24,7 +24,8 @@ complete enough for another stock-analysis skill to produce a reliable report.
 - Market: A / HK / US / auto
 - Analysis objective
 - Time windows: default 24h, 72h, 7d, 30d, 90d
-- Optional path to `tetap/stock-skills` through `STOCK_SKILLS_HOME`
+- Optional path to `tetap/stock-skills` through `STOCK_SKILLS_HOME`.
+  The built-in A-share collectors should run even when this is not configured.
 
 ## Mandatory Workflow
 
@@ -79,6 +80,15 @@ The audit must try these groups:
 ## Execution
 
 Preferred command:
+
+```bash
+python .agents/skills/news-evidence-gate/scripts/news_audit.py \
+  --query "<ticker-or-company>" \
+  --market "<A|HK|US|auto>" \
+  --out "./.cache/news-evidence-gate/<ticker-or-company>"
+```
+
+Optional enhanced command when `tetap/stock-skills` is installed:
 
 ```bash
 python .agents/skills/news-evidence-gate/scripts/news_audit.py \

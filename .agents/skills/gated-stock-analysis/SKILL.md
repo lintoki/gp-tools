@@ -27,9 +27,12 @@ This skill orchestrates a two-stage stock research workflow:
 python .agents/skills/news-evidence-gate/scripts/news_audit.py \
   --query "<ticker-or-company>" \
   --market "<A|HK|US|auto>" \
-  --stock-home "$STOCK_SKILLS_HOME" \
   --out "./.cache/news-evidence-gate/<ticker-or-company>"
 ```
+
+Only pass `--stock-home "$STOCK_SKILLS_HOME"` when an external `tetap/stock-skills`
+checkout is actually configured. The evidence gate has built-in A-share collectors
+and must not block solely because `STOCK_SKILLS_HOME` is absent.
 
 3. Read:
    - `evidence_pack.json`

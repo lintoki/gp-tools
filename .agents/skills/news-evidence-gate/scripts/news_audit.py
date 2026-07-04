@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import hashlib
+import html
 import json
 import os
 import re
@@ -27,6 +28,8 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
+from urllib.request import Request, urlopen
 
 
 MATERIAL_KEYWORDS: dict[str, list[str]] = {
@@ -70,6 +73,39 @@ HIGH_IMPACT_CATEGORIES = {
     "capacity_change",
 }
 
+MATERIAL_KEYWORDS.update(
+    {
+        "trading_anomaly": ["股票交易异常波动", "交易异常波动", "异常波动", "异动", "涨幅偏离", "跌幅偏离"],
+        "dividend": ["权益分派", "分红", "派息", "除权", "除息"],
+        "management_change": ["董事长", "法定代表人", "高管", "任职", "辞职", "补选"],
+        "earnings_revision": MATERIAL_KEYWORDS["earnings_revision"] + ["业绩预告", "业绩快报", "修正", "预亏", "预增", "预减"],
+        "fraud_investigation": MATERIAL_KEYWORDS["fraud_investigation"] + ["财务造假", "立案调查", "审计"],
+        "regulatory_penalty": MATERIAL_KEYWORDS["regulatory_penalty"] + ["处罚", "立案", "调查", "监管", "警示函", "问询函"],
+        "trading_halt": MATERIAL_KEYWORDS["trading_halt"] + ["停牌", "复牌"],
+        "debt_default": MATERIAL_KEYWORDS["debt_default"] + ["违约", "流动性", "评级下调"],
+        "major_customer_loss": MATERIAL_KEYWORDS["major_customer_loss"] + ["大客户", "客户流失", "订单取消"],
+        "export_control_sanction": MATERIAL_KEYWORDS["export_control_sanction"] + ["出口管制", "制裁", "实体清单", "关税"],
+        "safety_accident": MATERIAL_KEYWORDS["safety_accident"] + ["事故", "火灾", "爆炸", "召回", "安全"],
+        "delisting_risk": MATERIAL_KEYWORDS["delisting_risk"] + ["退市"],
+        "key_person_event": MATERIAL_KEYWORDS["key_person_event"] + ["实控人", "董事长", "核心技术人员"],
+        "major_contract": MATERIAL_KEYWORDS["major_contract"] + ["重大合同", "中标", "订单", "框架协议"],
+        "shareholder_change": MATERIAL_KEYWORDS["shareholder_change"] + ["减持", "增持", "回购", "质押", "冻结"],
+        "ma_restructuring": MATERIAL_KEYWORDS["ma_restructuring"] + ["并购", "重组", "收购", "资产注入"],
+        "litigation": MATERIAL_KEYWORDS["litigation"] + ["诉讼", "仲裁", "判决"],
+        "industry_policy": MATERIAL_KEYWORDS["industry_policy"] + ["政策", "医保", "集采", "价格管制", "补贴"],
+        "product_approval": MATERIAL_KEYWORDS["product_approval"] + ["获批", "临床", "认证"],
+        "capacity_change": MATERIAL_KEYWORDS["capacity_change"] + ["扩产", "停产", "产能", "供应链"],
+        "social_sentiment_spike": MATERIAL_KEYWORDS["social_sentiment_spike"] + ["热议", "爆雷", "传闻"],
+    }
+)
+HIGH_IMPACT_CATEGORIES.update({"trading_anomaly"})
+
+EASTMONEY_TOKEN = "D43BF722C8E33D741DCB40B44B70D7B3"
+DEFAULT_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "Referer": "https://quote.eastmoney.com/",
+}
+
 
 def run_cmd(cmd: list[str], cwd: Path | None = None, timeout: int = 90) -> tuple[int, str, str]:
     try:
@@ -107,6 +143,8 @@ def source_reliability(source: str) -> int:
     s = source.lower()
     if any(x in s for x in ["official", "exchange", "cninfo", "sec", "hkex", "disclosure"]):
         return 5
+    if any(x in s for x in ["price_volume", "kline", "quote", "sina"]):
+        return 4
     if any(x in s for x in ["market_news", "news", "eastmoney", "headline"]):
         return 4
     if any(x in s for x in ["flash", "7x24"]):
@@ -114,6 +152,92 @@ def source_reliability(source: str) -> int:
     if any(x in s for x in ["social", "forum", "xueqiu", "guba"]):
         return 2
     return 3
+
+
+def clean_text(value: Any) -> str:
+    text = html.unescape(str(value or ""))
+    text = re.sub(r"<[^>]+>", "", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def fetch_url_text(url: str, headers: dict[str, str] | None = None, timeout: int = 20) -> str:
+    req_headers = dict(DEFAULT_HEADERS)
+    if headers:
+        req_headers.update(headers)
+    request = Request(url, headers=req_headers)
+    try:
+        with urlopen(request, timeout=timeout) as resp:  # noqa: S310 - public market-data fetch
+            data = resp.read()
+            charset = resp.headers.get_content_charset() or "utf-8"
+            return data.decode(charset, errors="replace")
+    except Exception as primary_exc:  # noqa: BLE001
+        cmd = ["curl.exe", "-L", "--silent", "--show-error"]
+        for key, value in req_headers.items():
+            cmd.extend(["-H", f"{key}: {value}"])
+        cmd.append(url)
+        code, out, err = run_cmd(cmd, timeout=timeout)
+        if code == 0 and out:
+            return out
+        raise RuntimeError(f"urlopen failed: {primary_exc}; curl fallback failed code={code}: {err[:240]}") from primary_exc
+
+
+def parse_jsonish(raw: str) -> Any:
+    text = raw.strip().lstrip("\ufeff")
+    if not text:
+        return None
+    if text.startswith("{") or text.startswith("["):
+        return json.loads(text)
+    match = re.search(r"^[\w$]+\((.*)\)\s*;?$", text, re.S)
+    if match:
+        return json.loads(match.group(1))
+    return None
+
+
+def evidence_item(
+    source: str,
+    title: str,
+    *,
+    raw: Any | None = None,
+    url: str = "",
+    published_at: str = "",
+    confirmed: bool | None = None,
+    coverage_only: bool = False,
+) -> dict[str, Any] | None:
+    clean_title = clean_text(title)
+    if len(clean_title) < 4:
+        return None
+    reliability = source_reliability(source)
+    item_confirmed = confirmed if confirmed is not None else reliability >= 4
+    item = {
+        "id": stable_id(source + clean_title + url + published_at),
+        "source": source,
+        "title": clean_title[:260],
+        "raw": raw if raw is not None else clean_title,
+        "event_categories": classify_event(clean_title),
+        "reliability": reliability,
+        "confirmed": bool(item_confirmed and reliability >= 4 and not coverage_only),
+        "captured_at": now_iso(),
+    }
+    if url:
+        item["url"] = url
+    if published_at:
+        item["published_at"] = published_at
+    if coverage_only:
+        item["coverage_only"] = True
+    return item
+
+
+def append_item(items: list[dict[str, Any]], item: dict[str, Any] | None) -> None:
+    if item:
+        items.append(item)
+
+
+def market_id_for_code(code: str) -> str:
+    return "1" if code.startswith(("5", "6", "9")) else "0"
+
+
+def sina_symbol_for_code(code: str) -> str:
+    return ("sh" if market_id_for_code(code) == "1" else "sz") + code
 
 
 def parse_text_items(source_name: str, raw: str, *, confirmed: bool | None = None) -> list[dict[str, Any]]:
@@ -192,6 +316,323 @@ def collect_from_stock_skills(stock_home: Path, query: str) -> tuple[list[dict[s
     return items, missing
 
 
+def resolve_a_share(query: str, fetch_text=fetch_url_text) -> tuple[dict[str, str] | None, list[str]]:
+    missing: list[str] = []
+    code_match = re.search(r"\b(\d{6})\b", query)
+    if code_match:
+        code = code_match.group(1)
+        return {
+            "code": code,
+            "name": query,
+            "quote_id": f"{market_id_for_code(code)}.{code}",
+            "market_id": market_id_for_code(code),
+        }, missing
+
+    url = (
+        "https://searchapi.eastmoney.com/api/suggest/get"
+        f"?input={quote(query)}&type=14&token={EASTMONEY_TOKEN}"
+    )
+    try:
+        data = parse_jsonish(fetch_text(url))
+        rows = (((data or {}).get("QuotationCodeTable") or {}).get("Data") or [])
+        astock = next((row for row in rows if str(row.get("Classify", "")).lower() == "astock"), None)
+        row = astock or (rows[0] if rows else None)
+        if not row:
+            return None, [f"builtin_resolve failed: no A-share match for {query}"]
+        code = str(row.get("Code") or row.get("UnifiedCode") or "")
+        market_id = str(row.get("MarketType") or market_id_for_code(code))
+        return {
+            "code": code,
+            "name": str(row.get("Name") or query),
+            "quote_id": str(row.get("QuoteID") or f"{market_id}.{code}"),
+            "market_id": market_id,
+        }, missing
+    except Exception as exc:  # noqa: BLE001
+        return None, [f"builtin_resolve failed: {exc}"]
+
+
+def collect_eastmoney_announcements(
+    resolved: dict[str, str],
+    fetch_text=fetch_url_text,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    code = resolved["code"]
+    url = (
+        "https://np-anotice-stock.eastmoney.com/api/security/ann"
+        f"?sr=-1&page_size=20&page_index=1&ann_type=A&client_source=web&stock_list={code}"
+    )
+    try:
+        data = parse_jsonish(fetch_text(url, headers={"Referer": "https://data.eastmoney.com/"}))
+        rows = (((data or {}).get("data") or {}).get("list") or [])
+    except Exception as exc:  # noqa: BLE001
+        return [], [f"official_disclosure:eastmoney_announcements failed: {exc}"]
+
+    items: list[dict[str, Any]] = []
+    for row in rows:
+        title = row.get("title_ch") or row.get("title") or ""
+        art_code = str(row.get("art_code") or "")
+        notice_date = str(row.get("notice_date") or row.get("display_time") or "")
+        detail_url = f"https://data.eastmoney.com/notices/detail/{code}/{art_code}.html" if art_code else ""
+        append_item(
+            items,
+            evidence_item(
+                "official_disclosure:eastmoney_announcements",
+                f"{notice_date[:10]} {title}",
+                raw=row,
+                url=detail_url,
+                published_at=notice_date,
+                confirmed=True,
+            ),
+        )
+    if not items:
+        return [], ["official_disclosure:eastmoney_announcements empty"]
+    return items, []
+
+
+def collect_sina_quote(
+    resolved: dict[str, str],
+    fetch_text=fetch_url_text,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    code = resolved["code"]
+    symbol = sina_symbol_for_code(code)
+    url = f"https://hq.sinajs.cn/list={symbol}"
+    try:
+        raw = fetch_text(url, headers={"Referer": "https://finance.sina.com.cn/"})
+    except Exception as exc:  # noqa: BLE001
+        return [], [f"price_volume:sina_quote failed: {exc}"]
+
+    match = re.search(r'="(.*)";', raw)
+    if not match:
+        return [], ["price_volume:sina_quote empty"]
+    parts = match.group(1).split(",")
+    if len(parts) < 32 or not parts[0]:
+        return [], ["price_volume:sina_quote malformed"]
+
+    try:
+        prev_close = float(parts[2])
+        last = float(parts[3])
+        high = float(parts[4])
+        low = float(parts[5])
+        pct = ((last / prev_close) - 1) * 100 if prev_close else 0.0
+        amount = float(parts[9])
+        amplitude = ((high - low) / prev_close) * 100 if prev_close else 0.0
+        anomaly = abs(pct) >= 7 or amplitude >= 10 or amount >= 5_000_000_000
+        title = (
+            f"行情: {parts[0]} {code} 最新{last:.2f} 涨跌幅{pct:.2f}% "
+            f"最高{high:.2f} 最低{low:.2f} 振幅{amplitude:.2f}% "
+            f"成交额{amount / 100000000:.2f}亿 时间{parts[30]} {parts[31]}"
+        )
+    except Exception:
+        anomaly = False
+        amount = None
+        amplitude = None
+        pct = None
+        title = f"行情: {parts[0]} {code} " + ",".join(parts[:10])
+
+    item = evidence_item(
+        "price_volume:sina_quote",
+        title,
+        raw={
+            "url": url,
+            "fields": parts,
+            "pct": pct,
+            "amplitude": amplitude,
+            "amount": amount,
+            "anomaly": anomaly,
+        },
+        url=url,
+        published_at=f"{parts[30]} {parts[31]}" if len(parts) > 31 else "",
+        confirmed=True,
+    )
+    return ([item] if item else []), []
+
+
+def collect_eastmoney_kline(
+    resolved: dict[str, str],
+    fetch_text=fetch_url_text,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    quote_id = resolved["quote_id"]
+    url = (
+        "https://push2his.eastmoney.com/api/qt/stock/kline/get"
+        f"?secid={quote_id}&fields1=f1,f2,f3,f4,f5,f6"
+        "&fields2=f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61"
+        "&klt=101&fqt=1&beg=20250101&end=20500101"
+    )
+    try:
+        data = parse_jsonish(fetch_text(url))
+        rows = (((data or {}).get("data") or {}).get("klines") or [])
+    except Exception as exc:  # noqa: BLE001
+        return [], [f"price_volume:eastmoney_kline failed: {exc}"]
+
+    parsed: list[dict[str, Any]] = []
+    for row in rows:
+        parts = str(row).split(",")
+        if len(parts) < 11:
+            continue
+        try:
+            parsed.append(
+                {
+                    "date": parts[0],
+                    "open": float(parts[1]),
+                    "close": float(parts[2]),
+                    "high": float(parts[3]),
+                    "low": float(parts[4]),
+                    "volume": float(parts[5]),
+                    "amount": float(parts[6]),
+                    "amplitude": float(parts[7]),
+                    "pct": float(parts[8]),
+                    "change": float(parts[9]),
+                    "turnover": float(parts[10]),
+                }
+            )
+        except ValueError:
+            continue
+
+    if not parsed:
+        return [], ["price_volume:eastmoney_kline empty"]
+
+    first = parsed[0]
+    last = parsed[-1]
+    max_row = max(parsed, key=lambda row: row["high"])
+    period_return = ((last["close"] / first["close"]) - 1) * 100 if first["close"] else 0.0
+    has_limit_like_move = any(abs(row["pct"]) >= 9.5 for row in parsed[-20:])
+    has_turnover_spike = last["turnover"] >= 10 or last["amount"] >= 5_000_000_000
+    anomaly = abs(period_return) >= 20 or has_limit_like_move or has_turnover_spike
+    title_prefix = "K线异常" if anomaly else "K线检查"
+    title = (
+        f"{title_prefix}: {resolved.get('name') or resolved['code']} {first['date']}至{last['date']} "
+        f"收盘涨幅{period_return:.2f}% 最高{max_row['high']:.2f} "
+        f"最新收盘{last['close']:.2f} 最新换手{last['turnover']:.2f}% "
+        f"最新成交额{last['amount'] / 100000000:.2f}亿"
+    )
+    item = evidence_item(
+        "price_volume:eastmoney_kline",
+        title,
+        raw={
+            "url": url,
+            "first": first,
+            "last": last,
+            "max": max_row,
+            "period_return_pct": period_return,
+            "anomaly": anomaly,
+            "has_limit_like_move": has_limit_like_move,
+            "has_turnover_spike": has_turnover_spike,
+        },
+        url=url,
+        published_at=last["date"],
+        confirmed=True,
+    )
+    return ([item] if item else []), []
+
+
+def collect_market_news(query: str, fetch_text=fetch_url_text) -> tuple[list[dict[str, Any]], list[str]]:
+    url = f"https://so.eastmoney.com/news/s?keyword={quote(query)}&collector=market-news"
+    try:
+        raw = fetch_text(url, headers={"Referer": "https://so.eastmoney.com/"})
+    except Exception as exc:  # noqa: BLE001
+        return [], [f"market_news:eastmoney_search failed: {exc}"]
+
+    try:
+        data = parse_jsonish(raw)
+    except Exception:
+        data = None
+    rows = data.get("items", []) if isinstance(data, dict) else []
+
+    items: list[dict[str, Any]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        append_item(
+            items,
+            evidence_item(
+                "market_news:eastmoney_search",
+                row.get("title") or row.get("Title") or row.get("headline") or "",
+                raw=row,
+                url=str(row.get("url") or row.get("Url") or ""),
+                published_at=str(row.get("time") or row.get("date") or row.get("ShowTime") or ""),
+            ),
+        )
+    if items:
+        return items, []
+    if "<title>" in raw.lower() or "搜索结果" in raw:
+        item = evidence_item(
+            "market_news:eastmoney_search",
+            f"市场新闻源已检查: 东方财富新闻搜索页可达，关键词 {query}，未捕获结构化新闻条目",
+            raw={"url": url, "captured_chars": min(len(raw), 5000)},
+            url=url,
+            coverage_only=True,
+        )
+        return ([item] if item else []), ["market_news:eastmoney_search structured results empty"]
+    return [], ["market_news:eastmoney_search empty"]
+
+
+def collect_flash_news(query: str, fetch_text=fetch_url_text) -> tuple[list[dict[str, Any]], list[str]]:
+    url = f"https://kuaixun.eastmoney.com/?collector=flash-news&keyword={quote(query)}"
+    try:
+        raw = fetch_text(url, headers={"Referer": "https://kuaixun.eastmoney.com/"})
+    except Exception as exc:  # noqa: BLE001
+        return [], [f"flash_news:eastmoney_kuaixun failed: {exc}"]
+
+    try:
+        data = parse_jsonish(raw)
+    except Exception:
+        data = None
+    rows = data.get("items", []) if isinstance(data, dict) else []
+
+    items: list[dict[str, Any]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        append_item(
+            items,
+            evidence_item(
+                "flash_news:eastmoney_kuaixun",
+                row.get("title") or row.get("Title") or row.get("headline") or "",
+                raw=row,
+                url=str(row.get("url") or row.get("Url") or ""),
+                published_at=str(row.get("time") or row.get("date") or row.get("ShowTime") or ""),
+            ),
+        )
+    if items:
+        return items, []
+    if "全球财经快讯" in raw or "7*24" in raw or "7x24" in raw:
+        item = evidence_item(
+            "flash_news:eastmoney_kuaixun",
+            f"7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 {query}，未捕获结构化快讯条目",
+            raw={"url": url, "captured_chars": min(len(raw), 5000)},
+            url=url,
+            coverage_only=True,
+        )
+        return ([item] if item else []), ["flash_news:eastmoney_kuaixun structured results empty"]
+    return [], ["flash_news:eastmoney_kuaixun empty"]
+
+
+def collect_builtin_sources(query: str, market: str, fetch_text=fetch_url_text) -> tuple[list[dict[str, Any]], list[str]]:
+    market_upper = market.upper()
+    if market_upper not in {"A", "AUTO"}:
+        return [], [f"builtin collectors currently support A-share only; market={market}"]
+
+    resolved, missing = resolve_a_share(query, fetch_text=fetch_text)
+    if not resolved:
+        return [], missing
+
+    items: list[dict[str, Any]] = []
+    for collector in [
+        collect_eastmoney_announcements,
+        collect_sina_quote,
+        collect_eastmoney_kline,
+    ]:
+        got, miss = collector(resolved, fetch_text=fetch_text)
+        items.extend(got)
+        missing.extend(miss)
+
+    for collector in [collect_market_news, collect_flash_news]:
+        got, miss = collector(resolved.get("name") or query, fetch_text=fetch_text)
+        items.extend(got)
+        missing.extend(miss)
+
+    return items, missing
+
+
 def load_extra_json_files(paths: list[str]) -> tuple[list[dict[str, Any]], list[str]]:
     items: list[dict[str, Any]] = []
     missing: list[str] = []
@@ -243,18 +684,27 @@ def dedupe(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def infer_source_coverage(items: list[dict[str, Any]], missing_sources: list[str]) -> dict[str, str]:
-    sources = " ".join(sorted(set(str(x.get("source", "")) for x in items))).lower()
+    def coverage_for(*needles: str) -> str:
+        matched = [
+            item
+            for item in items
+            if any(needle.lower() in str(item.get("source", "")).lower() for needle in needles)
+        ]
+        if any(not item.get("coverage_only") for item in matched):
+            return "covered"
+        if matched:
+            return "partial"
+        return "missing"
 
-    def covered(*needles: str) -> bool:
-        return any(n.lower() in sources for n in needles)
+    price_volume_status = coverage_for("price_volume", "kline", "quote", "fund_flow")
 
     return {
-        "official_disclosure": "covered" if covered("official", "exchange", "cninfo", "sec", "hkex", "disclosure") else "missing",
-        "market_news": "covered" if covered("market_news", "news", "headline", "eastmoney") else "missing",
-        "flash_news": "covered" if covered("flash", "7x24") else "missing",
+        "official_disclosure": coverage_for("official", "exchange", "cninfo", "sec", "hkex", "disclosure"),
+        "market_news": coverage_for("market_news", "headline"),
+        "flash_news": coverage_for("flash", "7x24"),
         "policy_industry": "covered" if any("industry_policy" in x.get("event_categories", []) for x in items) else "partial",
-        "social_sentiment": "covered" if covered("social", "forum", "xueqiu", "guba") else "missing",
-        "price_volume_anomaly": "covered" if covered("price", "volume", "kline", "quote", "fund_flow") else "not_checked",
+        "social_sentiment": coverage_for("social", "forum", "xueqiu", "guba"),
+        "price_volume_anomaly": "not_checked" if price_volume_status == "missing" else price_volume_status,
         "collector_errors": "present" if missing_sources else "none",
     }
 
@@ -285,6 +735,60 @@ def detect_price_volume_anomalies(items: list[dict[str, Any]]) -> list[dict[str,
     return anomalies
 
 
+def detect_price_volume_anomalies_v2(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    anomalies: list[dict[str, Any]] = []
+    has_explanatory_source = any(
+        "official" in str(item.get("source", "")).lower()
+        or "market_news" in str(item.get("source", "")).lower()
+        or "flash_news" in str(item.get("source", "")).lower()
+        for item in items
+    )
+
+    for item in items:
+        raw = item.get("raw")
+        source = str(item.get("source", ""))
+        if "price_volume" in source and isinstance(raw, dict) and raw.get("anomaly"):
+            anomalies.append(
+                {
+                    "type": "structured_price_volume_anomaly",
+                    "source": source,
+                    "detail": item.get("title", ""),
+                    "matched_news": has_explanatory_source,
+                    "risk": "medium" if has_explanatory_source else "high",
+                    "raw": raw,
+                }
+            )
+
+    joined = "\n".join(str(x.get("title", "")) for x in items)
+    anomaly_terms = [
+        "异常",
+        "异动",
+        "放量",
+        "成交额",
+        "换手",
+        "涨停",
+        "跌停",
+        "大涨",
+        "大跌",
+        "资金流",
+        "volume",
+        "spike",
+    ]
+    if any(term.lower() in joined.lower() for term in anomaly_terms):
+        news_terms = ["公告", "新闻", "快讯", "政策", "中标", "订单", "回购", "减持", "增持"]
+        matched_news = any(term in joined for term in news_terms)
+        if not anomalies:
+            anomalies.append(
+                {
+                    "type": "text_detected_possible_anomaly",
+                    "detail": "Captured text contains price/volume/fund-flow anomaly terms.",
+                    "matched_news": matched_news,
+                    "risk": "medium" if matched_news else "high",
+                }
+            )
+    return anomalies
+
+
 def compute_pack(query: str, market: str, items: list[dict[str, Any]], missing_sources: list[str]) -> dict[str, Any]:
     source_coverage = infer_source_coverage(items, missing_sources)
     time_coverage = infer_time_coverage(items)
@@ -294,7 +798,7 @@ def compute_pack(query: str, market: str, items: list[dict[str, Any]], missing_s
         if any(cat in HIGH_IMPACT_CATEGORIES for cat in x.get("event_categories", []))
     ]
     unconfirmed_events = [x for x in material_events if not x.get("confirmed")]
-    price_volume_anomalies = detect_price_volume_anomalies(items)
+    price_volume_anomalies = detect_price_volume_anomalies_v2(items)
 
     score = 100
     cap = 8
@@ -462,12 +966,16 @@ def main() -> int:
     if args.demo:
         items.extend(demo_items(args.query))
     else:
+        got, miss = collect_builtin_sources(args.query, args.market)
+        items.extend(got)
+        missing.extend(miss)
+
         if args.stock_home:
             got, miss = collect_from_stock_skills(Path(args.stock_home), args.query)
             items.extend(got)
             missing.extend(miss)
-        else:
-            missing.append("STOCK_SKILLS_HOME not set and --stock-home not provided; skipped stock-skills collectors")
+        elif not items:
+            missing.append("STOCK_SKILLS_HOME not set and no builtin collectors succeeded")
 
     extra_items, extra_missing = load_extra_json_files(args.extra_json)
     items.extend(extra_items)
