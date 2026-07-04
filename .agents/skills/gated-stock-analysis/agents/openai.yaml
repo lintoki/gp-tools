@@ -1,0 +1,6 @@
+interface:
+  display_name: "Gated Stock Analysis"
+  short_description: "Runs a news evidence audit before handing off to stock-analysis skills."
+  default_prompt: "先做新闻证据门禁，再进行股票分析，并遵守 confidence_cap。"
+policy:
+  allow_implicit_invocation: true

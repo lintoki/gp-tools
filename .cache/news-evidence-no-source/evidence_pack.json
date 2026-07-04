@@ -1,0 +1,48 @@
+{
+  "ticker_or_query": "600519",
+  "market": "A",
+  "audit_time": "2026-07-04T13:42:54",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "BLOCK",
+  "coverage_score": 0,
+  "confidence_cap": 2,
+  "source_coverage": {
+    "official_disclosure": "missing",
+    "market_news": "missing",
+    "flash_news": "missing",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "not_checked",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "missing",
+    "72h": "missing",
+    "7d": "missing",
+    "30d": "missing",
+    "90d": "missing"
+  },
+  "material_events": [],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "STOCK_SKILLS_HOME not set and --stock-home not provided; skipped stock-skills collectors"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": []
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NewsEvidencePack",
+  "type": "object",
+  "required": [
+    "ticker_or_query",
+    "market",
+    "audit_time",
+    "evidence_status",
+    "coverage_score",
+    "confidence_cap",
+    "source_coverage",
+    "time_coverage",
+    "material_events",
+    "missing_sources",
+    "downstream_instructions"
+  ],
+  "properties": {
+    "ticker_or_query": {"type": "string"},
+    "market": {"type": "string"},
+    "audit_time": {"type": "string"},
+    "windows": {"type": "array", "items": {"type": "string"}},
+    "evidence_status": {"type": "string", "enum": ["PASS", "WARN", "BLOCK"]},
+    "coverage_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "confidence_cap": {"type": "number", "minimum": 0, "maximum": 10},
+    "source_coverage": {"type": "object"},
+    "time_coverage": {"type": "object"},
+    "material_events": {"type": "array"},
+    "unconfirmed_events": {"type": "array"},
+    "conflicts": {"type": "array"},
+    "price_volume_anomalies": {"type": "array"},
+    "missing_sources": {"type": "array"},
+    "downstream_instructions": {"type": "array", "items": {"type": "string"}},
+    "items": {"type": "array"}
+  }
+}

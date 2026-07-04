@@ -1,0 +1,6 @@
+interface:
+  display_name: "News Evidence Gate"
+  short_description: "Stock-news, announcement, sentiment, and anomaly audit before downstream analysis."
+  default_prompt: "先用 news-evidence-gate 审计新闻与公告覆盖，再进行股票分析。"
+policy:
+  allow_implicit_invocation: true
