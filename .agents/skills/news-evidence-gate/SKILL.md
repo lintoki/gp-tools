@@ -95,7 +95,7 @@ python .agents/skills/news-evidence-gate/scripts/news_audit.py \
   --query DEMO \
   --market A \
   --demo \
-  --out /tmp/news-evidence-demo
+  --out "./.cache/news-evidence-gate/DEMO"
 ```
 
 ## Output Contract

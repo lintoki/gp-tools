@@ -1,7 +1,7 @@
 {
   "ticker_or_query": "DEMO",
   "market": "A",
-  "audit_time": "2026-07-04T13:42:49",
+  "audit_time": "2026-07-04T15:26:15",
   "windows": [
     "24h",
     "72h",
@@ -41,7 +41,7 @@
       ],
       "reliability": 5,
       "confirmed": true,
-      "captured_at": "2026-07-04T13:42:49"
+      "captured_at": "2026-07-04T15:26:15"
     },
     {
       "id": "ccb7711e85c17309",
@@ -54,7 +54,7 @@
       ],
       "reliability": 4,
       "confirmed": true,
-      "captured_at": "2026-07-04T13:42:49"
+      "captured_at": "2026-07-04T15:26:15"
     }
   ],
   "unconfirmed_events": [],
@@ -90,7 +90,7 @@
       ],
       "reliability": 5,
       "confirmed": true,
-      "captured_at": "2026-07-04T13:42:49"
+      "captured_at": "2026-07-04T15:26:15"
     },
     {
       "id": "1c8611d581e1d4c3",
@@ -100,7 +100,7 @@
       "event_categories": [],
       "reliability": 4,
       "confirmed": true,
-      "captured_at": "2026-07-04T13:42:49"
+      "captured_at": "2026-07-04T15:26:15"
     },
     {
       "id": "ccb7711e85c17309",
@@ -113,7 +113,7 @@
       ],
       "reliability": 4,
       "confirmed": true,
-      "captured_at": "2026-07-04T13:42:49"
+      "captured_at": "2026-07-04T15:26:15"
     },
     {
       "id": "75ca4747cdcc40db",
@@ -123,7 +123,7 @@
       "event_categories": [],
       "reliability": 2,
       "confirmed": false,
-      "captured_at": "2026-07-04T13:42:49"
+      "captured_at": "2026-07-04T15:26:15"
     },
     {
       "id": "a3eda124a1cb2820",
@@ -133,7 +133,7 @@
       "event_categories": [],
       "reliability": 3,
       "confirmed": false,
-      "captured_at": "2026-07-04T13:42:49"
+      "captured_at": "2026-07-04T15:26:15"
     }
   ]
 }
