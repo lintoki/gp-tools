@@ -1,0 +1,1219 @@
+{
+  "ticker_or_query": "南大光电",
+  "market": "A",
+  "audit_time": "2026-07-04T20:44:42",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "WARN",
+  "coverage_score": 49,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "covered",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "covered",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "078cc63ae5a42391",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-29 南大光电:关于持股5%以上股东股份减持计划完成的公告",
+      "raw": {
+        "art_code": "AN202606291826547570",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-06-29 19:13:10:486",
+        "eiTime": "2026-06-29 19:14:09:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-29 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-29 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于持股5%以上股东股份减持计划完成的公告",
+        "title_ch": "南大光电:关于持股5%以上股东股份减持计划完成的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202606291826547570.html",
+      "published_at": "2026-06-29 00:00:00"
+    },
+    {
+      "id": "e2970b9cb921afe9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-11 南大光电:2025年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202605111822160482",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-05-11 16:58:04:418",
+        "eiTime": "2026-05-11 16:59:16:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-11 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度权益分派实施公告",
+        "title_ch": "南大光电:2025年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202605111822160482.html",
+      "published_at": "2026-05-11 00:00:00"
+    },
+    {
+      "id": "04073a8d89519237",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-14 南大光电:关于董事股份减持计划完成的公告",
+      "raw": {
+        "art_code": "AN202604141821191857",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-04-14 18:43:10:594",
+        "eiTime": "2026-04-14 18:44:06:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-14 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-14 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于董事股份减持计划完成的公告",
+        "title_ch": "南大光电:关于董事股份减持计划完成的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604141821191857.html",
+      "published_at": "2026-04-14 00:00:00"
+    },
+    {
+      "id": "d7a03e0a43db38a1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:关于会计政策变更的公告",
+      "raw": {
+        "art_code": "AN202604091821094217",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:694",
+        "eiTime": "2026-04-09 18:27:19:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于会计政策变更的公告",
+        "title_ch": "南大光电:关于会计政策变更的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "industry_policy"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094217.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "13cd09842d83b663",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:中审亚太关于江苏南大光电材料股份有限公司内部控制审计报告",
+      "raw": {
+        "art_code": "AN202604091821094210",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          },
+          {
+            "column_code": "001003003004",
+            "column_name": "内部控制报告"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:631",
+        "eiTime": "2026-04-09 18:26:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:中审亚太关于江苏南大光电材料股份有限公司内部控制审计报告",
+        "title_ch": "南大光电:中审亚太关于江苏南大光电材料股份有限公司内部控制审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094210.html",
+      "published_at": "2026-04-10 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [
+    {
+      "type": "structured_price_volume_anomaly",
+      "source": "price_volume:sina_quote",
+      "detail": "行情: 南大光电 300346 最新80.18 涨跌幅-9.68% 最高88.66 最低79.33 振幅10.51% 成交额91.84亿 时间2026-07-03 16:29:00",
+      "matched_news": true,
+      "risk": "medium",
+      "raw": {
+        "url": "https://hq.sinajs.cn/list=sz300346",
+        "fields": [
+          "南大光电",
+          "85.580",
+          "88.770",
+          "80.180",
+          "88.660",
+          "79.330",
+          "80.170",
+          "80.180",
+          "111938493",
+          "9183529530.560",
+          "9800",
+          "80.170",
+          "12300",
+          "80.160",
+          "27300",
+          "80.150",
+          "4100",
+          "80.140",
+          "5100",
+          "80.130",
+          "70036",
+          "80.180",
+          "53300",
+          "80.190",
+          "20300",
+          "80.200",
+          "2400",
+          "80.210",
+          "7200",
+          "80.220",
+          "2026-07-03",
+          "16:29:00",
+          "00",
+          "D|8500|681530.000"
+        ],
+        "pct": -9.676692576320821,
+        "amplitude": 10.51030753632984,
+        "amount": 9183529530.56,
+        "anomaly": true
+      }
+    }
+  ],
+  "missing_sources": [
+    "price_volume:eastmoney_kline failed: urlopen failed: Remote end closed connection without response; curl fallback failed code=56: curl: (56) schannel: server closed abruptly (missing close_notify)\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "078cc63ae5a42391",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-29 南大光电:关于持股5%以上股东股份减持计划完成的公告",
+      "raw": {
+        "art_code": "AN202606291826547570",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-06-29 19:13:10:486",
+        "eiTime": "2026-06-29 19:14:09:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-29 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-29 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于持股5%以上股东股份减持计划完成的公告",
+        "title_ch": "南大光电:关于持股5%以上股东股份减持计划完成的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202606291826547570.html",
+      "published_at": "2026-06-29 00:00:00"
+    },
+    {
+      "id": "18fa89f265c71e4e",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-29 南大光电:关于变更保荐代表人的公告",
+      "raw": {
+        "art_code": "AN202606291826547564",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005001008001",
+            "column_name": "保荐代表人（机构）变更"
+          }
+        ],
+        "display_time": "2026-06-29 19:13:10:454",
+        "eiTime": "2026-06-29 19:14:09:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-29 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-29 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于变更保荐代表人的公告",
+        "title_ch": "南大光电:关于变更保荐代表人的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202606291826547564.html",
+      "published_at": "2026-06-29 00:00:00"
+    },
+    {
+      "id": "62fb175aa4529143",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-25 南大光电:关于持股5%以上股东权益变动触及1%整数倍的公告",
+      "raw": {
+        "art_code": "AN202605251822860136",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002005",
+            "column_name": "权益变动报告书"
+          }
+        ],
+        "display_time": "2026-05-25 18:54:09:349",
+        "eiTime": "2026-05-25 18:55:07:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-25 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-25 12:01:10",
+        "source_type": "333",
+        "title": "南大光电:关于持股5%以上股东权益变动触及1%整数倍的公告",
+        "title_ch": "南大光电:关于持股5%以上股东权益变动触及1%整数倍的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202605251822860136.html",
+      "published_at": "2026-05-25 00:00:00"
+    },
+    {
+      "id": "e2970b9cb921afe9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-11 南大光电:2025年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202605111822160482",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-05-11 16:58:04:418",
+        "eiTime": "2026-05-11 16:59:16:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-11 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度权益分派实施公告",
+        "title_ch": "南大光电:2025年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202605111822160482.html",
+      "published_at": "2026-05-11 00:00:00"
+    },
+    {
+      "id": "d3f16e85a071da46",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-07 南大光电:2025年度股东会决议公告",
+      "raw": {
+        "art_code": "AN202605071822032729",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001004",
+            "column_name": "分配方案决议公告"
+          },
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          }
+        ],
+        "display_time": "2026-05-07 17:39:08:334",
+        "eiTime": "2026-05-07 17:39:41:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-07 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-07 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度股东会决议公告",
+        "title_ch": "南大光电:2025年度股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202605071822032729.html",
+      "published_at": "2026-05-07 00:00:00"
+    },
+    {
+      "id": "93c5d8ad4d616bfb",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-07 南大光电:北京国枫律师事务所关于江苏南大光电材料股份有限公司2025年度股东会的法律意见书",
+      "raw": {
+        "art_code": "AN202605071822032732",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-05-07 17:39:08:335",
+        "eiTime": "2026-05-07 17:40:10:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-07 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-07 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:北京国枫律师事务所关于江苏南大光电材料股份有限公司2025年度股东会的法律意见书",
+        "title_ch": "南大光电:北京国枫律师事务所关于江苏南大光电材料股份有限公司2025年度股东会的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202605071822032732.html",
+      "published_at": "2026-05-07 00:00:00"
+    },
+    {
+      "id": "cbb067b11c562358",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-24 南大光电:2026年一季度报告",
+      "raw": {
+        "art_code": "AN202604231821498085",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001003001",
+            "column_name": "一季度报告全文"
+          }
+        ],
+        "display_time": "2026-04-23 16:58:31:468",
+        "eiTime": "2026-04-23 16:58:52:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-24 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-24 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2026年一季度报告",
+        "title_ch": "南大光电:2026年一季度报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604231821498085.html",
+      "published_at": "2026-04-24 00:00:00"
+    },
+    {
+      "id": "250644aedf8e6788",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-15 南大光电:2026年4月15日投资者关系活动记录表",
+      "raw": {
+        "art_code": "AN202604151821244114",
+        "codes": [
+          {
+            "ann_type": "INV",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "050003",
+            "column_name": "调研活动"
+          }
+        ],
+        "display_time": "2026-04-15 19:17:57:628",
+        "eiTime": "2026-04-15 19:17:21:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-15 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-15 12:00:00",
+        "source_type": "324",
+        "title": "南大光电:2026年4月15日投资者关系活动记录表",
+        "title_ch": "南大光电:2026年4月15日投资者关系活动记录表",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604151821244114.html",
+      "published_at": "2026-04-15 00:00:00"
+    },
+    {
+      "id": "04073a8d89519237",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-14 南大光电:关于董事股份减持计划完成的公告",
+      "raw": {
+        "art_code": "AN202604141821191857",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-04-14 18:43:10:594",
+        "eiTime": "2026-04-14 18:44:06:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-14 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-14 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于董事股份减持计划完成的公告",
+        "title_ch": "南大光电:关于董事股份减持计划完成的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604141821191857.html",
+      "published_at": "2026-04-14 00:00:00"
+    },
+    {
+      "id": "9626020e96bce1c1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+      "raw": {
+        "art_code": "AN202604091821094240",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006009",
+            "column_name": "资金占用"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:736",
+        "eiTime": "2026-04-09 18:27:19:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+        "title_ch": "南大光电:2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094240.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "8896ba6468bbd1a0",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:2025年度可持续发展报告",
+      "raw": {
+        "art_code": "AN202604091821094215",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003005",
+            "column_name": "ESG公告"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:733",
+        "eiTime": "2026-04-09 18:30:29:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度可持续发展报告",
+        "title_ch": "南大光电:2025年度可持续发展报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094215.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "2bf48e3b3bf72be0",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:关于2025年度利润分配预案的公告",
+      "raw": {
+        "art_code": "AN202604091821094214",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001001",
+            "column_name": "分配预案"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:718",
+        "eiTime": "2026-04-09 18:27:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于2025年度利润分配预案的公告",
+        "title_ch": "南大光电:关于2025年度利润分配预案的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094214.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "d7a03e0a43db38a1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:关于会计政策变更的公告",
+      "raw": {
+        "art_code": "AN202604091821094217",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:694",
+        "eiTime": "2026-04-09 18:27:19:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:关于会计政策变更的公告",
+        "title_ch": "南大光电:关于会计政策变更的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "industry_policy"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094217.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "a5107cb265e2a2f2",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:2025年度独立董事述职报告(杨富华)",
+      "raw": {
+        "art_code": "AN202604091821094233",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001001004",
+            "column_name": "独立董事述职报告"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:659",
+        "eiTime": "2026-04-09 18:26:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度独立董事述职报告(杨富华)",
+        "title_ch": "南大光电:2025年度独立董事述职报告(杨富华)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094233.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "b08c4248261b82db",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:中信建投证券股份有限公司关于江苏南大光电材料股份有限公司2025年度募集资金存放与使用情况的核查意见",
+      "raw": {
+        "art_code": "AN202604091821094227",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002001",
+            "column_name": "保荐/核查意见"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:680",
+        "eiTime": "2026-04-09 18:26:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:中信建投证券股份有限公司关于江苏南大光电材料股份有限公司2025年度募集资金存放与使用情况的核查意见",
+        "title_ch": "南大光电:中信建投证券股份有限公司关于江苏南大光电材料股份有限公司2025年度募集资金存放与使用情况的核查意见",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094227.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "9963cc8055011ec3",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:2025年年度报告摘要",
+      "raw": {
+        "art_code": "AN202604091821094231",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001001002",
+            "column_name": "年度报告摘要"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:656",
+        "eiTime": "2026-04-09 18:27:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年年度报告摘要",
+        "title_ch": "南大光电:2025年年度报告摘要",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094231.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "18ec2e30b7a97a11",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:中信建投证券股份有限公司关于江苏南大光电材料股份有限公司部分募投项目延期的核查意见",
+      "raw": {
+        "art_code": "AN202604091821094224",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002001",
+            "column_name": "保荐/核查意见"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:649",
+        "eiTime": "2026-04-09 18:27:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:中信建投证券股份有限公司关于江苏南大光电材料股份有限公司部分募投项目延期的核查意见",
+        "title_ch": "南大光电:中信建投证券股份有限公司关于江苏南大光电材料股份有限公司部分募投项目延期的核查意见",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094224.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "fb05bf1c37ddce74",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:2025年度独立董事述职报告(张久俊)",
+      "raw": {
+        "art_code": "AN202604091821094262",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001001004",
+            "column_name": "独立董事述职报告"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:644",
+        "eiTime": "2026-04-09 18:26:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度独立董事述职报告(张久俊)",
+        "title_ch": "南大光电:2025年度独立董事述职报告(张久俊)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094262.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "296510fd4ae6738f",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:2025年度独立董事述职报告(石瑛)",
+      "raw": {
+        "art_code": "AN202604091821094255",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001001004",
+            "column_name": "独立董事述职报告"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:640",
+        "eiTime": "2026-04-09 18:27:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:2025年度独立董事述职报告(石瑛)",
+        "title_ch": "南大光电:2025年度独立董事述职报告(石瑛)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094255.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "13cd09842d83b663",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-10 南大光电:中审亚太关于江苏南大光电材料股份有限公司内部控制审计报告",
+      "raw": {
+        "art_code": "AN202604091821094210",
+        "codes": [
+          {
+            "ann_type": "A,CYB",
+            "inner_code": "30163850004470",
+            "market_code": "0",
+            "short_name": "南大光电",
+            "stock_code": "300346"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          },
+          {
+            "column_code": "001003003004",
+            "column_name": "内部控制报告"
+          }
+        ],
+        "display_time": "2026-04-09 18:26:15:631",
+        "eiTime": "2026-04-09 18:26:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-10 12:00:00",
+        "source_type": "333",
+        "title": "南大光电:中审亚太关于江苏南大光电材料股份有限公司内部控制审计报告",
+        "title_ch": "南大光电:中审亚太关于江苏南大光电材料股份有限公司内部控制审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/300346/AN202604091821094210.html",
+      "published_at": "2026-04-10 00:00:00"
+    },
+    {
+      "id": "f1780033efaea9e5",
+      "source": "price_volume:sina_quote",
+      "title": "行情: 南大光电 300346 最新80.18 涨跌幅-9.68% 最高88.66 最低79.33 振幅10.51% 成交额91.84亿 时间2026-07-03 16:29:00",
+      "raw": {
+        "url": "https://hq.sinajs.cn/list=sz300346",
+        "fields": [
+          "南大光电",
+          "85.580",
+          "88.770",
+          "80.180",
+          "88.660",
+          "79.330",
+          "80.170",
+          "80.180",
+          "111938493",
+          "9183529530.560",
+          "9800",
+          "80.170",
+          "12300",
+          "80.160",
+          "27300",
+          "80.150",
+          "4100",
+          "80.140",
+          "5100",
+          "80.130",
+          "70036",
+          "80.180",
+          "53300",
+          "80.190",
+          "20300",
+          "80.200",
+          "2400",
+          "80.210",
+          "7200",
+          "80.220",
+          "2026-07-03",
+          "16:29:00",
+          "00",
+          "D|8500|681530.000"
+        ],
+        "pct": -9.676692576320821,
+        "amplitude": 10.51030753632984,
+        "amount": 9183529530.56,
+        "anomaly": true
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://hq.sinajs.cn/list=sz300346",
+      "published_at": "2026-07-03 16:29:00"
+    },
+    {
+      "id": "dce26adbab50c850",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 南大光电，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=%E5%8D%97%E5%A4%A7%E5%85%89%E7%94%B5&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-04T20:44:42",
+      "url": "https://so.eastmoney.com/news/s?keyword=%E5%8D%97%E5%A4%A7%E5%85%89%E7%94%B5&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "2ebd5dd2c0392ae5",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 南大光电，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=%E5%8D%97%E5%A4%A7%E5%85%89%E7%94%B5",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-04T20:44:42",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=%E5%8D%97%E5%A4%A7%E5%85%89%E7%94%B5",
+      "coverage_only": true
+    }
+  ]
+}

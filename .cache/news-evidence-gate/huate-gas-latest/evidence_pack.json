@@ -1,0 +1,1323 @@
+{
+  "ticker_or_query": "华特气体",
+  "market": "A",
+  "audit_time": "2026-07-04T20:44:42",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "WARN",
+  "coverage_score": 49,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "covered",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "0a00e09c3e5815cd",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-03 华特气体:广东信达律师事务所关于广东华特气体股份有限公司差异化分红事项的法律意见书",
+      "raw": {
+        "art_code": "AN202607021826667533",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-07-02 19:48:36:364",
+        "eiTime": "2026-07-02 19:49:36:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-03 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东信达律师事务所关于广东华特气体股份有限公司差异化分红事项的法律意见书",
+        "title_ch": "华特气体:广东信达律师事务所关于广东华特气体股份有限公司差异化分红事项的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202607021826667533.html",
+      "published_at": "2026-07-03 00:00:00"
+    },
+    {
+      "id": "e45f390484e283d4",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-03 华特气体:广东华特气体股份有限公司2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202607021826667532",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-07-02 19:48:36:338",
+        "eiTime": "2026-07-02 19:49:03:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-03 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司2025年年度权益分派实施公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202607021826667532.html",
+      "published_at": "2026-07-03 00:00:00"
+    },
+    {
+      "id": "6baf69b28a226f31",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-24 华特气体:广东华特气体股份有限公司股票交易异常波动公告",
+      "raw": {
+        "art_code": "AN202606231823777624",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004007",
+            "column_name": "股票交易异常波动"
+          }
+        ],
+        "display_time": "2026-06-23 19:12:28:262",
+        "eiTime": "2026-06-23 19:12:53:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-24 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-24 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司股票交易异常波动公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司股票交易异常波动公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "trading_anomaly"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606231823777624.html",
+      "published_at": "2026-06-24 00:00:00"
+    },
+    {
+      "id": "98282cd1daee624a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-12 华特气体:广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施公告",
+      "raw": {
+        "art_code": "AN202606111823464166",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007003009005",
+            "column_name": "回购实施公告"
+          }
+        ],
+        "display_time": "2026-06-11 20:04:35:364",
+        "eiTime": "2026-06-11 20:07:58:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-12 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-12 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606111823464166.html",
+      "published_at": "2026-06-12 00:00:00"
+    },
+    {
+      "id": "90cd89d5b05d3b09",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-12 华特气体:北京金诚同达(深圳)律师事务所关于广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施情况的法律意见书",
+      "raw": {
+        "art_code": "AN202606111823464161",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-06-11 20:04:27:473",
+        "eiTime": "2026-06-11 20:07:54:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-12 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-12 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:北京金诚同达(深圳)律师事务所关于广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施情况的法律意见书",
+        "title_ch": "华特气体:北京金诚同达(深圳)律师事务所关于广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施情况的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606111823464161.html",
+      "published_at": "2026-06-12 00:00:00"
+    },
+    {
+      "id": "3dad6fdc3a8c6264",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-12 华特气体:广东华特气体股份有限公司股东减持股份结果公告",
+      "raw": {
+        "art_code": "AN202606111823464160",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-06-11 20:04:27:457",
+        "eiTime": "2026-06-11 20:07:54:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-12 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-12 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司股东减持股份结果公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司股东减持股份结果公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606111823464160.html",
+      "published_at": "2026-06-12 00:00:00"
+    },
+    {
+      "id": "d32b44bd16ca5a34",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-11 华特气体:广东华特气体股份有限公司董事、高级管理人员减持股份结果公告",
+      "raw": {
+        "art_code": "AN202606101823426825",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004001",
+            "column_name": "高管人员持股变动"
+          },
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-06-10 18:11:08:282",
+        "eiTime": "2026-06-10 18:12:02:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-11 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司董事、高级管理人员减持股份结果公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司董事、高级管理人员减持股份结果公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606101823426825.html",
+      "published_at": "2026-06-11 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [
+    {
+      "type": "structured_price_volume_anomaly",
+      "source": "price_volume:sina_quote",
+      "detail": "行情: 华特气体 688268 最新225.91 涨跌幅-9.27% 最高256.00 最低225.00 振幅12.45% 成交额23.90亿 时间2026-07-03 15:34:59",
+      "matched_news": true,
+      "risk": "medium",
+      "raw": {
+        "url": "https://hq.sinajs.cn/list=sh688268",
+        "fields": [
+          "华特气体",
+          "246.660",
+          "249.000",
+          "225.910",
+          "256.000",
+          "225.000",
+          "225.910",
+          "225.940",
+          "10217529",
+          "2389944156.000",
+          "18572",
+          "225.910",
+          "3151",
+          "225.900",
+          "200",
+          "225.890",
+          "600",
+          "225.880",
+          "1022",
+          "225.870",
+          "958",
+          "225.940",
+          "200",
+          "225.980",
+          "4514",
+          "225.990",
+          "4600",
+          "226.000",
+          "360",
+          "226.130",
+          "2026-07-03",
+          "15:34:59",
+          "00",
+          "D|4252|960569.32"
+        ],
+        "pct": -9.273092369477908,
+        "amplitude": 12.449799196787147,
+        "amount": 2389944156.0,
+        "anomaly": true
+      }
+    }
+  ],
+  "missing_sources": [
+    "price_volume:eastmoney_kline failed: urlopen failed: Remote end closed connection without response; curl fallback failed code=56: curl: (56) schannel: server closed abruptly (missing close_notify)\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "0a00e09c3e5815cd",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-03 华特气体:广东信达律师事务所关于广东华特气体股份有限公司差异化分红事项的法律意见书",
+      "raw": {
+        "art_code": "AN202607021826667533",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-07-02 19:48:36:364",
+        "eiTime": "2026-07-02 19:49:36:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-03 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东信达律师事务所关于广东华特气体股份有限公司差异化分红事项的法律意见书",
+        "title_ch": "华特气体:广东信达律师事务所关于广东华特气体股份有限公司差异化分红事项的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202607021826667533.html",
+      "published_at": "2026-07-03 00:00:00"
+    },
+    {
+      "id": "e45f390484e283d4",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-03 华特气体:广东华特气体股份有限公司2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202607021826667532",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-07-02 19:48:36:338",
+        "eiTime": "2026-07-02 19:49:03:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-03 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司2025年年度权益分派实施公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202607021826667532.html",
+      "published_at": "2026-07-03 00:00:00"
+    },
+    {
+      "id": "8c050032d4764325",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-03 华特气体:广东华特气体股份有限公司关于2025年年度利润分配方案调整总股本及对应分配总额的公告",
+      "raw": {
+        "art_code": "AN202607021826667531",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001002",
+            "column_name": "分配方案调整"
+          }
+        ],
+        "display_time": "2026-07-02 19:48:36:236",
+        "eiTime": "2026-07-02 19:49:36:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-03 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司关于2025年年度利润分配方案调整总股本及对应分配总额的公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司关于2025年年度利润分配方案调整总股本及对应分配总额的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202607021826667531.html",
+      "published_at": "2026-07-03 00:00:00"
+    },
+    {
+      "id": "aedf3c6cb2c9ab83",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-01 华特气体:广东华特气体股份有限公司关于股票交易风险提示的公告",
+      "raw": {
+        "art_code": "AN202606301826600258",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002001004006006",
+            "column_name": "风险提示性公告"
+          }
+        ],
+        "display_time": "2026-06-30 18:59:25:351",
+        "eiTime": "2026-06-30 19:00:30:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-01 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司关于股票交易风险提示的公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司关于股票交易风险提示的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606301826600258.html",
+      "published_at": "2026-07-01 00:00:00"
+    },
+    {
+      "id": "b4348c2dcedb7dc8",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-26 华特气体:广东华特气体股份有限公司2026年第三次临时股东会决议",
+      "raw": {
+        "art_code": "AN202606251823850675",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          }
+        ],
+        "display_time": "2026-06-25 17:09:26:226",
+        "eiTime": "2026-06-25 17:10:24:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-26 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-26 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司2026年第三次临时股东会决议",
+        "title_ch": "华特气体:广东华特气体股份有限公司2026年第三次临时股东会决议",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606251823850675.html",
+      "published_at": "2026-06-26 00:00:00"
+    },
+    {
+      "id": "10fcdcbadb42a94c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-26 华特气体:广东信达律师事务所关于广东华特气体股份有限公司2026年第三次临时股东会的法律意见书",
+      "raw": {
+        "art_code": "AN202606251823850674",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-06-25 17:09:26:217",
+        "eiTime": "2026-06-25 17:10:24:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-26 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-26 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东信达律师事务所关于广东华特气体股份有限公司2026年第三次临时股东会的法律意见书",
+        "title_ch": "华特气体:广东信达律师事务所关于广东华特气体股份有限公司2026年第三次临时股东会的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606251823850674.html",
+      "published_at": "2026-06-26 00:00:00"
+    },
+    {
+      "id": "6baf69b28a226f31",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-24 华特气体:广东华特气体股份有限公司股票交易异常波动公告",
+      "raw": {
+        "art_code": "AN202606231823777624",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004007",
+            "column_name": "股票交易异常波动"
+          }
+        ],
+        "display_time": "2026-06-23 19:12:28:262",
+        "eiTime": "2026-06-23 19:12:53:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-24 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-24 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司股票交易异常波动公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司股票交易异常波动公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "trading_anomaly"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606231823777624.html",
+      "published_at": "2026-06-24 00:00:00"
+    },
+    {
+      "id": "016156421937cbd4",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-19 华特气体:广东华特气体股份有限公司向不特定对象发行可转换公司债券受托管理事务报告(2025年度)",
+      "raw": {
+        "art_code": "AN202606181823665870",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          },
+          {
+            "column_code": "003017002002",
+            "column_name": "受托管理事务定期报告"
+          }
+        ],
+        "display_time": "2026-06-18 15:54:03:220",
+        "eiTime": "2026-06-18 15:54:33:000",
+        "language": "0",
+        "listing_state": "2",
+        "notice_date": "2026-06-19 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-19 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司向不特定对象发行可转换公司债券受托管理事务报告(2025年度)",
+        "title_ch": "华特气体:广东华特气体股份有限公司向不特定对象发行可转换公司债券受托管理事务报告(2025年度)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606181823665870.html",
+      "published_at": "2026-06-19 00:00:00"
+    },
+    {
+      "id": "f06dbba6447ad10e",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-16 华特气体:广东华特气体股份有限公司2026年第三次临时股东会会议资料",
+      "raw": {
+        "art_code": "AN202606151823569673",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003004002",
+            "column_name": "股东大会资料"
+          }
+        ],
+        "display_time": "2026-06-15 16:20:38:504",
+        "eiTime": "2026-06-15 16:21:41:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-16 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-16 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司2026年第三次临时股东会会议资料",
+        "title_ch": "华特气体:广东华特气体股份有限公司2026年第三次临时股东会会议资料",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606151823569673.html",
+      "published_at": "2026-06-16 00:00:00"
+    },
+    {
+      "id": "d927b8362c56ca68",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-15 华特气体:2026-004广东华特气体股份有限公司投资者关系活动记录表(2026年6月12日)",
+      "raw": {
+        "art_code": "AN202606151823572655",
+        "codes": [
+          {
+            "ann_type": "INV",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "050003",
+            "column_name": "调研活动"
+          }
+        ],
+        "display_time": "2026-06-15 18:41:48:558",
+        "eiTime": "2026-06-15 18:41:11:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-15 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-15 12:00:00",
+        "source_type": "311",
+        "title": "华特气体:2026-004广东华特气体股份有限公司投资者关系活动记录表(2026年6月12日)",
+        "title_ch": "华特气体:2026-004广东华特气体股份有限公司投资者关系活动记录表(2026年6月12日)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606151823572655.html",
+      "published_at": "2026-06-15 00:00:00"
+    },
+    {
+      "id": "98282cd1daee624a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-12 华特气体:广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施公告",
+      "raw": {
+        "art_code": "AN202606111823464166",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007003009005",
+            "column_name": "回购实施公告"
+          }
+        ],
+        "display_time": "2026-06-11 20:04:35:364",
+        "eiTime": "2026-06-11 20:07:58:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-12 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-12 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606111823464166.html",
+      "published_at": "2026-06-12 00:00:00"
+    },
+    {
+      "id": "90cd89d5b05d3b09",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-12 华特气体:北京金诚同达(深圳)律师事务所关于广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施情况的法律意见书",
+      "raw": {
+        "art_code": "AN202606111823464161",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-06-11 20:04:27:473",
+        "eiTime": "2026-06-11 20:07:54:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-12 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-12 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:北京金诚同达(深圳)律师事务所关于广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施情况的法律意见书",
+        "title_ch": "华特气体:北京金诚同达(深圳)律师事务所关于广东华特气体股份有限公司2023年限制性股票激励计划部分第一类限制性股票回购注销实施情况的法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606111823464161.html",
+      "published_at": "2026-06-12 00:00:00"
+    },
+    {
+      "id": "3dad6fdc3a8c6264",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-12 华特气体:广东华特气体股份有限公司股东减持股份结果公告",
+      "raw": {
+        "art_code": "AN202606111823464160",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-06-11 20:04:27:457",
+        "eiTime": "2026-06-11 20:07:54:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-12 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-12 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司股东减持股份结果公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司股东减持股份结果公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606111823464160.html",
+      "published_at": "2026-06-12 00:00:00"
+    },
+    {
+      "id": "4935ff3076a1b8f1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-11 华特气体:广东华特气体股份有限公司关于持股5%以上股东权益变动触及1%刻度的提示性公告(张穗萍)",
+      "raw": {
+        "art_code": "AN202606101823426827",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002005",
+            "column_name": "权益变动报告书"
+          }
+        ],
+        "display_time": "2026-06-10 18:11:08:307",
+        "eiTime": "2026-06-10 18:11:25:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-11 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司关于持股5%以上股东权益变动触及1%刻度的提示性公告(张穗萍)",
+        "title_ch": "华特气体:广东华特气体股份有限公司关于持股5%以上股东权益变动触及1%刻度的提示性公告(张穗萍)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606101823426827.html",
+      "published_at": "2026-06-11 00:00:00"
+    },
+    {
+      "id": "216e8f7f514b810c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-11 华特气体:广东华特气体股份有限公司关于持股5%以上股东权益变动触及1%刻度的提示性公告",
+      "raw": {
+        "art_code": "AN202606101823426830",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002005",
+            "column_name": "权益变动报告书"
+          }
+        ],
+        "display_time": "2026-06-10 18:11:08:307",
+        "eiTime": "2026-06-10 18:12:02:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-11 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司关于持股5%以上股东权益变动触及1%刻度的提示性公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司关于持股5%以上股东权益变动触及1%刻度的提示性公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606101823426830.html",
+      "published_at": "2026-06-11 00:00:00"
+    },
+    {
+      "id": "d32b44bd16ca5a34",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-11 华特气体:广东华特气体股份有限公司董事、高级管理人员减持股份结果公告",
+      "raw": {
+        "art_code": "AN202606101823426825",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004001",
+            "column_name": "高管人员持股变动"
+          },
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-06-10 18:11:08:282",
+        "eiTime": "2026-06-10 18:12:02:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-11 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司董事、高级管理人员减持股份结果公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司董事、高级管理人员减持股份结果公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606101823426825.html",
+      "published_at": "2026-06-11 00:00:00"
+    },
+    {
+      "id": "962b177300ccb634",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-11 华特气体:广东华特气体股份有限公司关于“华特气体”赎回结果暨股份变动的公告",
+      "raw": {
+        "art_code": "AN202606101823426824",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002004",
+            "column_name": "股本变动"
+          },
+          {
+            "column_code": "003012002004",
+            "column_name": "赎回结果公告"
+          }
+        ],
+        "display_time": "2026-06-10 18:11:08:264",
+        "eiTime": "2026-06-10 18:12:02:000",
+        "language": "0",
+        "listing_state": "2",
+        "notice_date": "2026-06-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-11 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司关于“华特气体”赎回结果暨股份变动的公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司关于“华特气体”赎回结果暨股份变动的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606101823426824.html",
+      "published_at": "2026-06-11 00:00:00"
+    },
+    {
+      "id": "832a4e5b5ee56669",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-09 华特气体:广东华特气体股份有限公司董事、高级管理人员薪酬管理制度",
+      "raw": {
+        "art_code": "AN202606081823363520",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-06-08 18:25:37:255",
+        "eiTime": "2026-06-08 18:26:45:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-09 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司董事、高级管理人员薪酬管理制度",
+        "title_ch": "华特气体:广东华特气体股份有限公司董事、高级管理人员薪酬管理制度",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606081823363520.html",
+      "published_at": "2026-06-09 00:00:00"
+    },
+    {
+      "id": "e8f8d66f0f414b62",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-09 华特气体:广东华特气体股份有限公司关于修订董事、高级管理人员薪酬管理制度的公告",
+      "raw": {
+        "art_code": "AN202606081823363523",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          },
+          {
+            "column_code": "003014",
+            "column_name": "其它"
+          }
+        ],
+        "display_time": "2026-06-08 18:25:37:255",
+        "eiTime": "2026-06-08 18:26:45:000",
+        "language": "0",
+        "listing_state": "2",
+        "notice_date": "2026-06-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-09 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司关于修订董事、高级管理人员薪酬管理制度的公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司关于修订董事、高级管理人员薪酬管理制度的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606081823363523.html",
+      "published_at": "2026-06-09 00:00:00"
+    },
+    {
+      "id": "052db592484f4672",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-09 华特气体:广东华特气体股份有限公司关于实施“华特转债”赎回暨摘牌的最后一次提示性公告",
+      "raw": {
+        "art_code": "AN202606081823363522",
+        "codes": [
+          {
+            "ann_type": "A,KCB,SHA",
+            "inner_code": "22382083251957",
+            "market_code": "1",
+            "short_name": "华特气体",
+            "stock_code": "688268"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          },
+          {
+            "column_code": "003007009002",
+            "column_name": "摘牌提示性公告"
+          },
+          {
+            "column_code": "003012002003",
+            "column_name": "赎回提示性公告"
+          }
+        ],
+        "display_time": "2026-06-08 18:25:37:248",
+        "eiTime": "2026-06-08 18:26:08:000",
+        "language": "0",
+        "listing_state": "2",
+        "notice_date": "2026-06-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-09 12:00:00",
+        "source_type": "313",
+        "title": "华特气体:广东华特气体股份有限公司关于实施“华特转债”赎回暨摘牌的最后一次提示性公告",
+        "title_ch": "华特气体:广东华特气体股份有限公司关于实施“华特转债”赎回暨摘牌的最后一次提示性公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://data.eastmoney.com/notices/detail/688268/AN202606081823363522.html",
+      "published_at": "2026-06-09 00:00:00"
+    },
+    {
+      "id": "9f2b839a93f88888",
+      "source": "price_volume:sina_quote",
+      "title": "行情: 华特气体 688268 最新225.91 涨跌幅-9.27% 最高256.00 最低225.00 振幅12.45% 成交额23.90亿 时间2026-07-03 15:34:59",
+      "raw": {
+        "url": "https://hq.sinajs.cn/list=sh688268",
+        "fields": [
+          "华特气体",
+          "246.660",
+          "249.000",
+          "225.910",
+          "256.000",
+          "225.000",
+          "225.910",
+          "225.940",
+          "10217529",
+          "2389944156.000",
+          "18572",
+          "225.910",
+          "3151",
+          "225.900",
+          "200",
+          "225.890",
+          "600",
+          "225.880",
+          "1022",
+          "225.870",
+          "958",
+          "225.940",
+          "200",
+          "225.980",
+          "4514",
+          "225.990",
+          "4600",
+          "226.000",
+          "360",
+          "226.130",
+          "2026-07-03",
+          "15:34:59",
+          "00",
+          "D|4252|960569.32"
+        ],
+        "pct": -9.273092369477908,
+        "amplitude": 12.449799196787147,
+        "amount": 2389944156.0,
+        "anomaly": true
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": true,
+      "captured_at": "2026-07-04T20:44:39",
+      "url": "https://hq.sinajs.cn/list=sh688268",
+      "published_at": "2026-07-03 15:34:59"
+    },
+    {
+      "id": "75556046b713d39a",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 华特气体，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=%E5%8D%8E%E7%89%B9%E6%B0%94%E4%BD%93&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-04T20:44:42",
+      "url": "https://so.eastmoney.com/news/s?keyword=%E5%8D%8E%E7%89%B9%E6%B0%94%E4%BD%93&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "1956e84c2bfd9c39",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 华特气体，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=%E5%8D%8E%E7%89%B9%E6%B0%94%E4%BD%93",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-04T20:44:42",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=%E5%8D%8E%E7%89%B9%E6%B0%94%E4%BD%93",
+      "coverage_only": true
+    }
+  ]
+}
