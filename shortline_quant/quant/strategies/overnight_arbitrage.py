@@ -38,7 +38,7 @@ def get_spec() -> StrategySpec:
     return StrategySpec(
         strategy_id="overnight_arbitrage",
         name="杨永兴隔夜套利法",
-        description="14:30 后从实时涨幅榜筛选主板 3%-5% 强势股，隔夜持有，次日早盘只卖不加仓。",
+        description="请求时从实时涨幅榜筛选主板 3%-5% 强势股，作为盘中辅助观察；尾盘确认后隔夜持有，次日早盘只卖不加仓。",
         source_note="/Users/zhihu/Desktop/短线.txt",
         supported_timeframes=["day", "5m-later"],
         default_params={

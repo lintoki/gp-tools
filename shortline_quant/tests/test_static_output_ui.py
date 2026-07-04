@@ -6,14 +6,16 @@ class StaticOutputUiTest(unittest.TestCase):
     def setUp(self):
         self.html = (Path(__file__).resolve().parents[1] / "static" / "index.html").read_text(encoding="utf-8")
 
-    def test_signal_output_uses_abc_modules_without_unmatched_lists(self):
+    def test_signal_output_uses_abc_modules_with_observation_lists(self):
         self.assertIn("function renderCandidateModules", self.html)
         self.assertIn("abc-grid", self.html)
         self.assertIn("abc-module", self.html)
-        self.assertNotIn("renderNearMisses", self.html)
-        self.assertNotIn("renderRejections", self.html)
-        self.assertNotIn("data.rejected", self.html)
-        self.assertNotIn("data.rejections", self.html)
+        self.assertIn("function renderNearMisses", self.html)
+        self.assertIn("function renderRejections", self.html)
+        self.assertIn("接近标准观察池", self.html)
+        self.assertIn("剔除原因", self.html)
+        self.assertIn("data.rejected", self.html)
+        self.assertIn("data.rejections", self.html)
 
     def test_backtest_time_filter_defaults_to_recent_week(self):
         self.assertIn('id="quickRange"', self.html)

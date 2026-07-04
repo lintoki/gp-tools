@@ -93,16 +93,15 @@ class RealtimeScreenerTest(unittest.TestCase):
         self.assertIn("行情榜数据源暂时不可用", result["data_warning"])
         self.assertNotIn("RemoteDisconnected", str(result))
 
-    def test_yang_strategy_does_not_run_before_1430(self):
+    def test_yang_strategy_runs_when_requested_before_1430(self):
         provider = StubRealtimeProvider([], {})
         screener = RealtimeStrategyScreener(provider, now_func=lambda: datetime(2026, 6, 23, 14, 20))
 
         result = screener.run("overnight_arbitrage")
 
-        self.assertFalse(result["run_time_valid"])
+        self.assertTrue(result["run_time_valid"])
         self.assertEqual([], result["candidates"])
-        self.assertEqual("今日无符合策略标的，建议空仓", result["decision"]["note"])
-        self.assertEqual(0, provider.ranked_quote_calls)
+        self.assertEqual(1, provider.ranked_quote_calls)
 
     def test_yang_strategy_uses_ranked_quotes_filters_scores_and_reports_rejections(self):
         provider = StubRealtimeProvider(
@@ -195,7 +194,7 @@ class RealtimeScreenerTest(unittest.TestCase):
         self.assertEqual(["002222"], [item["code"] for item in result["C_pool_candidates"]])
         self.assertEqual("buy_candidate", result["A_buy_candidates"][0]["action"])
         self.assertEqual("watch", result["B_watch_candidates"][0]["action"])
-        self.assertIn("需要 14:30 后放量突破当日新高", result["B_watch_candidates"][0]["upgrade_requirements"])
+        self.assertIn("需要尾盘阶段放量突破当日新高", result["B_watch_candidates"][0]["upgrade_requirements"])
         self.assertTrue(result["trade_decision"]["can_buy"])
         self.assertEqual(1, result["trade_decision"]["max_buy_count"])
         self.assertEqual(1, result["stats"]["A_buy_count"])
