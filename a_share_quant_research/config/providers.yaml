@@ -1,0 +1,15 @@
+dataset_deadline_seconds: 60
+minimum_request_interval_seconds: 0.2
+http:
+  connect_timeout_seconds: 10
+  read_timeout_seconds: 20
+  user_agent_env: A_SHARE_RESEARCH_USER_AGENT
+providers:
+  a_share_primary: akshare
+  announcements_primary: cninfo_public
+  us_macro_primary: fred_csv
+  us_filings_primary: sec_edgar
+  futures_positioning_primary: cftc_cot
+secrets:
+  fred_api_key_env: FRED_API_KEY
+  bea_api_key_env: BEA_API_KEY

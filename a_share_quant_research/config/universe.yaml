@@ -1,0 +1,10 @@
+main_board_only: true
+allowed_prefixes: ["000", "001", "002", "003", "600", "601", "603", "605"]
+excluded_boards: ["chinext", "star", "bse"]
+exclude_st: true
+exclude_delisting: true
+minimum_listing_trading_days: 250
+maximum_consecutive_suspension_days: 20
+minimum_20d_average_amount_cny: 100000000
+minimum_20d_valid_trading_days: 18
+

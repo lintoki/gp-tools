@@ -1,0 +1,16 @@
+lot_size: 100
+signal_time: close
+execution_time: next_open
+t_plus_one: true
+costs:
+  commission_rate: 0.0003
+  minimum_commission_cny: 5.0
+  sell_stamp_tax_rate: 0.0005
+  slippage_bps: 5.0
+limits:
+  main_board_pct: 0.10
+  st_pct: 0.05
+portfolio:
+  maximum_candidates: 5
+  initial_cash_cny: 1000000
+

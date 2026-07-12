@@ -1,0 +1,22 @@
+weights:
+  trend: 0.15
+  relative_strength: 0.15
+  volume_turnover: 0.10
+  volatility_drawdown: 0.10
+  fundamental_quality: 0.15
+  valuation_percentile: 0.10
+  industry_prosperity: 0.15
+  event_catalyst: 0.10
+required:
+  - trend
+  - relative_strength
+  - volume_turnover
+  - volatility_drawdown
+  - fundamental_quality
+  - valuation_percentile
+  - industry_prosperity
+  - event_catalyst
+standardization:
+  lower_quantile: 0.01
+  upper_quantile: 0.99
+

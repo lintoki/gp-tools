@@ -1,0 +1,15 @@
+max_attempts: 3
+retry_delays_seconds: [1, 2]
+maximum_backup_sources: 1
+required_status: PASS
+cross_source_sample_size: 30
+cross_source_price_relative_tolerance: 0.005
+freshness:
+  daily_bars_trading_days: 1
+  security_master_calendar_days: 7
+  financial_reports_calendar_days: 120
+  announcements_hours: 24
+  news_hours: 24
+  fred_trading_days: 3
+  cftc_cot_calendar_days: 10
+

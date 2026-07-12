@@ -1,0 +1,4 @@
+interface:
+  display_name: "A股每日量化投研"
+  short_description: "按失败关闭规则运行A股每日数据、证据、因子、回测与报告流程"
+  default_prompt: "Use $a-share-daily-research to run the fail-closed daily A-share research workflow and stop if any required data gate fails."
