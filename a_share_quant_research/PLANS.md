@@ -24,7 +24,7 @@
 
 ## 最终验证结果
 
-- 全量测试：72 passed（单元、集成、数据质量、防未来函数与 Skill 契约）。
+- 全量测试：73 passed（单元、集成、数据质量、防未来函数与 Skill 契约）。
 - 静态检查：Ruff check 通过。
 - 格式检查：68 files already formatted。
 - 编译检查：`python -m compileall -q src` 通过。
