@@ -1,0 +1,987 @@
+{
+  "ticker_or_query": "600685",
+  "market": "A",
+  "audit_time": "2026-07-12T23:33:02",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "BLOCK",
+  "coverage_score": 37,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "not_checked",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "f9fc4d9d4cf1f62a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-11 中船防务:中船防务2026年半年度业绩预增公告",
+      "raw": {
+        "art_code": "AN202607101826875730",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-07-10 17:13:21:940",
+        "eiTime": "2026-07-10 17:12:44:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-11 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2026年半年度业绩预增公告",
+        "title_ch": "中船防务:中船防务2026年半年度业绩预增公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202607101826875730.html",
+      "published_at": "2026-07-11 00:00:00"
+    },
+    {
+      "id": "c032e6d2300a3548",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-09 中船防务:中船防务2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202607081826816212",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-07-08 17:02:06:535",
+        "eiTime": "2026-07-08 17:01:41:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-09 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2025年年度权益分派实施公告",
+        "title_ch": "中船防务:中船防务2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202607081826816212.html",
+      "published_at": "2026-07-09 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "price_volume:sina_quote empty",
+    "price_volume:eastmoney_kline failed: urlopen failed: [SSL] record layer failure (_ssl.c:2580); curl fallback failed code=56: curl: (56) schannel: failed to read data from server: SEC_E_DECRYPT_FAILURE (0x80090330) - 无法解密指定的数据。\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "f9fc4d9d4cf1f62a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-11 中船防务:中船防务2026年半年度业绩预增公告",
+      "raw": {
+        "art_code": "AN202607101826875730",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-07-10 17:13:21:940",
+        "eiTime": "2026-07-10 17:12:44:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-11 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2026年半年度业绩预增公告",
+        "title_ch": "中船防务:中船防务2026年半年度业绩预增公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202607101826875730.html",
+      "published_at": "2026-07-11 00:00:00"
+    },
+    {
+      "id": "c032e6d2300a3548",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-09 中船防务:中船防务2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202607081826816212",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-07-08 17:02:06:535",
+        "eiTime": "2026-07-08 17:01:41:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-09 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-09 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2025年年度权益分派实施公告",
+        "title_ch": "中船防务:中船防务2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202607081826816212.html",
+      "published_at": "2026-07-09 00:00:00"
+    },
+    {
+      "id": "91f4db46e2d96871",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-04 中船防务:中船防务H股公告_股份发行人的证券变动月报表",
+      "raw": {
+        "art_code": "AN202607031826697595",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-07-03 17:00:45:776",
+        "eiTime": "2026-07-03 17:00:27:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-04 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-04 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务H股公告_股份发行人的证券变动月报表",
+        "title_ch": "中船防务:中船防务H股公告_股份发行人的证券变动月报表",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202607031826697595.html",
+      "published_at": "2026-07-04 00:00:00"
+    },
+    {
+      "id": "747a37c9d05ae1fa",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-30 中船防务:中船防务关于子公司提供担保的进展公告",
+      "raw": {
+        "art_code": "AN202606291826541081",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006011003",
+            "column_name": "提供/对外担保公告"
+          }
+        ],
+        "display_time": "2026-06-29 17:38:51:584",
+        "eiTime": "2026-06-29 17:38:18:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-30 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务关于子公司提供担保的进展公告",
+        "title_ch": "中船防务:中船防务关于子公司提供担保的进展公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202606291826541081.html",
+      "published_at": "2026-06-30 00:00:00"
+    },
+    {
+      "id": "8586b5a81689fbe3",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-25 中船防务:中船防务关于变更办公地址名称的公告",
+      "raw": {
+        "art_code": "AN202606241823813700",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005001002",
+            "column_name": "公司名称变更"
+          },
+          {
+            "column_code": "001002005001006",
+            "column_name": "公司办公地址变更"
+          }
+        ],
+        "display_time": "2026-06-24 17:51:33:740",
+        "eiTime": "2026-06-24 17:51:06:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-25 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-25 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务关于变更办公地址名称的公告",
+        "title_ch": "中船防务:中船防务关于变更办公地址名称的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202606241823813700.html",
+      "published_at": "2026-06-25 00:00:00"
+    },
+    {
+      "id": "9dbdf775677b2e50",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-03 中船防务:中船防务H股公告-股份发行人的证券变动月报表",
+      "raw": {
+        "art_code": "AN202606021823160186",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-06-02 16:28:45:730",
+        "eiTime": "2026-06-02 16:28:12:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-03 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务H股公告-股份发行人的证券变动月报表",
+        "title_ch": "中船防务:中船防务H股公告-股份发行人的证券变动月报表",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202606021823160186.html",
+      "published_at": "2026-06-03 00:00:00"
+    },
+    {
+      "id": "57fddb6b8acfb0d6",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-28 中船防务:中船防务H股公告-董事名單及彼等角色及職能",
+      "raw": {
+        "art_code": "AN202605271822919255",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-05-27 19:07:39:555",
+        "eiTime": "2026-05-27 19:07:04:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-28 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务H股公告-董事名單及彼等角色及職能",
+        "title_ch": "中船防务:中船防务H股公告-董事名單及彼等角色及職能",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202605271822919255.html",
+      "published_at": "2026-05-28 00:00:00"
+    },
+    {
+      "id": "3d3593790d0e7052",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-28 中船防务:中船防务2025年年度股东会决议公告",
+      "raw": {
+        "art_code": "AN202605271822917050",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001004",
+            "column_name": "分配方案决议公告"
+          },
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          },
+          {
+            "column_code": "001002005002",
+            "column_name": "高管人员任职变动"
+          }
+        ],
+        "display_time": "2026-05-27 18:01:54:982",
+        "eiTime": "2026-05-27 18:01:27:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-28 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2025年年度股东会决议公告",
+        "title_ch": "中船防务:中船防务2025年年度股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202605271822917050.html",
+      "published_at": "2026-05-28 00:00:00"
+    },
+    {
+      "id": "20038c0e3f850cc2",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-28 中船防务:中船防务第十一届董事会第二十一次会议决议公告",
+      "raw": {
+        "art_code": "AN202605271822917046",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005002",
+            "column_name": "高管人员任职变动"
+          },
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-05-27 18:01:48:586",
+        "eiTime": "2026-05-27 18:01:15:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-28 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务第十一届董事会第二十一次会议决议公告",
+        "title_ch": "中船防务:中船防务第十一届董事会第二十一次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202605271822917046.html",
+      "published_at": "2026-05-28 00:00:00"
+    },
+    {
+      "id": "cf45fa5a36265f4e",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-28 中船防务:北京市盈科(广州)律师事务所关于中船海洋与防务装备股份有限公司2025年年度股东会法律意见书",
+      "raw": {
+        "art_code": "AN202605271822917049",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-05-27 18:04:57:690",
+        "eiTime": "2026-05-27 18:04:27:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-28 11:59:38",
+        "source_type": "31",
+        "title": "中船防务:北京市盈科(广州)律师事务所关于中船海洋与防务装备股份有限公司2025年年度股东会法律意见书",
+        "title_ch": "中船防务:北京市盈科(广州)律师事务所关于中船海洋与防务装备股份有限公司2025年年度股东会法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202605271822917049.html",
+      "published_at": "2026-05-28 00:00:00"
+    },
+    {
+      "id": "21c0641776ba86ad",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-26 中船防务:中船防务关于召开2025年年度暨2026年第一季度业绩说明会的公告",
+      "raw": {
+        "art_code": "AN202605251822857692",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-05-25 17:43:03:503",
+        "eiTime": "2026-05-25 17:42:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-26 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-26 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务关于召开2025年年度暨2026年第一季度业绩说明会的公告",
+        "title_ch": "中船防务:中船防务关于召开2025年年度暨2026年第一季度业绩说明会的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202605251822857692.html",
+      "published_at": "2026-05-26 00:00:00"
+    },
+    {
+      "id": "3dc3465644b4f434",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-08 中船防务:中船防务H股公告-股份发行人的证券变动月报表",
+      "raw": {
+        "art_code": "AN202605071822032415",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-05-07 17:33:15:926",
+        "eiTime": "2026-05-07 17:32:49:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-08 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-08 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务H股公告-股份发行人的证券变动月报表",
+        "title_ch": "中船防务:中船防务H股公告-股份发行人的证券变动月报表",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202605071822032415.html",
+      "published_at": "2026-05-08 00:00:00"
+    },
+    {
+      "id": "cac938f6c630a318",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-01 中船防务:中船防务关于召开2025年年度股东会的通知",
+      "raw": {
+        "art_code": "AN202604301821865432",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003001002",
+            "column_name": "召开股东大会通知"
+          }
+        ],
+        "display_time": "2026-04-30 20:36:52:569",
+        "eiTime": "2026-04-30 20:36:14:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-01 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务关于召开2025年年度股东会的通知",
+        "title_ch": "中船防务:中船防务关于召开2025年年度股东会的通知",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604301821865432.html",
+      "published_at": "2026-05-01 00:00:00"
+    },
+    {
+      "id": "a136135d18a170ab",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-01 中船防务:中船防务2025年年度股东会会议资料",
+      "raw": {
+        "art_code": "AN202604301821865337",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003004002",
+            "column_name": "股东大会资料"
+          }
+        ],
+        "display_time": "2026-04-30 20:35:34:671",
+        "eiTime": "2026-04-30 20:34:56:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-01 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2025年年度股东会会议资料",
+        "title_ch": "中船防务:中船防务2025年年度股东会会议资料",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604301821865337.html",
+      "published_at": "2026-05-01 00:00:00"
+    },
+    {
+      "id": "389c3db571e06e41",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中船防务:中船防务第十一届董事会第二十次会议决议公告",
+      "raw": {
+        "art_code": "AN202604291821753866",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-04-29 17:56:01:166",
+        "eiTime": "2026-04-29 17:55:32:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务第十一届董事会第二十次会议决议公告",
+        "title_ch": "中船防务:中船防务第十一届董事会第二十次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604291821753866.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "acaefc4b182c3d3b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中船防务:中船防务关于子公司提供担保的进展公告",
+      "raw": {
+        "art_code": "AN202604291821753860",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006011003",
+            "column_name": "提供/对外担保公告"
+          }
+        ],
+        "display_time": "2026-04-29 17:56:01:158",
+        "eiTime": "2026-04-29 17:55:32:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务关于子公司提供担保的进展公告",
+        "title_ch": "中船防务:中船防务关于子公司提供担保的进展公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604291821753860.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "94f5e55299675f2c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中船防务:中船防务关于公司董事、高级管理人员2026年度薪酬方案的公告",
+      "raw": {
+        "art_code": "AN202604291821753865",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-29 17:56:01:182",
+        "eiTime": "2026-04-29 17:55:32:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务关于公司董事、高级管理人员2026年度薪酬方案的公告",
+        "title_ch": "中船防务:中船防务关于公司董事、高级管理人员2026年度薪酬方案的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604291821753865.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "901c7935239153a7",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中船防务:中船防务2026年度“提质增效重回报”行动方案",
+      "raw": {
+        "art_code": "AN202604291821753861",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-29 17:56:01:166",
+        "eiTime": "2026-04-29 17:55:32:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2026年度“提质增效重回报”行动方案",
+        "title_ch": "中船防务:中船防务2026年度“提质增效重回报”行动方案",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604291821753861.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "ca7a7ef2267d5509",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中船防务:中船防务董事、高级管理人员薪酬管理规定",
+      "raw": {
+        "art_code": "AN202604291821753867",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003002",
+            "column_name": "议事规则/实施细则"
+          }
+        ],
+        "display_time": "2026-04-29 17:56:01:159",
+        "eiTime": "2026-04-29 17:55:32:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务董事、高级管理人员薪酬管理规定",
+        "title_ch": "中船防务:中船防务董事、高级管理人员薪酬管理规定",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604291821753867.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "92fd0ef6e62bfc55",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中船防务:中船防务2026年第一季度报告",
+      "raw": {
+        "art_code": "AN202604291821753864",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "44759213274245",
+            "market_code": "1",
+            "short_name": "中船防务",
+            "stock_code": "600685"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001003001",
+            "column_name": "一季度报告全文"
+          }
+        ],
+        "display_time": "2026-04-29 17:55:28:242",
+        "eiTime": "2026-04-29 17:55:00:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中船防务:中船防务2026年第一季度报告",
+        "title_ch": "中船防务:中船防务2026年第一季度报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600685/AN202604291821753864.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "00018d3d9a788ae4",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 600685，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=600685&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:01",
+      "url": "https://so.eastmoney.com/news/s?keyword=600685&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "aed3f0ad12e5d638",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 600685，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600685",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:02",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600685",
+      "coverage_only": true
+    }
+  ]
+}

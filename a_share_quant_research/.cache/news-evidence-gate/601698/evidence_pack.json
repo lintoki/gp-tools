@@ -1,0 +1,1076 @@
+{
+  "ticker_or_query": "601698",
+  "market": "A",
+  "audit_time": "2026-07-12T23:33:02",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "BLOCK",
+  "coverage_score": 37,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "covered",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "not_checked",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "f828df68ecbac23d",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 中国卫通:中国卫通集团股份有限公司2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202606171823637872",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-06-17 18:29:20:573",
+        "eiTime": "2026-06-17 18:30:20:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司2025年年度权益分派实施公告",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202606171823637872.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "04900eeae8c8fe3c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通集团股份有限公司董事会关于会计政策变更的说明",
+      "raw": {
+        "art_code": "AN202603311820921994",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001001003",
+            "column_name": "专项说明/独立意见"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:365",
+        "eiTime": "2026-03-31 19:18:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司董事会关于会计政策变更的说明",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司董事会关于会计政策变更的说明",
+        "title_en": ""
+      },
+      "event_categories": [
+        "industry_policy"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921994.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "21a0eda01f0bd17b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通集团股份有限公司2025年内部控制审计报告",
+      "raw": {
+        "art_code": "AN202603311820921988",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          },
+          {
+            "column_code": "001003003004",
+            "column_name": "内部控制报告"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:379",
+        "eiTime": "2026-03-31 19:18:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司2025年内部控制审计报告",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司2025年内部控制审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921988.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "6609306dcd1e2fa8",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通关于会计政策变更的公告",
+      "raw": {
+        "art_code": "AN202603311820921990",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:366",
+        "eiTime": "2026-03-31 19:16:23:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通关于会计政策变更的公告",
+        "title_ch": "中国卫通:中国卫通关于会计政策变更的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "industry_policy"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921990.html",
+      "published_at": "2026-04-01 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "price_volume:sina_quote empty",
+    "price_volume:eastmoney_kline failed: urlopen failed: [SSL] record layer failure (_ssl.c:2580); curl fallback failed code=56: curl: (56) schannel: failed to read data from server: SEC_E_DECRYPT_FAILURE (0x80090330) - 无法解密指定的数据。\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "52ffe80e0695c3d9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-01 中国卫通:中国卫通第三届董事会第三十一次会议决议公告",
+      "raw": {
+        "art_code": "AN202606301826590981",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-06-30 17:09:00:891",
+        "eiTime": "2026-06-30 17:10:01:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通第三届董事会第三十一次会议决议公告",
+        "title_ch": "中国卫通:中国卫通第三届董事会第三十一次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202606301826590981.html",
+      "published_at": "2026-07-01 00:00:00"
+    },
+    {
+      "id": "f828df68ecbac23d",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 中国卫通:中国卫通集团股份有限公司2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202606171823637872",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-06-17 18:29:20:573",
+        "eiTime": "2026-06-17 18:30:20:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司2025年年度权益分派实施公告",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202606171823637872.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "227abda129a7b04d",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-06 中国卫通:中国卫通2025年年度股东会法律意见书",
+      "raw": {
+        "art_code": "AN202606051823299857",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-06-05 18:50:00:935",
+        "eiTime": "2026-06-05 18:52:27:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-06 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-06 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通2025年年度股东会法律意见书",
+        "title_ch": "中国卫通:中国卫通2025年年度股东会法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202606051823299857.html",
+      "published_at": "2026-06-06 00:00:00"
+    },
+    {
+      "id": "ff0ab0397d8008bf",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-06 中国卫通:中国卫通2025年年度股东会决议公告",
+      "raw": {
+        "art_code": "AN202606051823299856",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001004",
+            "column_name": "分配方案决议公告"
+          },
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          }
+        ],
+        "display_time": "2026-06-05 18:50:00:934",
+        "eiTime": "2026-06-05 18:50:31:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-06 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-06 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通2025年年度股东会决议公告",
+        "title_ch": "中国卫通:中国卫通2025年年度股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202606051823299856.html",
+      "published_at": "2026-06-06 00:00:00"
+    },
+    {
+      "id": "49104ac696b1aae1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-22 中国卫通:中国卫通2025年年度股东会资料",
+      "raw": {
+        "art_code": "AN202605211822642141",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003004002",
+            "column_name": "股东大会资料"
+          }
+        ],
+        "display_time": "2026-05-21 15:42:37:348",
+        "eiTime": "2026-05-21 15:43:17:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-22 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-22 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通2025年年度股东会资料",
+        "title_ch": "中国卫通:中国卫通2025年年度股东会资料",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202605211822642141.html",
+      "published_at": "2026-05-22 00:00:00"
+    },
+    {
+      "id": "fbb7dec5cc7b5125",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-16 中国卫通:中国卫通关于召开2025年年度股东会的通知",
+      "raw": {
+        "art_code": "AN202605151822347147",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003001002",
+            "column_name": "召开股东大会通知"
+          }
+        ],
+        "display_time": "2026-05-15 16:52:35:542",
+        "eiTime": "2026-05-15 16:53:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-16 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-16 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通关于召开2025年年度股东会的通知",
+        "title_ch": "中国卫通:中国卫通关于召开2025年年度股东会的通知",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202605151822347147.html",
+      "published_at": "2026-05-16 00:00:00"
+    },
+    {
+      "id": "6f8e6bb17d1842f9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-16 中国卫通:中国卫通关于召开2025年度暨2026年第一季度业绩说明会的公告",
+      "raw": {
+        "art_code": "AN202605151822347148",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-05-15 16:52:35:496",
+        "eiTime": "2026-05-15 16:53:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-16 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-16 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通关于召开2025年度暨2026年第一季度业绩说明会的公告",
+        "title_ch": "中国卫通:中国卫通关于召开2025年度暨2026年第一季度业绩说明会的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202605151822347148.html",
+      "published_at": "2026-05-16 00:00:00"
+    },
+    {
+      "id": "33e038285f57cab5",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中国卫通:中国卫通关于2026年度董事薪酬方案的公告",
+      "raw": {
+        "art_code": "AN202604291821742819",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-29 16:30:37:508",
+        "eiTime": "2026-04-29 16:31:38:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通关于2026年度董事薪酬方案的公告",
+        "title_ch": "中国卫通:中国卫通关于2026年度董事薪酬方案的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202604291821742819.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "315242751ad504e9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中国卫通:中国卫通第三届董事会第三十次会议决议公告",
+      "raw": {
+        "art_code": "AN202604291821742821",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-04-29 16:30:37:405",
+        "eiTime": "2026-04-29 16:31:38:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通第三届董事会第三十次会议决议公告",
+        "title_ch": "中国卫通:中国卫通第三届董事会第三十次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202604291821742821.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "df6eb4e69cf30b8c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中国卫通:中国卫通董事、高级管理人员薪酬管理办法",
+      "raw": {
+        "art_code": "AN202604291821742822",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-04-29 16:30:37:438",
+        "eiTime": "2026-04-29 16:31:38:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通董事、高级管理人员薪酬管理办法",
+        "title_ch": "中国卫通:中国卫通董事、高级管理人员薪酬管理办法",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202604291821742822.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "0bbf6391ac7902aa",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 中国卫通:中国卫通2026年第一季度报告",
+      "raw": {
+        "art_code": "AN202604291821742818",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001003001",
+            "column_name": "一季度报告全文"
+          }
+        ],
+        "display_time": "2026-04-29 16:30:37:404",
+        "eiTime": "2026-04-29 16:31:08:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通2026年第一季度报告",
+        "title_ch": "中国卫通:中国卫通2026年第一季度报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202604291821742818.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "de4c45e45e054da6",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-03 中国卫通:关于公司控股股东公开发行可交换公司债券摘牌完成暨拟办理解除可交换公司债券担保及信托登记的提示性公告",
+      "raw": {
+        "art_code": "AN202604021820988239",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006011099",
+            "column_name": "其他担保公告"
+          }
+        ],
+        "display_time": "2026-04-02 19:30:21:346",
+        "eiTime": "2026-04-02 19:31:27:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-03 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:关于公司控股股东公开发行可交换公司债券摘牌完成暨拟办理解除可交换公司债券担保及信托登记的提示性公告",
+        "title_ch": "中国卫通:关于公司控股股东公开发行可交换公司债券摘牌完成暨拟办理解除可交换公司债券担保及信托登记的提示性公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202604021820988239.html",
+      "published_at": "2026-04-03 00:00:00"
+    },
+    {
+      "id": "04900eeae8c8fe3c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通集团股份有限公司董事会关于会计政策变更的说明",
+      "raw": {
+        "art_code": "AN202603311820921994",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001001003",
+            "column_name": "专项说明/独立意见"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:365",
+        "eiTime": "2026-03-31 19:18:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司董事会关于会计政策变更的说明",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司董事会关于会计政策变更的说明",
+        "title_en": ""
+      },
+      "event_categories": [
+        "industry_policy"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921994.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "2bd99d3d47a7bbd2",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:立信会计师事务所(特殊普通合伙)关于中国卫通涉及财务公司关联交易的专项说明",
+      "raw": {
+        "art_code": "AN202603311820921986",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002001",
+            "column_name": "保荐/核查意见"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:386",
+        "eiTime": "2026-03-31 19:15:59:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:立信会计师事务所(特殊普通合伙)关于中国卫通涉及财务公司关联交易的专项说明",
+        "title_ch": "中国卫通:立信会计师事务所(特殊普通合伙)关于中国卫通涉及财务公司关联交易的专项说明",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921986.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "4c3d6cb1f75fbe38",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通集团股份有限公司对会计师事务所2025年度履职情况评估及履行监督职责情况的报告",
+      "raw": {
+        "art_code": "AN202603311820922006",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:430",
+        "eiTime": "2026-03-31 19:16:23:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司对会计师事务所2025年度履职情况评估及履行监督职责情况的报告",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司对会计师事务所2025年度履职情况评估及履行监督职责情况的报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820922006.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "6e759b4b7a8c33f1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:立信会计师事务所(特殊普通合伙)关于中国卫通集团股份有限公司非经营性资金占用及其他关联资金往来情况汇总表的专项说明",
+      "raw": {
+        "art_code": "AN202603311820921999",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001001003",
+            "column_name": "专项说明/独立意见"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:394",
+        "eiTime": "2026-03-31 19:16:23:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:立信会计师事务所(特殊普通合伙)关于中国卫通集团股份有限公司非经营性资金占用及其他关联资金往来情况汇总表的专项说明",
+        "title_ch": "中国卫通:立信会计师事务所(特殊普通合伙)关于中国卫通集团股份有限公司非经营性资金占用及其他关联资金往来情况汇总表的专项说明",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921999.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "f8afa518d1c790f8",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通集团股份有限公司独立董事2025年度述职报告(李明高)",
+      "raw": {
+        "art_code": "AN202603311820922007",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003001001004",
+            "column_name": "独立董事述职报告"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:366",
+        "eiTime": "2026-03-31 19:15:59:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司独立董事2025年度述职报告(李明高)",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司独立董事2025年度述职报告(李明高)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820922007.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "21a0eda01f0bd17b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通集团股份有限公司2025年内部控制审计报告",
+      "raw": {
+        "art_code": "AN202603311820921988",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          },
+          {
+            "column_code": "001003003004",
+            "column_name": "内部控制报告"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:379",
+        "eiTime": "2026-03-31 19:18:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司2025年内部控制审计报告",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司2025年内部控制审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921988.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "5e1dac1b37cf786a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通集团股份有限公司2025年年度报告",
+      "raw": {
+        "art_code": "AN202603311820921980",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001001001",
+            "column_name": "年度报告全文"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:387",
+        "eiTime": "2026-03-31 19:16:03:000",
+        "financial_report": {
+          "android_url": "dfcft://router/h5?url=https%3A%2F%2Femh5.eastmoney.com%2Fextend%2Findex.html%3Ffc%3D601698%26fn%3D%E4%B8%AD%E5%9B%BD%E5%8D%AB%E9%80%9A%26reportDate%3D2025-12-31%26reportType%3D2025%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A%26color%3Dw%23%2FHS_VFR",
+          "ios_url": "eastmoney://wireless/h5/trade?url=https%3A%2F%2Femh5.eastmoney.com%2Fextend%2Findex.html%3Ffc%3D601698%26fn%3D%E4%B8%AD%E5%9B%BD%E5%8D%AB%E9%80%9A%26reportDate%3D2025-12-31%26reportType%3D2025%E5%B9%B4%E5%BA%A6%E6%8A%A5%E5%91%8A%26color%3Dw%23%2FHS_VFR",
+          "title": "一张图读懂2025年度报告"
+        },
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通集团股份有限公司2025年年度报告",
+        "title_ch": "中国卫通:中国卫通集团股份有限公司2025年年度报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921980.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "6609306dcd1e2fa8",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-01 中国卫通:中国卫通关于会计政策变更的公告",
+      "raw": {
+        "art_code": "AN202603311820921990",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "28590370851819",
+            "market_code": "1",
+            "short_name": "中国卫通",
+            "stock_code": "601698"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-03-31 19:15:51:366",
+        "eiTime": "2026-03-31 19:16:23:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-01 12:00:00",
+        "source_type": "31",
+        "title": "中国卫通:中国卫通关于会计政策变更的公告",
+        "title_ch": "中国卫通:中国卫通关于会计政策变更的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "industry_policy"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/601698/AN202603311820921990.html",
+      "published_at": "2026-04-01 00:00:00"
+    },
+    {
+      "id": "e731e1ba8605f787",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 601698，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=601698&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:00",
+      "url": "https://so.eastmoney.com/news/s?keyword=601698&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "b0052573d8a0f15b",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 601698，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=601698",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:02",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=601698",
+      "coverage_only": true
+    }
+  ]
+}

@@ -1,0 +1,983 @@
+{
+  "ticker_or_query": "600118",
+  "market": "A",
+  "audit_time": "2026-07-12T23:33:03",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "BLOCK",
+  "coverage_score": 37,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "not_checked",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "905a5c39ae679bee",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-13 中国卫星:中国卫星2026年半年度业绩预告",
+      "raw": {
+        "art_code": "AN202607121826910785",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-07-12 15:30:50:717",
+        "eiTime": "2026-07-12 15:31:53:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-13 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-13 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2026年半年度业绩预告",
+        "title_ch": "中国卫星:中国卫星2026年半年度业绩预告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202607121826910785.html",
+      "published_at": "2026-07-13 00:00:00"
+    },
+    {
+      "id": "1515132eed94ee35",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-19 中国卫星:中国卫星股东减持股份计划公告",
+      "raw": {
+        "art_code": "AN202605181822402023",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-05-18 18:27:25:361",
+        "eiTime": "2026-05-18 18:28:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-19 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-19 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星股东减持股份计划公告",
+        "title_ch": "中国卫星:中国卫星股东减持股份计划公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202605181822402023.html",
+      "published_at": "2026-05-19 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "price_volume:sina_quote empty",
+    "price_volume:eastmoney_kline failed: urlopen failed: [SSL] record layer failure (_ssl.c:2580); curl fallback failed code=56: curl: (56) schannel: failed to read data from server: SEC_E_DECRYPT_FAILURE (0x80090330) - 无法解密指定的数据。\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "905a5c39ae679bee",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-13 中国卫星:中国卫星2026年半年度业绩预告",
+      "raw": {
+        "art_code": "AN202607121826910785",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-07-12 15:30:50:717",
+        "eiTime": "2026-07-12 15:31:53:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-13 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-13 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2026年半年度业绩预告",
+        "title_ch": "中国卫星:中国卫星2026年半年度业绩预告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202607121826910785.html",
+      "published_at": "2026-07-13 00:00:00"
+    },
+    {
+      "id": "fe5904db45798ea5",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-27 中国卫星:中国卫星第十届董事会第六次会议决议公告",
+      "raw": {
+        "art_code": "AN202606261824690246",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-06-26 18:10:27:215",
+        "eiTime": "2026-06-26 18:11:21:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-27 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星第十届董事会第六次会议决议公告",
+        "title_ch": "中国卫星:中国卫星第十届董事会第六次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202606261824690246.html",
+      "published_at": "2026-06-27 00:00:00"
+    },
+    {
+      "id": "4c32602bb402517d",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-27 中国卫星:中国卫星关于全资子公司航天东方红卫星有限公司放弃参股公司增资优先认缴权暨关联交易的公告",
+      "raw": {
+        "art_code": "AN202606261824690084",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006012001002",
+            "column_name": "增资扩股"
+          },
+          {
+            "column_code": "001002007005",
+            "column_name": "关联交易"
+          }
+        ],
+        "display_time": "2026-06-26 18:10:20:883",
+        "eiTime": "2026-06-26 18:11:13:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-27 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星关于全资子公司航天东方红卫星有限公司放弃参股公司增资优先认缴权暨关联交易的公告",
+        "title_ch": "中国卫星:中国卫星关于全资子公司航天东方红卫星有限公司放弃参股公司增资优先认缴权暨关联交易的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202606261824690084.html",
+      "published_at": "2026-06-27 00:00:00"
+    },
+    {
+      "id": "04cb233a679178ad",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-01 中国卫星:中国东方红卫星股份有限公司2025年度暨2026年第一季度业绩说明会投资者关系活动记录表",
+      "raw": {
+        "art_code": "AN202606011823125385",
+        "codes": [
+          {
+            "ann_type": "INV",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "050003",
+            "column_name": "调研活动"
+          }
+        ],
+        "display_time": "2026-06-01 16:17:06:476",
+        "eiTime": "2026-06-01 16:16:30:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-01 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-01 12:00:00",
+        "source_type": "311",
+        "title": "中国卫星:中国东方红卫星股份有限公司2025年度暨2026年第一季度业绩说明会投资者关系活动记录表",
+        "title_ch": "中国卫星:中国东方红卫星股份有限公司2025年度暨2026年第一季度业绩说明会投资者关系活动记录表",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202606011823125385.html",
+      "published_at": "2026-06-01 00:00:00"
+    },
+    {
+      "id": "9a34c86ab65e2ee5",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-28 中国卫星:中国卫星2025年年度股东会决议公告",
+      "raw": {
+        "art_code": "AN202605271822918510",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001004",
+            "column_name": "分配方案决议公告"
+          },
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          }
+        ],
+        "display_time": "2026-05-27 18:45:11:222",
+        "eiTime": "2026-05-27 18:45:40:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-28 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2025年年度股东会决议公告",
+        "title_ch": "中国卫星:中国卫星2025年年度股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202605271822918510.html",
+      "published_at": "2026-05-28 00:00:00"
+    },
+    {
+      "id": "d50d0eb5faaa4e7a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-28 中国卫星:北京市天元律师事务所关于中国东方红卫星股份有限公司2025年年度股东会的法律意见",
+      "raw": {
+        "art_code": "AN202605271822918509",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-05-27 18:45:11:178",
+        "eiTime": "2026-05-27 18:46:09:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-28 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:北京市天元律师事务所关于中国东方红卫星股份有限公司2025年年度股东会的法律意见",
+        "title_ch": "中国卫星:北京市天元律师事务所关于中国东方红卫星股份有限公司2025年年度股东会的法律意见",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202605271822918509.html",
+      "published_at": "2026-05-28 00:00:00"
+    },
+    {
+      "id": "1515132eed94ee35",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-19 中国卫星:中国卫星股东减持股份计划公告",
+      "raw": {
+        "art_code": "AN202605181822402023",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007004003",
+            "column_name": "股东/实际控制人股份减持"
+          }
+        ],
+        "display_time": "2026-05-18 18:27:25:361",
+        "eiTime": "2026-05-18 18:28:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-19 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-19 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星股东减持股份计划公告",
+        "title_ch": "中国卫星:中国卫星股东减持股份计划公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202605181822402023.html",
+      "published_at": "2026-05-19 00:00:00"
+    },
+    {
+      "id": "edb187dbba862039",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-19 中国卫星:中国东方红卫星股份有限公司2025年度暨2026年第一季度业绩说明会的公告",
+      "raw": {
+        "art_code": "AN202605181822395135",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-05-18 15:35:12:243",
+        "eiTime": "2026-05-18 15:36:17:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-19 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-19 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国东方红卫星股份有限公司2025年度暨2026年第一季度业绩说明会的公告",
+        "title_ch": "中国卫星:中国东方红卫星股份有限公司2025年度暨2026年第一季度业绩说明会的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202605181822395135.html",
+      "published_at": "2026-05-19 00:00:00"
+    },
+    {
+      "id": "b6c2d87598d9ad52",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-14 中国卫星:中国卫星2025年年度股东会资料",
+      "raw": {
+        "art_code": "AN202605131822267926",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003004002",
+            "column_name": "股东大会资料"
+          }
+        ],
+        "display_time": "2026-05-13 16:11:15:375",
+        "eiTime": "2026-05-13 16:12:00:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-14 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-14 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2025年年度股东会资料",
+        "title_ch": "中国卫星:中国卫星2025年年度股东会资料",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202605131822267926.html",
+      "published_at": "2026-05-14 00:00:00"
+    },
+    {
+      "id": "8b7ab2a1ffcd7f4e",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-22 中国卫星:中国卫星2026年度“提质增效重回报”行动方案",
+      "raw": {
+        "art_code": "AN202604211821395620",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-21 21:21:26:218",
+        "eiTime": "2026-04-21 21:22:19:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-22 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-22 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2026年度“提质增效重回报”行动方案",
+        "title_ch": "中国卫星:中国卫星2026年度“提质增效重回报”行动方案",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604211821395620.html",
+      "published_at": "2026-04-22 00:00:00"
+    },
+    {
+      "id": "9f246e3dcbe81960",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-22 中国卫星:中国卫星关于2026年度董事、高级管理人员薪酬方案的公告",
+      "raw": {
+        "art_code": "AN202604211821395616",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-21 21:21:20:670",
+        "eiTime": "2026-04-21 21:22:19:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-22 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-22 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星关于2026年度董事、高级管理人员薪酬方案的公告",
+        "title_ch": "中国卫星:中国卫星关于2026年度董事、高级管理人员薪酬方案的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604211821395616.html",
+      "published_at": "2026-04-22 00:00:00"
+    },
+    {
+      "id": "c5928a51c9416d2c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-22 中国卫星:中国卫星第十届董事会第五次会议决议公告",
+      "raw": {
+        "art_code": "AN202604211821395615",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-04-21 21:21:20:626",
+        "eiTime": "2026-04-21 21:21:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-22 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-22 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星第十届董事会第五次会议决议公告",
+        "title_ch": "中国卫星:中国卫星第十届董事会第五次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604211821395615.html",
+      "published_at": "2026-04-22 00:00:00"
+    },
+    {
+      "id": "529db733fe0613a8",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-22 中国卫星:中国卫星2026年第一季度报告",
+      "raw": {
+        "art_code": "AN202604211821395619",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001003001",
+            "column_name": "一季度报告全文"
+          }
+        ],
+        "display_time": "2026-04-21 21:21:20:598",
+        "eiTime": "2026-04-21 21:21:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-22 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-22 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2026年第一季度报告",
+        "title_ch": "中国卫星:中国卫星2026年第一季度报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604211821395619.html",
+      "published_at": "2026-04-22 00:00:00"
+    },
+    {
+      "id": "715367b8128f1f9b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-22 中国卫星:中国卫星关于召开2025年年度股东会的通知",
+      "raw": {
+        "art_code": "AN202604211821395618",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003001002",
+            "column_name": "召开股东大会通知"
+          }
+        ],
+        "display_time": "2026-04-21 21:21:20:576",
+        "eiTime": "2026-04-21 21:21:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-22 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-22 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星关于召开2025年年度股东会的通知",
+        "title_ch": "中国卫星:中国卫星关于召开2025年年度股东会的通知",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604211821395618.html",
+      "published_at": "2026-04-22 00:00:00"
+    },
+    {
+      "id": "41ffebe7b05a07cf",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-22 中国卫星:中国卫星董事、高级管理人员薪酬管理办法",
+      "raw": {
+        "art_code": "AN202604211821395617",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-04-21 21:21:20:526",
+        "eiTime": "2026-04-21 21:21:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-22 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-22 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星董事、高级管理人员薪酬管理办法",
+        "title_ch": "中国卫星:中国卫星董事、高级管理人员薪酬管理办法",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604211821395617.html",
+      "published_at": "2026-04-22 00:00:00"
+    },
+    {
+      "id": "c3ac418015eb0d06",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-16 中国卫星:中国卫星第十届董事会第四次会议决议公告",
+      "raw": {
+        "art_code": "AN202604151821234801",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005002",
+            "column_name": "高管人员任职变动"
+          },
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-04-15 15:32:54:348",
+        "eiTime": "2026-04-15 15:33:47:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-16 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-16 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星第十届董事会第四次会议决议公告",
+        "title_ch": "中国卫星:中国卫星第十届董事会第四次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604151821234801.html",
+      "published_at": "2026-04-16 00:00:00"
+    },
+    {
+      "id": "9c63dac89c176f37",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-16 中国卫星:中国卫星关于聘任董事会秘书的公告",
+      "raw": {
+        "art_code": "AN202604151821234798",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005002",
+            "column_name": "高管人员任职变动"
+          }
+        ],
+        "display_time": "2026-04-15 15:32:54:332",
+        "eiTime": "2026-04-15 15:33:47:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-16 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-16 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星关于聘任董事会秘书的公告",
+        "title_ch": "中国卫星:中国卫星关于聘任董事会秘书的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202604151821234798.html",
+      "published_at": "2026-04-16 00:00:00"
+    },
+    {
+      "id": "adb9253897f26573",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-03-31 中国卫星:中国卫星2026年日常经营性关联交易公告",
+      "raw": {
+        "art_code": "AN202603301820863342",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007005",
+            "column_name": "关联交易"
+          }
+        ],
+        "display_time": "2026-03-30 18:25:17:307",
+        "eiTime": "2026-03-30 18:25:51:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-03-31 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-03-31 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2026年日常经营性关联交易公告",
+        "title_ch": "中国卫星:中国卫星2026年日常经营性关联交易公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202603301820863342.html",
+      "published_at": "2026-03-31 00:00:00"
+    },
+    {
+      "id": "d4fd5f480ecb801a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-03-31 中国卫星:中国卫星2025年年度报告摘要",
+      "raw": {
+        "art_code": "AN202603301820863328",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001001001001002",
+            "column_name": "年度报告摘要"
+          }
+        ],
+        "display_time": "2026-03-30 18:25:17:213",
+        "eiTime": "2026-03-30 18:25:51:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-03-31 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-03-31 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星2025年年度报告摘要",
+        "title_ch": "中国卫星:中国卫星2025年年度报告摘要",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202603301820863328.html",
+      "published_at": "2026-03-31 00:00:00"
+    },
+    {
+      "id": "fd317554fcb0376c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-03-31 中国卫星:中国卫星关于对航天科技财务有限责任公司风险评估报告的公告",
+      "raw": {
+        "art_code": "AN202603301820863345",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "22342354636469",
+            "market_code": "1",
+            "short_name": "中国卫星",
+            "stock_code": "600118"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-03-30 18:25:12:471",
+        "eiTime": "2026-03-30 18:25:51:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-03-31 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-03-31 12:00:00",
+        "source_type": "31",
+        "title": "中国卫星:中国卫星关于对航天科技财务有限责任公司风险评估报告的公告",
+        "title_ch": "中国卫星:中国卫星关于对航天科技财务有限责任公司风险评估报告的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:39",
+      "url": "https://data.eastmoney.com/notices/detail/600118/AN202603301820863345.html",
+      "published_at": "2026-03-31 00:00:00"
+    },
+    {
+      "id": "1cc610091fde44d3",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 600118，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=600118&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:01",
+      "url": "https://so.eastmoney.com/news/s?keyword=600118&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "a8e9de63bf57ef7d",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 600118，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600118",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:03",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600118",
+      "coverage_only": true
+    }
+  ]
+}

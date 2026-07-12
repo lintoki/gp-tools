@@ -1,0 +1,1087 @@
+{
+  "ticker_or_query": "600879",
+  "market": "A",
+  "audit_time": "2026-07-12T23:33:04",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "BLOCK",
+  "coverage_score": 37,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "not_checked",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "fd6f48d4e7982e5f",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-04 航天电子:航天时代电子技术股份有限公司2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202607031826694912",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-07-03 16:01:47:253",
+        "eiTime": "2026-07-03 16:02:31:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-04 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-04 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司2025年年度权益分派实施公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202607031826694912.html",
+      "published_at": "2026-07-04 00:00:00"
+    },
+    {
+      "id": "589c4887fdbbe682",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 航天电子:陕西航天时代导航设备有限公司专项审计报告",
+      "raw": {
+        "art_code": "AN202606171823632882",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002001",
+            "column_name": "保荐/核查意见"
+          }
+        ],
+        "display_time": "2026-06-17 16:43:25:563",
+        "eiTime": "2026-06-17 16:46:30:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:陕西航天时代导航设备有限公司专项审计报告",
+        "title_ch": "航天电子:陕西航天时代导航设备有限公司专项审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606171823632882.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "629720afe5fb8b56",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 航天电子:航天电子关于陕西航天时代导航设备有限公司将惯性导航机械式平台相关资产重组至陕西航天导航设备有限公司的关联交易公告",
+      "raw": {
+        "art_code": "AN202606171823632888",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007005",
+            "column_name": "关联交易"
+          }
+        ],
+        "display_time": "2026-06-17 16:43:25:477",
+        "eiTime": "2026-06-17 16:44:29:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天电子关于陕西航天时代导航设备有限公司将惯性导航机械式平台相关资产重组至陕西航天导航设备有限公司的关联交易公告",
+        "title_ch": "航天电子:航天电子关于陕西航天时代导航设备有限公司将惯性导航机械式平台相关资产重组至陕西航天导航设备有限公司的关联交易公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "ma_restructuring"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606171823632888.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "0b8e9415515db6bc",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-27 航天电子:航天时代低空科技有限公司专项审计报告(上网)",
+      "raw": {
+        "art_code": "AN202605261822884566",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002001",
+            "column_name": "保荐/核查意见"
+          },
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          }
+        ],
+        "display_time": "2026-05-26 18:09:44:462",
+        "eiTime": "2026-05-26 18:10:02:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-27 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代低空科技有限公司专项审计报告(上网)",
+        "title_ch": "航天电子:航天时代低空科技有限公司专项审计报告(上网)",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202605261822884566.html",
+      "published_at": "2026-05-27 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "price_volume:sina_quote empty",
+    "price_volume:eastmoney_kline failed: urlopen failed: [SSL] record layer failure (_ssl.c:2580); curl fallback failed code=56: curl: (56) schannel: failed to read data from server: SEC_E_DECRYPT_FAILURE (0x80090330) - 无法解密指定的数据。\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "f6952f5ac8c0fcee",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-10 航天电子:航天时代电子技术股份有限公司投资者关系活动记录表20260709",
+      "raw": {
+        "art_code": "AN202607101826873868",
+        "codes": [
+          {
+            "ann_type": "INV",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "050003",
+            "column_name": "调研活动"
+          }
+        ],
+        "display_time": "2026-07-10 16:29:12:725",
+        "eiTime": "2026-07-10 16:28:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-10 12:00:00",
+        "source_type": "311",
+        "title": "航天电子:航天时代电子技术股份有限公司投资者关系活动记录表20260709",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司投资者关系活动记录表20260709",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202607101826873868.html",
+      "published_at": "2026-07-10 00:00:00"
+    },
+    {
+      "id": "fd6f48d4e7982e5f",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-04 航天电子:航天时代电子技术股份有限公司2025年年度权益分派实施公告",
+      "raw": {
+        "art_code": "AN202607031826694912",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001005",
+            "column_name": "分配方案实施"
+          }
+        ],
+        "display_time": "2026-07-03 16:01:47:253",
+        "eiTime": "2026-07-03 16:02:31:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-04 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-04 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司2025年年度权益分派实施公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司2025年年度权益分派实施公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "dividend"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202607031826694912.html",
+      "published_at": "2026-07-04 00:00:00"
+    },
+    {
+      "id": "9e87a63774261be7",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-23 航天电子:航天时代电子技术股份有限公司关于2026年度第二期超短期融资券完成发行的公告",
+      "raw": {
+        "art_code": "AN202606221823737116",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          },
+          {
+            "column_code": "003006002009002",
+            "column_name": "一般债券发行公告"
+          }
+        ],
+        "display_time": "2026-06-22 16:16:31:300",
+        "eiTime": "2026-06-22 16:17:27:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-23 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司关于2026年度第二期超短期融资券完成发行的公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司关于2026年度第二期超短期融资券完成发行的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606221823737116.html",
+      "published_at": "2026-06-23 00:00:00"
+    },
+    {
+      "id": "b39ff3d50643c639",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 航天电子:航天时代电子技术股份有限公司董事会2026年第六次会议决议公告",
+      "raw": {
+        "art_code": "AN202606171823632886",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005002",
+            "column_name": "高管人员任职变动"
+          },
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-06-17 16:43:25:578",
+        "eiTime": "2026-06-17 16:44:29:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司董事会2026年第六次会议决议公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司董事会2026年第六次会议决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606171823632886.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "589c4887fdbbe682",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 航天电子:陕西航天时代导航设备有限公司专项审计报告",
+      "raw": {
+        "art_code": "AN202606171823632882",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002001",
+            "column_name": "保荐/核查意见"
+          }
+        ],
+        "display_time": "2026-06-17 16:43:25:563",
+        "eiTime": "2026-06-17 16:46:30:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:陕西航天时代导航设备有限公司专项审计报告",
+        "title_ch": "航天电子:陕西航天时代导航设备有限公司专项审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606171823632882.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "6bd5e6a65e5b97a9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 航天电子:航天时代电子技术股份有限公司关于公司董事会完成换届选举暨聘任高级管理人员及证券事务代表的公告",
+      "raw": {
+        "art_code": "AN202606171823632885",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002005002",
+            "column_name": "高管人员任职变动"
+          }
+        ],
+        "display_time": "2026-06-17 16:43:25:563",
+        "eiTime": "2026-06-17 16:43:53:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司关于公司董事会完成换届选举暨聘任高级管理人员及证券事务代表的公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司关于公司董事会完成换届选举暨聘任高级管理人员及证券事务代表的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606171823632885.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "4cd33516dcf8c499",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 航天电子:陕西航天时代导航设备有限公司惯性导航机械式平台资产评估报告",
+      "raw": {
+        "art_code": "AN202606171823632884",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-06-17 16:43:25:563",
+        "eiTime": "2026-06-17 16:46:30:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:陕西航天时代导航设备有限公司惯性导航机械式平台资产评估报告",
+        "title_ch": "航天电子:陕西航天时代导航设备有限公司惯性导航机械式平台资产评估报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606171823632884.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "629720afe5fb8b56",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-18 航天电子:航天电子关于陕西航天时代导航设备有限公司将惯性导航机械式平台相关资产重组至陕西航天导航设备有限公司的关联交易公告",
+      "raw": {
+        "art_code": "AN202606171823632888",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002007005",
+            "column_name": "关联交易"
+          }
+        ],
+        "display_time": "2026-06-17 16:43:25:477",
+        "eiTime": "2026-06-17 16:44:29:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-18 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-18 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天电子关于陕西航天时代导航设备有限公司将惯性导航机械式平台相关资产重组至陕西航天导航设备有限公司的关联交易公告",
+        "title_ch": "航天电子:航天电子关于陕西航天时代导航设备有限公司将惯性导航机械式平台相关资产重组至陕西航天导航设备有限公司的关联交易公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "ma_restructuring"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606171823632888.html",
+      "published_at": "2026-06-18 00:00:00"
+    },
+    {
+      "id": "b37b427279b32b9e",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-17 航天电子:航天时代电子技术股份有限公司募集资金管理办法(2026年6月修订)",
+      "raw": {
+        "art_code": "AN202606161823608904",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-06-16 18:54:35:457",
+        "eiTime": "2026-06-16 18:55:24:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-17 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-17 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司募集资金管理办法(2026年6月修订)",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司募集资金管理办法(2026年6月修订)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606161823608904.html",
+      "published_at": "2026-06-17 00:00:00"
+    },
+    {
+      "id": "01f26f6f02d2ddd2",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-17 航天电子:航天时代电子技术股份有限公司2025年年度股东会决议公告",
+      "raw": {
+        "art_code": "AN202606161823608905",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001004",
+            "column_name": "分配方案决议公告"
+          },
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          },
+          {
+            "column_code": "001002005002",
+            "column_name": "高管人员任职变动"
+          }
+        ],
+        "display_time": "2026-06-16 18:54:35:525",
+        "eiTime": "2026-06-16 18:54:55:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-17 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-17 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司2025年年度股东会决议公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司2025年年度股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606161823608905.html",
+      "published_at": "2026-06-17 00:00:00"
+    },
+    {
+      "id": "802f3f6efeb3867f",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-17 航天电子:航天电子2025年年度股东会法律意见书",
+      "raw": {
+        "art_code": "AN202606161823608906",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-06-16 18:54:35:491",
+        "eiTime": "2026-06-16 18:55:24:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-17 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-17 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天电子2025年年度股东会法律意见书",
+        "title_ch": "航天电子:航天电子2025年年度股东会法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606161823608906.html",
+      "published_at": "2026-06-17 00:00:00"
+    },
+    {
+      "id": "c9875bbe3c68e0eb",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-17 航天电子:航天时代电子技术股份有限公司关联交易管理办法(2026年6月修订)",
+      "raw": {
+        "art_code": "AN202606161823608903",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-06-16 18:54:35:470",
+        "eiTime": "2026-06-16 18:55:24:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-17 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-17 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司关联交易管理办法(2026年6月修订)",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司关联交易管理办法(2026年6月修订)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606161823608903.html",
+      "published_at": "2026-06-17 00:00:00"
+    },
+    {
+      "id": "2419098b7a7b170f",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-17 航天电子:航天时代电子技术股份有限公司董事、高级管理人员薪酬管理办法",
+      "raw": {
+        "art_code": "AN202606161823608907",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-06-16 18:54:35:458",
+        "eiTime": "2026-06-16 18:55:24:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-17 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-17 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司董事、高级管理人员薪酬管理办法",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司董事、高级管理人员薪酬管理办法",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606161823608907.html",
+      "published_at": "2026-06-17 00:00:00"
+    },
+    {
+      "id": "7e0167669cb0ca6c",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-03 航天电子:航天时代电子技术股份有限公司2025年年度股东会会议资料",
+      "raw": {
+        "art_code": "AN202606021823163537",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003004002",
+            "column_name": "股东大会资料"
+          }
+        ],
+        "display_time": "2026-06-02 17:42:50:611",
+        "eiTime": "2026-06-02 17:43:06:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-03 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司2025年年度股东会会议资料",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司2025年年度股东会会议资料",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202606021823163537.html",
+      "published_at": "2026-06-03 00:00:00"
+    },
+    {
+      "id": "5b4e9f1a6eddb289",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-27 航天电子:航天时代电子技术股份有限公司关于制定和修订公司部分制度的公告",
+      "raw": {
+        "art_code": "AN202605261822884564",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-05-26 18:09:53:291",
+        "eiTime": "2026-05-26 18:10:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-27 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司关于制定和修订公司部分制度的公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司关于制定和修订公司部分制度的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202605261822884564.html",
+      "published_at": "2026-05-27 00:00:00"
+    },
+    {
+      "id": "5218d0c48edb3ea9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-27 航天电子:航天时代电子技术股份有限公司关于公司增资航天时代低空科技有限公司的关联交易公告",
+      "raw": {
+        "art_code": "AN202605261822884555",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006012001002",
+            "column_name": "增资扩股"
+          },
+          {
+            "column_code": "001002007005",
+            "column_name": "关联交易"
+          }
+        ],
+        "display_time": "2026-05-26 18:09:44:540",
+        "eiTime": "2026-05-26 18:10:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-27 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司关于公司增资航天时代低空科技有限公司的关联交易公告",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司关于公司增资航天时代低空科技有限公司的关联交易公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202605261822884555.html",
+      "published_at": "2026-05-27 00:00:00"
+    },
+    {
+      "id": "0b8e9415515db6bc",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-27 航天电子:航天时代低空科技有限公司专项审计报告(上网)",
+      "raw": {
+        "art_code": "AN202605261822884566",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002001",
+            "column_name": "保荐/核查意见"
+          },
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          }
+        ],
+        "display_time": "2026-05-26 18:09:44:462",
+        "eiTime": "2026-05-26 18:10:02:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-27 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代低空科技有限公司专项审计报告(上网)",
+        "title_ch": "航天电子:航天时代低空科技有限公司专项审计报告(上网)",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202605261822884566.html",
+      "published_at": "2026-05-27 00:00:00"
+    },
+    {
+      "id": "9b17791e0ab0fde6",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-27 航天电子:航天时代电子技术股份有限公司关于召开2025年年度股东会的通知",
+      "raw": {
+        "art_code": "AN202605261822884562",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003001002",
+            "column_name": "召开股东大会通知"
+          }
+        ],
+        "display_time": "2026-05-26 18:09:44:454",
+        "eiTime": "2026-05-26 18:09:54:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-27 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司关于召开2025年年度股东会的通知",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司关于召开2025年年度股东会的通知",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202605261822884562.html",
+      "published_at": "2026-05-27 00:00:00"
+    },
+    {
+      "id": "c8d5478d640db9d4",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-27 航天电子:航天时代低空科技有限公司资产评估报告(上网)",
+      "raw": {
+        "art_code": "AN202605261822884557",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-05-26 18:09:44:453",
+        "eiTime": "2026-05-26 18:12:23:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-27 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代低空科技有限公司资产评估报告(上网)",
+        "title_ch": "航天电子:航天时代低空科技有限公司资产评估报告(上网)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202605261822884557.html",
+      "published_at": "2026-05-27 00:00:00"
+    },
+    {
+      "id": "717a86d22b327672",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-27 航天电子:航天时代电子技术股份有限公司董事、高级管理人员薪酬管理办法(2026年5月)",
+      "raw": {
+        "art_code": "AN202605261822884559",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "16470239733995",
+            "market_code": "1",
+            "short_name": "航天电子",
+            "stock_code": "600879"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-05-26 18:09:44:455",
+        "eiTime": "2026-05-26 18:10:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-27 12:00:00",
+        "source_type": "31",
+        "title": "航天电子:航天时代电子技术股份有限公司董事、高级管理人员薪酬管理办法(2026年5月)",
+        "title_ch": "航天电子:航天时代电子技术股份有限公司董事、高级管理人员薪酬管理办法(2026年5月)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:44",
+      "url": "https://data.eastmoney.com/notices/detail/600879/AN202605261822884559.html",
+      "published_at": "2026-05-27 00:00:00"
+    },
+    {
+      "id": "4ffb9d03b75f3d32",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 600879，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=600879&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:03",
+      "url": "https://so.eastmoney.com/news/s?keyword=600879&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "2a17b99b55fc5620",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 600879，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600879",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:04",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600879",
+      "coverage_only": true
+    }
+  ]
+}

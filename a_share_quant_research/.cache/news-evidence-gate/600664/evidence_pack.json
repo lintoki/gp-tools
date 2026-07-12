@@ -1,0 +1,1079 @@
+{
+  "ticker_or_query": "600664",
+  "market": "A",
+  "audit_time": "2026-07-12T23:33:00",
+  "windows": [
+    "24h",
+    "72h",
+    "7d",
+    "30d",
+    "90d"
+  ],
+  "evidence_status": "BLOCK",
+  "coverage_score": 37,
+  "confidence_cap": 6,
+  "source_coverage": {
+    "official_disclosure": "covered",
+    "market_news": "partial",
+    "flash_news": "partial",
+    "policy_industry": "partial",
+    "social_sentiment": "missing",
+    "price_volume_anomaly": "not_checked",
+    "collector_errors": "present"
+  },
+  "time_coverage": {
+    "24h": "partial",
+    "72h": "partial",
+    "7d": "partial",
+    "30d": "partial",
+    "90d": "partial"
+  },
+  "material_events": [
+    {
+      "id": "0c06ec94d4bbb5c7",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-10 哈药股份:哈药集团股份有限公司2026年半年度业绩预增公告",
+      "raw": {
+        "art_code": "AN202607091826843581",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-07-09 15:34:23:263",
+        "eiTime": "2026-07-09 15:35:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-10 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司2026年半年度业绩预增公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司2026年半年度业绩预增公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202607091826843581.html",
+      "published_at": "2026-07-10 00:00:00"
+    },
+    {
+      "id": "dbaa049518f4050b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-25 哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+      "raw": {
+        "art_code": "AN202606241823807588",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006010",
+            "column_name": "股份质押、冻结"
+          }
+        ],
+        "display_time": "2026-06-24 15:33:27:457",
+        "eiTime": "2026-06-24 15:34:54:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-25 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-25 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606241823807588.html",
+      "published_at": "2026-06-25 00:00:00"
+    },
+    {
+      "id": "e6d525e93d1164f9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-11 哈药股份:哈药集团股份有限公司关于全资子公司签订《技术转让(委托)合同》进展暨达普司他片进入Ⅲ期临床试验(确证性临床研究)的公告",
+      "raw": {
+        "art_code": "AN202606101823421503",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-06-10 16:02:25:373",
+        "eiTime": "2026-06-10 16:03:14:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-11 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于全资子公司签订《技术转让(委托)合同》进展暨达普司他片进入Ⅲ期临床试验(确证性临床研究)的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于全资子公司签订《技术转让(委托)合同》进展暨达普司他片进入Ⅲ期临床试验(确证性临床研究)的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "product_approval"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606101823421503.html",
+      "published_at": "2026-06-11 00:00:00"
+    },
+    {
+      "id": "5ac6c526e0a09844",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-28 哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+      "raw": {
+        "art_code": "AN202604271821605651",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006010",
+            "column_name": "股份质押、冻结"
+          }
+        ],
+        "display_time": "2026-04-27 15:33:52:392",
+        "eiTime": "2026-04-27 15:34:52:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-28 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604271821605651.html",
+      "published_at": "2026-04-28 00:00:00"
+    },
+    {
+      "id": "fa1929f47db4a836",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-23 哈药股份:哈药集团股份有限公司2025年度内部控制审计报告",
+      "raw": {
+        "art_code": "AN202604221821446581",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          },
+          {
+            "column_code": "001003003004",
+            "column_name": "内部控制报告"
+          }
+        ],
+        "display_time": "2026-04-22 16:49:23:628",
+        "eiTime": "2026-04-22 16:50:08:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-23 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司2025年度内部控制审计报告",
+        "title_ch": "哈药股份:哈药集团股份有限公司2025年度内部控制审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604221821446581.html",
+      "published_at": "2026-04-23 00:00:00"
+    }
+  ],
+  "unconfirmed_events": [],
+  "conflicts": [],
+  "price_volume_anomalies": [],
+  "missing_sources": [
+    "price_volume:sina_quote empty",
+    "price_volume:eastmoney_kline failed: urlopen failed: [SSL] record layer failure (_ssl.c:2580); curl fallback failed code=56: curl: (56) schannel: failed to read data from server: SEC_E_DECRYPT_FAILURE (0x80090330) - 无法解密指定的数据。\n",
+    "market_news:eastmoney_search structured results empty",
+    "flash_news:eastmoney_kuaixun structured results empty"
+  ],
+  "downstream_instructions": [
+    "Start final report with evidence_status, coverage_score, and confidence_cap.",
+    "Do not exceed confidence_cap.",
+    "Discuss material_events before technical or valuation conclusions.",
+    "Do not say no major news unless official_disclosure, market_news, and flash_news are covered.",
+    "If official_disclosure is missing, avoid strong BUY/SELL language.",
+    "If price/volume anomaly is unexplained, mark information-gap risk.",
+    "Include a section: 哪些新增信息会推翻当前结论."
+  ],
+  "items": [
+    {
+      "id": "0c06ec94d4bbb5c7",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-07-10 哈药股份:哈药集团股份有限公司2026年半年度业绩预增公告",
+      "raw": {
+        "art_code": "AN202607091826843581",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002004001",
+            "column_name": "业绩预告"
+          }
+        ],
+        "display_time": "2026-07-09 15:34:23:263",
+        "eiTime": "2026-07-09 15:35:35:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-07-10 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-07-10 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司2026年半年度业绩预增公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司2026年半年度业绩预增公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "earnings_revision"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202607091826843581.html",
+      "published_at": "2026-07-10 00:00:00"
+    },
+    {
+      "id": "01883d2e0f7d54a3",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-27 哈药股份:哈药集团股份有限公司关于所属企业获得化学原料药上市申请批准通知书的公告",
+      "raw": {
+        "art_code": "AN202606261824419842",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-06-26 15:42:49:331",
+        "eiTime": "2026-06-26 15:43:44:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-27 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-27 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于所属企业获得化学原料药上市申请批准通知书的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于所属企业获得化学原料药上市申请批准通知书的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606261824419842.html",
+      "published_at": "2026-06-27 00:00:00"
+    },
+    {
+      "id": "dbaa049518f4050b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-25 哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+      "raw": {
+        "art_code": "AN202606241823807588",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006010",
+            "column_name": "股份质押、冻结"
+          }
+        ],
+        "display_time": "2026-06-24 15:33:27:457",
+        "eiTime": "2026-06-24 15:34:54:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-25 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-25 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606241823807588.html",
+      "published_at": "2026-06-25 00:00:00"
+    },
+    {
+      "id": "a9e6aaf4aa1e14d1",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-24 哈药股份:哈药集团股份有限公司2025年年度股东会决议公告",
+      "raw": {
+        "art_code": "AN202606231823773339",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001004",
+            "column_name": "分配方案决议公告"
+          },
+          {
+            "column_code": "001002003003",
+            "column_name": "股东大会决议公告"
+          }
+        ],
+        "display_time": "2026-06-23 17:16:49:442",
+        "eiTime": "2026-06-23 17:17:22:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-24 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-24 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司2025年年度股东会决议公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司2025年年度股东会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606231823773339.html",
+      "published_at": "2026-06-24 00:00:00"
+    },
+    {
+      "id": "faa32908ed8888df",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-24 哈药股份:北京岳成(黑龙江)律师事务所关于哈药集团股份有限公司2025年年度股东会之法律意见书",
+      "raw": {
+        "art_code": "AN202606231823773340",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002002",
+            "column_name": "法律意见书"
+          }
+        ],
+        "display_time": "2026-06-23 17:16:49:303",
+        "eiTime": "2026-06-23 17:20:25:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-24 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-24 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:北京岳成(黑龙江)律师事务所关于哈药集团股份有限公司2025年年度股东会之法律意见书",
+        "title_ch": "哈药股份:北京岳成(黑龙江)律师事务所关于哈药集团股份有限公司2025年年度股东会之法律意见书",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606231823773340.html",
+      "published_at": "2026-06-24 00:00:00"
+    },
+    {
+      "id": "6b490bf9b2cedcde",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-24 哈药股份:哈药集团股份有限公司关于所属企业获得药品注册证书的公告",
+      "raw": {
+        "art_code": "AN202606231823773326",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006003",
+            "column_name": "获得认证"
+          }
+        ],
+        "display_time": "2026-06-23 17:16:42:384",
+        "eiTime": "2026-06-23 17:17:59:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-24 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-24 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于所属企业获得药品注册证书的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于所属企业获得药品注册证书的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606231823773326.html",
+      "published_at": "2026-06-24 00:00:00"
+    },
+    {
+      "id": "e6d525e93d1164f9",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-11 哈药股份:哈药集团股份有限公司关于全资子公司签订《技术转让(委托)合同》进展暨达普司他片进入Ⅲ期临床试验(确证性临床研究)的公告",
+      "raw": {
+        "art_code": "AN202606101823421503",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-06-10 16:02:25:373",
+        "eiTime": "2026-06-10 16:03:14:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-11 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-11 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于全资子公司签订《技术转让(委托)合同》进展暨达普司他片进入Ⅲ期临床试验(确证性临床研究)的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于全资子公司签订《技术转让(委托)合同》进展暨达普司他片进入Ⅲ期临床试验(确证性临床研究)的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "product_approval"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606101823421503.html",
+      "published_at": "2026-06-11 00:00:00"
+    },
+    {
+      "id": "15fdec85e9ff84f6",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-04 哈药股份:哈药集团股份有限公司2025年年度股东会会议材料",
+      "raw": {
+        "art_code": "AN202606031823207948",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003004002",
+            "column_name": "股东大会资料"
+          }
+        ],
+        "display_time": "2026-06-03 17:24:05:576",
+        "eiTime": "2026-06-03 17:24:31:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-04 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-04 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司2025年年度股东会会议材料",
+        "title_ch": "哈药股份:哈药集团股份有限公司2025年年度股东会会议材料",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606031823207948.html",
+      "published_at": "2026-06-04 00:00:00"
+    },
+    {
+      "id": "beb98cb2ecbcb2d7",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-03 哈药股份:哈药集团股份有限公司关于召开2025年年度股东会的通知",
+      "raw": {
+        "art_code": "AN202606021823159040",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002003001002",
+            "column_name": "召开股东大会通知"
+          }
+        ],
+        "display_time": "2026-06-02 15:38:28:356",
+        "eiTime": "2026-06-02 15:39:00:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-03 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于召开2025年年度股东会的通知",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于召开2025年年度股东会的通知",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606021823159040.html",
+      "published_at": "2026-06-03 00:00:00"
+    },
+    {
+      "id": "efcce5518ffeb1c6",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-06-03 哈药股份:哈药集团股份有限公司十届二十六次董事会决议公告",
+      "raw": {
+        "art_code": "AN202606021823159038",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-06-02 15:38:28:348",
+        "eiTime": "2026-06-02 15:39:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-06-03 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-06-03 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司十届二十六次董事会决议公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司十届二十六次董事会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202606021823159038.html",
+      "published_at": "2026-06-03 00:00:00"
+    },
+    {
+      "id": "5134fd01e81a638d",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-05-13 哈药股份:哈药集团股份有限公司投资者关系活动记录表(2026年5月13日)",
+      "raw": {
+        "art_code": "AN202605131822274046",
+        "codes": [
+          {
+            "ann_type": "INV",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "050003",
+            "column_name": "调研活动"
+          }
+        ],
+        "display_time": "2026-05-13 18:07:48:614",
+        "eiTime": "2026-05-13 18:07:13:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-05-13 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-05-13 12:00:00",
+        "source_type": "311",
+        "title": "哈药股份:哈药集团股份有限公司投资者关系活动记录表(2026年5月13日)",
+        "title_ch": "哈药股份:哈药集团股份有限公司投资者关系活动记录表(2026年5月13日)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202605131822274046.html",
+      "published_at": "2026-05-13 00:00:00"
+    },
+    {
+      "id": "97b4dfeafc7f5465",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-30 哈药股份:哈药集团股份有限公司关于参加黑龙江辖区上市公司2026年投资者网上集体接待日暨2025年度及2026年第一季度业绩说明会的公告",
+      "raw": {
+        "art_code": "AN202604291821742074",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001004003",
+            "column_name": "调研活动"
+          }
+        ],
+        "display_time": "2026-04-29 16:22:22:534",
+        "eiTime": "2026-04-29 16:23:28:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-30 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-30 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于参加黑龙江辖区上市公司2026年投资者网上集体接待日暨2025年度及2026年第一季度业绩说明会的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于参加黑龙江辖区上市公司2026年投资者网上集体接待日暨2025年度及2026年第一季度业绩说明会的公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604291821742074.html",
+      "published_at": "2026-04-30 00:00:00"
+    },
+    {
+      "id": "5ac6c526e0a09844",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-28 哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+      "raw": {
+        "art_code": "AN202604271821605651",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002006010",
+            "column_name": "股份质押、冻结"
+          }
+        ],
+        "display_time": "2026-04-27 15:33:52:392",
+        "eiTime": "2026-04-27 15:34:52:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-28 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-28 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司关于控股股东部分股份质押的公告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "shareholder_change"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604271821605651.html",
+      "published_at": "2026-04-28 00:00:00"
+    },
+    {
+      "id": "5f86613c3b52c5eb",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-23 哈药股份:哈药集团股份有限公司董事及高级管理人员薪酬管理与履职评价制度(2026年4月)",
+      "raw": {
+        "art_code": "AN202604221821446582",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003001",
+            "column_name": "管理办法/制度"
+          }
+        ],
+        "display_time": "2026-04-22 16:49:32:384",
+        "eiTime": "2026-04-22 16:49:43:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-23 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司董事及高级管理人员薪酬管理与履职评价制度(2026年4月)",
+        "title_ch": "哈药股份:哈药集团股份有限公司董事及高级管理人员薪酬管理与履职评价制度(2026年4月)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604221821446582.html",
+      "published_at": "2026-04-23 00:00:00"
+    },
+    {
+      "id": "efcca39f7df74e3a",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-23 哈药股份:哈药集团股份有限公司对会计师事务所2025年度履职情况评估报告",
+      "raw": {
+        "art_code": "AN202604221821446572",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-22 16:49:32:368",
+        "eiTime": "2026-04-22 16:50:08:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-23 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司对会计师事务所2025年度履职情况评估报告",
+        "title_ch": "哈药股份:哈药集团股份有限公司对会计师事务所2025年度履职情况评估报告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604221821446572.html",
+      "published_at": "2026-04-23 00:00:00"
+    },
+    {
+      "id": "79b82bc556fbbb0b",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-23 哈药股份:哈药集团股份有限公司十届二十五次董事会决议公告",
+      "raw": {
+        "art_code": "AN202604221821446567",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002002001001",
+            "column_name": "分配预案"
+          },
+          {
+            "column_code": "001002009",
+            "column_name": "董事会决议公告"
+          }
+        ],
+        "display_time": "2026-04-22 16:49:32:363",
+        "eiTime": "2026-04-22 16:50:20:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-23 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司十届二十五次董事会决议公告",
+        "title_ch": "哈药股份:哈药集团股份有限公司十届二十五次董事会决议公告",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604221821446567.html",
+      "published_at": "2026-04-23 00:00:00"
+    },
+    {
+      "id": "fa1929f47db4a836",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-23 哈药股份:哈药集团股份有限公司2025年度内部控制审计报告",
+      "raw": {
+        "art_code": "AN202604221821446581",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003002005",
+            "column_name": "审计报告"
+          },
+          {
+            "column_code": "001003003004",
+            "column_name": "内部控制报告"
+          }
+        ],
+        "display_time": "2026-04-22 16:49:23:628",
+        "eiTime": "2026-04-22 16:50:08:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-23 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司2025年度内部控制审计报告",
+        "title_ch": "哈药股份:哈药集团股份有限公司2025年度内部控制审计报告",
+        "title_en": ""
+      },
+      "event_categories": [
+        "fraud_investigation"
+      ],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604221821446581.html",
+      "published_at": "2026-04-23 00:00:00"
+    },
+    {
+      "id": "b6ad4c74d9762e1f",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-23 哈药股份:哈药集团股份有限公司股东回报规划(2026年-2028年)",
+      "raw": {
+        "art_code": "AN202604221821446578",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001002008",
+            "column_name": "其他"
+          }
+        ],
+        "display_time": "2026-04-22 16:49:23:557",
+        "eiTime": "2026-04-22 16:50:08:000",
+        "language": "0",
+        "listing_state": "0",
+        "notice_date": "2026-04-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-23 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司股东回报规划(2026年-2028年)",
+        "title_ch": "哈药股份:哈药集团股份有限公司股东回报规划(2026年-2028年)",
+        "title_en": ""
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604221821446578.html",
+      "published_at": "2026-04-23 00:00:00"
+    },
+    {
+      "id": "6c7380888b234a98",
+      "source": "official_disclosure:eastmoney_announcements",
+      "title": "2026-04-23 哈药股份:哈药集团股份有限公司2025年度可持续发展报告(英文版)",
+      "raw": {
+        "art_code": "AN202604221821446586",
+        "codes": [
+          {
+            "ann_type": "A,SHA",
+            "inner_code": "41560107199573",
+            "market_code": "1",
+            "short_name": "哈药股份",
+            "stock_code": "600664"
+          }
+        ],
+        "columns": [
+          {
+            "column_code": "001003003005",
+            "column_name": "ESG公告"
+          }
+        ],
+        "display_time": "2026-04-22 16:49:23:554",
+        "eiTime": "2026-04-22 16:49:43:000",
+        "language": "1",
+        "listing_state": "0",
+        "notice_date": "2026-04-23 00:00:00",
+        "product_code": "",
+        "sort_date": "2026-04-23 12:00:00",
+        "source_type": "31",
+        "title": "哈药股份:哈药集团股份有限公司2025年度可持续发展报告(英文版)",
+        "title_ch": "",
+        "title_en": "哈药股份:哈药集团股份有限公司2025年度可持续发展报告(英文版)"
+      },
+      "event_categories": [],
+      "reliability": 5,
+      "confirmed": true,
+      "captured_at": "2026-07-12T23:32:42",
+      "url": "https://data.eastmoney.com/notices/detail/600664/AN202604221821446586.html",
+      "published_at": "2026-04-23 00:00:00"
+    },
+    {
+      "id": "06fbf9448195b3c7",
+      "source": "market_news:eastmoney_search",
+      "title": "市场新闻源已检查: 东方财富新闻搜索页可达，关键词 600664，未捕获结构化新闻条目",
+      "raw": {
+        "url": "https://so.eastmoney.com/news/s?keyword=600664&collector=market-news",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:32:59",
+      "url": "https://so.eastmoney.com/news/s?keyword=600664&collector=market-news",
+      "coverage_only": true
+    },
+    {
+      "id": "6545c86c043cfd9c",
+      "source": "flash_news:eastmoney_kuaixun",
+      "title": "7x24快讯源已检查: 东方财富全球财经快讯页面可达，关键词 600664，未捕获结构化快讯条目",
+      "raw": {
+        "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600664",
+        "captured_chars": 5000
+      },
+      "event_categories": [],
+      "reliability": 4,
+      "confirmed": false,
+      "captured_at": "2026-07-12T23:33:00",
+      "url": "https://kuaixun.eastmoney.com/?collector=flash-news&keyword=600664",
+      "coverage_only": true
+    }
+  ]
+}
